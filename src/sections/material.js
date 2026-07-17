@@ -33,22 +33,43 @@ export function initMaterial(ctx) {
 
   gsap.fromTo(
     root,
-    { '--daylight': 0, '--grain-opacity': 1 },
+    { '--daylight': 0 },
     {
       '--daylight': 1,
-      '--grain-opacity': 0.04,
       ease: 'none',
+      scrollTrigger: { trigger: section, start: 'top 80%', end: 'top 30%', scrub: 0.5 },
+    },
+  );
+
+  // grain dies early in the ramp — speckle over a half-pale ground is what
+  // makes the crossing read as noise
+  gsap.fromTo(
+    root,
+    { '--grain-opacity': 1 },
+    {
+      '--grain-opacity': 0.04,
+      ease: 'power2.out',
       scrollTrigger: { trigger: section, start: 'top 80%', end: 'top 30%', scrub: 0.5 },
     },
   );
 
   gsap.fromTo(
     root,
-    { '--daylight': 1, '--grain-opacity': 0.04 },
+    { '--daylight': 1 },
     {
       '--daylight': 0,
-      '--grain-opacity': 1,
       ease: 'none',
+      immediateRender: false,
+      scrollTrigger: { trigger: section, start: 'bottom 70%', end: 'bottom 20%', scrub: 0.5 },
+    },
+  );
+
+  gsap.fromTo(
+    root,
+    { '--grain-opacity': 0.04 },
+    {
+      '--grain-opacity': 1,
+      ease: 'power2.in',
       immediateRender: false,
       scrollTrigger: { trigger: section, start: 'bottom 70%', end: 'bottom 20%', scrub: 0.5 },
     },
