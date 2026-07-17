@@ -52,30 +52,54 @@ if (!reduceMotion) {
 // ——— Boot after fonts so SplitText measures real glyphs ———
 const ctx = { gsap, ScrollTrigger, lenis, reduceMotion };
 
-document.fonts.ready.then(() => {
-  const grain = initGrain(ctx);
+// One broken module costs its own feature, never the page.
+const safe = (name, fn, arg) => {
+  try {
+    return fn(arg);
+  } catch (err) {
+    console.error(`[stille] ${name} failed:`, err);
+    return undefined;
+  }
+};
+
+// Never boot into a zero-sized viewport (collapsed/background windows):
+// media queries and ScrollTrigger math both need real dimensions.
+const viewportReady = () =>
+  window.innerWidth > 0 && window.innerHeight > 0
+    ? Promise.resolve()
+    : new Promise((resolve) => {
+        const iv = setInterval(() => {
+          if (window.innerWidth > 0 && window.innerHeight > 0) {
+            clearInterval(iv);
+            resolve();
+          }
+        }, 200);
+      });
+
+Promise.all([document.fonts.ready, viewportReady()]).then(() => {
+  const grain = safe('grain', initGrain, ctx);
   const thread = initThread(ctx);
   window.__stille = { thread, grain, lenis }; // debug/verification handle
 
-  const loader = initLoader(ctx);
+  const loader = safe('loader', initLoader, ctx) || { introDelay: 0.2 };
   const appCtx = { ...ctx, introDelay: loader.introDelay };
 
-  initInterface(appCtx);
-  initMotion(appCtx);
+  safe('interface', initInterface, appCtx);
+  safe('motion', initMotion, appCtx);
 
-  initHero(appCtx);
-  initWave(appCtx);
-  initReveal(appCtx);
-  initAnatomy(appCtx);
-  initSweep(appCtx);
-  initMaterial(appCtx);
-  initLedger(appCtx);
-  initFinale(appCtx);
-  initScrambleIn(appCtx);
-  initCursor(appCtx);
-  initFilmdrag(appCtx);
-  initParticles(appCtx);
-  initVelocity(appCtx);
+  safe('hero', initHero, appCtx);
+  safe('wave', initWave, appCtx);
+  safe('reveal', initReveal, appCtx);
+  safe('anatomy', initAnatomy, appCtx);
+  safe('sweep', initSweep, appCtx);
+  safe('material', initMaterial, appCtx);
+  safe('ledger', initLedger, appCtx);
+  safe('finale', initFinale, appCtx);
+  safe('scramblein', initScrambleIn, appCtx);
+  safe('cursor', initCursor, appCtx);
+  safe('filmdrag', initFilmdrag, appCtx);
+  safe('particles', initParticles, appCtx);
+  safe('velocity', initVelocity, appCtx);
   ScrollTrigger.refresh();
   if (reduceMotion) thread.redraw();
 }).catch((err) => {
