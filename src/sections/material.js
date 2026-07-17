@@ -15,7 +15,7 @@ export function initMaterial(ctx) {
   const quote = section.querySelector('.material-quote p');
 
   const setDaylight = (on) => {
-    gsap.set(root, { '--daylight': on ? 1 : 0, '--grain-opacity': on ? 0.1 : 1 });
+    gsap.set(root, { '--daylight': on ? 1 : 0, '--grain-opacity': on ? 0.04 : 1 });
   };
 
   if (ctx.reduceMotion) {
@@ -36,7 +36,7 @@ export function initMaterial(ctx) {
     { '--daylight': 0, '--grain-opacity': 1 },
     {
       '--daylight': 1,
-      '--grain-opacity': 0.1,
+      '--grain-opacity': 0.04,
       ease: 'none',
       scrollTrigger: { trigger: section, start: 'top 80%', end: 'top 30%', scrub: 0.5 },
     },
@@ -44,7 +44,7 @@ export function initMaterial(ctx) {
 
   gsap.fromTo(
     root,
-    { '--daylight': 1, '--grain-opacity': 0.1 },
+    { '--daylight': 1, '--grain-opacity': 0.04 },
     {
       '--daylight': 0,
       '--grain-opacity': 1,

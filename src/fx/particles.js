@@ -322,7 +322,7 @@ export function initParticles(ctx) {
     gl.uniform2f(U.res, w, h);
     gl.uniform1f(U.dpr, DPR);
     gl.uniform1f(U.stretch, streak);
-    gl.uniform1f(U.alpha, 0.5 * (1 - daylight * 0.88));
+    gl.uniform1f(U.alpha, 0.5 * (1 - daylight * 0.97));
     gl.drawArrays(gl.POINTS, 0, N);
   });
 }
