@@ -131,7 +131,8 @@ html.has-loader .signal-cursor {
   top: 50%;
   height: 1px;
   background: var(--signal);
-  box-shadow: 0 0 16px rgba(91, 108, 255, 0.3);
+  /* deliberate: the loader line is a light source, tuned tight like an LED */
+  box-shadow: 0 0 9px rgba(91, 108, 255, 0.22);
   transform-origin: center;
 }
 
@@ -163,10 +164,6 @@ html.has-loader .signal-cursor {
   z-index: var(--z-grain);
   opacity: var(--grain-opacity, 1);
   will-change: opacity;
-}
-
-.layer--scene {
-  z-index: var(--z-scene);
 }
 
 .layer--thread {

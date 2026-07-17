@@ -16,11 +16,9 @@ import Lenis from 'lenis';
 
 import { initGrain } from './grain.js';
 import { initThread } from './thread.js';
-import { initSpin } from './fx/spin.js';
 import { initScrambleIn } from './fx/scramblein.js';
 import { initCursor } from './fx/cursor.js';
 import { initFilmdrag } from './fx/filmdrag.js';
-import { initWaveforms } from './fx/waveforms.js';
 import { initLoader } from './loader.js';
 import { initInterface } from './interface.js';
 import { initMotion } from './motion.js';
@@ -63,10 +61,6 @@ document.fonts.ready.then(() => {
   initInterface(appCtx);
   initMotion(appCtx);
 
-  // The 3D object rides in on its own chunk — the page never waits for it.
-  import('./scene3d.js').then(({ initScene3d, stage }) => {
-    window.__stille.stage = initScene3d(appCtx) || stage;
-  });
   initHero(appCtx);
   initWave(appCtx);
   initReveal(appCtx);
@@ -75,11 +69,9 @@ document.fonts.ready.then(() => {
   initMaterial(appCtx);
   initLedger(appCtx);
   initFinale(appCtx);
-  initSpin(appCtx);
   initScrambleIn(appCtx);
   initCursor(appCtx);
   initFilmdrag(appCtx);
-  initWaveforms(appCtx);
   ScrollTrigger.refresh();
   if (reduceMotion) thread.redraw();
 }).catch((err) => {

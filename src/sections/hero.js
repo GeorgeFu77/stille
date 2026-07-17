@@ -2,7 +2,6 @@ import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { thread } from '../thread.js';
 import { grain } from '../grain.js';
-import { stage } from '../stage.js';
 
 /*
  * 00 · Threshold — the inhale.
@@ -45,8 +44,6 @@ export function initHero(ctx) {
     .set(axes, { autoAlpha: 0, y: 10 })
     // the flatline draws in from center — one breath in
     .to(thread.P, { spread: 1, duration: 1.15, ease: 'expo.out' }, 0)
-    // the object surfaces out of black with the same breath
-    .fromTo(stage.P, { fade: 0 }, { fade: 1, duration: 2.4, ease: 'power2.inOut' }, 0.15)
     .fromTo(
       apertureField,
       { autoAlpha: 0, scale: 0.72, rotation: -8 },
