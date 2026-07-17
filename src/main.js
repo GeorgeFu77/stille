@@ -55,7 +55,7 @@ const ctx = { gsap, ScrollTrigger, lenis, reduceMotion };
 document.fonts.ready.then(() => {
   const grain = initGrain(ctx);
   const thread = initThread(ctx);
-  window.__stille = { thread, grain }; // debug/verification handle
+  window.__stille = { thread, grain, lenis }; // debug/verification handle
 
   const loader = initLoader(ctx);
   const appCtx = { ...ctx, introDelay: loader.introDelay };
