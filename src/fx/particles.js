@@ -4,9 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 /*
  * The signal field — thousands of spectral points with one shared mind.
  * They assemble as the STILLE wordmark in the hero, detonate into a free
- * field on the first scroll, regroup into a phone outline at the reveal,
- * and settle into a calm horizontal band for the finale. The cursor pushes
- * them like a hand in water; scroll velocity streaks them into light.
+ * field on the first scroll, and settle into a calm horizontal band for the
+ * finale. The cursor pushes them like a hand in water; scroll velocity
+ * streaks them into light.
  */
 
 const VERT = `
@@ -157,38 +157,6 @@ export function initParticles(ctx) {
     }
   }
 
-  function samplePhone(out) {
-    const pw = Math.min(w * 0.2, 280);
-    const ph = pw * 1.95;
-    const cx = w * 0.68;
-    const cy = h * 0.5;
-    for (let i = 0; i < N; i++) {
-      const r = Math.random();
-      let x;
-      let y;
-      if (r < 0.62) {
-        // perimeter of the rounded frame
-        const t = Math.random() * (pw + ph) * 2;
-        if (t < pw) { x = cx - pw / 2 + t; y = cy - ph / 2; }
-        else if (t < pw + ph) { x = cx + pw / 2; y = cy - ph / 2 + (t - pw); }
-        else if (t < pw * 2 + ph) { x = cx + pw / 2 - (t - pw - ph); y = cy + ph / 2; }
-        else { x = cx - pw / 2; y = cy + ph / 2 - (t - pw * 2 - ph); }
-      } else if (r < 0.8) {
-        // header call-bar
-        x = cx - pw * 0.32 + Math.random() * pw * 0.64;
-        y = cy - ph * 0.34 + (Math.random() - 0.5) * 5;
-      } else {
-        // the call button
-        const a = Math.random() * Math.PI * 2;
-        const rad = pw * 0.16 * (0.85 + Math.random() * 0.15);
-        x = cx + Math.cos(a) * rad;
-        y = cy + ph * 0.3 + Math.sin(a) * rad * 0.45;
-      }
-      out[i * 2] = x + (Math.random() - 0.5) * 4;
-      out[i * 2 + 1] = y + (Math.random() - 0.5) * 4;
-    }
-  }
-
   function sampleField(out) {
     for (let i = 0; i < N; i++) {
       out[i * 2] = Math.random() * w;
@@ -203,7 +171,7 @@ export function initParticles(ctx) {
     }
   }
 
-  const BUILDERS = { word: sampleWord, field: sampleField, phone: samplePhone, band: sampleBand };
+  const BUILDERS = { word: sampleWord, field: sampleField, band: sampleBand };
 
   function buildState(next) {
     state = next;
@@ -238,15 +206,6 @@ export function initParticles(ctx) {
     end: 'bottom 55%',
     onLeave: () => buildState('field'),
     onEnterBack: () => buildState('word'),
-  });
-  ScrollTrigger.create({
-    trigger: '.s-reveal',
-    start: 'top 65%',
-    end: 'bottom 40%',
-    onEnter: () => buildState('phone'),
-    onLeave: () => buildState('field'),
-    onEnterBack: () => buildState('phone'),
-    onLeaveBack: () => buildState('field'),
   });
   ScrollTrigger.create({
     trigger: '.s-finale',
