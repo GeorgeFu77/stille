@@ -19,6 +19,8 @@ import { initThread } from './thread.js';
 import { initScrambleIn } from './fx/scramblein.js';
 import { initCursor } from './fx/cursor.js';
 import { initFilmdrag } from './fx/filmdrag.js';
+import { initParticles } from './fx/particles.js';
+import { initVelocity } from './fx/velocity.js';
 import { initLoader } from './loader.js';
 import { initInterface } from './interface.js';
 import { initMotion } from './motion.js';
@@ -72,6 +74,8 @@ document.fonts.ready.then(() => {
   initScrambleIn(appCtx);
   initCursor(appCtx);
   initFilmdrag(appCtx);
+  initParticles(appCtx);
+  initVelocity(appCtx);
   ScrollTrigger.refresh();
   if (reduceMotion) thread.redraw();
 }).catch((err) => {

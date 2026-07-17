@@ -34,11 +34,13 @@ export function initHero(ctx) {
     return;
   }
 
-  const split = SplitText.create(title, { type: 'lines,chars', mask: 'lines' });
+  // words, not lines: line-splitting bakes in whatever wrap existed at split
+  // time — word masks let the browser re-wrap freely at any viewport
+  const split = SplitText.create(title, { type: 'words,chars', mask: 'words' });
 
   const tl = gsap.timeline({ delay: ctx.introDelay || 0.2 });
   tl.set([title, label, sub, cue, aperture, axes], { visibility: 'visible' })
-    .set(split.lines, { yPercent: 115 })
+    .set(split.words, { yPercent: 115 })
     .set(split.chars, { autoAlpha: 0.16, fontVariationSettings: "'opsz' 144, 'wght' 220" })
     .set([label, sub, cue], { autoAlpha: 0, y: 10 })
     .set(axes, { autoAlpha: 0, y: 10 })
@@ -52,11 +54,11 @@ export function initHero(ctx) {
     )
     .to(apertureScan, { scaleX: 1, duration: 1.15, ease: 'expo.inOut' }, 0.12)
     .to(
-      split.lines,
+      split.words,
       {
         yPercent: 0,
         duration: 1.0,
-        stagger: 0.09,
+        stagger: 0.055,
         ease: 'power4.out',
       },
       0.1,
@@ -89,7 +91,7 @@ export function initHero(ctx) {
   });
 
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    const lineX = split.lines.map((line) => gsap.quickTo(line, 'x', { duration: 0.9, ease: 'power3.out' }));
+    const lineX = split.words.map((word) => gsap.quickTo(word, 'x', { duration: 0.9, ease: 'power3.out' }));
     const apertureX = gsap.quickTo(apertureField, 'x', { duration: 1.15, ease: 'power3.out' });
     const apertureY = gsap.quickTo(apertureField, 'y', { duration: 1.15, ease: 'power3.out' });
 

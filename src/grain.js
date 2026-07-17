@@ -41,54 +41,78 @@ float noise(vec2 p) {
     u.y);
 }
 
+float fbm(vec2 p) {
+  float v = 0.0;
+  float a = 0.5;
+  for (int i = 0; i < 4; i++) {
+    v += a * noise(p);
+    p = p * 2.03 + vec2(17.1, 9.7);
+    a *= 0.5;
+  }
+  return v;
+}
+
 void main() {
   vec2 uv = gl_FragCoord.xy / u_res;
   vec2 asp = vec2(u_res.x / u_res.y, 1.0);
 
-  // --- displacement from cursor + ripples + scroll pulse ---
+  // --- displacement from cursor + ripples + scroll pulse (wind in the bands) ---
   vec2 disp = vec2(0.0);
 
   vec2 dm = (gl_FragCoord.xy - u_mouse) / u_res.y;
   float md = length(dm);
-  disp += normalize(dm + 1e-5) * exp(-md * 6.0) * 0.012;
+  disp += normalize(dm + 1e-5) * exp(-md * 6.0) * 0.03;
 
   for (int i = 0; i < 3; i++) {
     vec2 rp = (gl_FragCoord.xy - u_ripple[i].xy) / u_res.y;
     float rd = length(rp);
     float age = u_ripple[i].z;
     float wave = sin(rd * 40.0 - age * 5.0) * exp(-rd * 5.0) * exp(-age * 1.4);
-    disp += normalize(rp + 1e-5) * wave * 0.015 * u_ripple[i].w;
+    disp += normalize(rp + 1e-5) * wave * 0.035 * u_ripple[i].w;
   }
 
   // scroll pulse: a soft pressure band sweeping down the screen
   float band = exp(-pow((1.0 - uv.y) - u_pulse, 2.0) * 60.0) * (1.0 - u_pulse);
-  disp.y += band * 0.02;
+  disp.y += band * 0.05;
 
-  // --- the air: slow large-scale pressure + fine grain ---
+  // --- the aurora: domain-warped curtains flowing diagonally ---
   vec2 p = uv * asp;
-  float air = noise(p * 2.4 + disp * 14.0 + vec2(u_time * 0.016, u_time * 0.009));
-  air += 0.5 * noise(p * 5.1 - disp * 9.0 - vec2(u_time * 0.011, 0.0));
-  air /= 1.5;
+  float t = u_time * 0.03;
+  vec2 q = vec2(fbm(p * 1.4 + vec2(t, -t * 0.6)),
+                fbm(p * 1.4 + vec2(5.2, 1.3) - vec2(t * 0.7, 0.0)));
+  float f = fbm(p * 1.9 + 1.7 * q + disp * 8.0 + vec2(0.0, -t * 0.4));
+
+  // curtain mask: diagonal drape, brightest along the warped ridges
+  float drape = f * (0.62 + 0.38 * sin((uv.x * 0.9 - uv.y * 1.3) * 3.1 + q.x * 2.2 + t * 0.8));
+  float curtain = smoothstep(0.32, 0.9, drape);
 
   float shimmerFreq = mix(24.0, 160.0, u_audio.x);
-  float shimmer = noise(p * shimmerFreq + u_time * mix(0.2, 2.0, u_audio.x)) * u_audio.y * 0.05;
+  float shimmer = noise(p * shimmerFreq + u_time * mix(0.2, 2.0, u_audio.x)) * u_audio.y * 0.06;
 
-  float grain = hash(gl_FragCoord.xy + fract(u_time) * 61.7) * 0.021;
+  float grain = hash(gl_FragCoord.xy + fract(u_time) * 61.7) * 0.02;
 
-  // --- color: blue-black air, ice dust, and a restrained aurora bloom ---
+  // --- color: the spectrum lives in the curtains, the edges stay void ---
   vec3 ink = vec3(0.0431, 0.0549, 0.0863);           // #0b0e16
   vec3 deep = vec3(0.0196, 0.0235, 0.0431);          // #05060b
   vec3 iceDust = vec3(0.9137, 0.9333, 0.9647);       // #e9eef6
-  vec3 signal = vec3(0.3569, 0.4235, 1.0);           // #5b6cff
-  vec3 aurora = vec3(0.6157, 0.4824, 1.0);           // #9d7bff
+  vec3 violet = vec3(0.6157, 0.4824, 1.0);           // #9d7bff
+  vec3 blue = vec3(0.3569, 0.4235, 1.0);             // #5b6cff
+  vec3 cyan = vec3(0.3098, 0.8471, 1.0);             // #4fd8ff
 
   float vig = smoothstep(1.25, 0.45, distance(uv, vec2(0.5, 0.46)));
   vec3 col = mix(deep, ink, vig);
 
-  float peaks = smoothstep(0.55, 0.95, air);
-  col += iceDust * peaks * (0.012 + band * 0.05);
-  col += mix(signal, aurora, 0.5) * peaks * u_aurora * 0.028;
-  col += signal * shimmer;
+  // spectral ramp across the warp field: violet valleys → cyan ridges
+  float ramp = clamp(f * 0.75 + q.y * 0.45, 0.0, 1.0);
+  vec3 spectra = mix(violet, blue, smoothstep(0.0, 0.55, ramp));
+  spectra = mix(spectra, cyan, smoothstep(0.55, 1.0, ramp));
+
+  // always breathing, blooming mid-page; edges pool back to black
+  float gain = curtain * (0.05 + 0.11 * u_aurora) * vig;
+  col += spectra * gain;
+  col += iceDust * smoothstep(0.78, 0.97, drape) * (0.014 + band * 0.05) * vig;
+  col += spectra * band * 0.12;
+  col += cyan * shimmer;
   col += grain;
 
   gl_FragColor = vec4(col, 1.0);

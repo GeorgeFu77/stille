@@ -1,14 +1,14 @@
 import gsap from 'gsap';
 
 const SECTION_META = {
-  hero: ['00', 'THRESHOLD'],
-  wave: ['01', 'FIRST WAVE'],
-  reveal: ['02', 'MONO ONE'],
-  anatomy: ['03', 'ANATOMY'],
-  sweep: ['04', 'THE SWEEP'],
-  material: ['05', 'COLD MATTER'],
-  ledger: ['06', 'THE LEDGER'],
-  finale: ['07', 'RETURN TO SILENCE'],
+  hero: ['00', 'THE HOOK'],
+  wave: ['01', 'DEAD PAGES'],
+  reveal: ['02', 'YOUR SITE'],
+  anatomy: ['03', 'WHAT YOU GET'],
+  sweep: ['04', 'CRAFT'],
+  material: ['05', 'RECENT BUILDS'],
+  ledger: ['06', 'THE DEAL'],
+  finale: ['07', 'LET’S BUILD YOURS'],
 };
 
 export function initInterface(ctx) {
@@ -179,6 +179,21 @@ function initStoryHud(ctx) {
       onEnterBack: () => update(key),
     });
   }
+
+  // load-order races (scroll restoration, late pins) can leave the HUD lying —
+  // resync to whatever section actually sits at viewport center
+  const syncNow = () => {
+    const mid = window.innerHeight * 0.5;
+    for (const section of document.querySelectorAll('main > section[data-section]')) {
+      const r = section.getBoundingClientRect();
+      if (r.top <= mid && r.bottom >= mid) {
+        update(section.dataset.section);
+        break;
+      }
+    }
+  };
+  ctx.ScrollTrigger.addEventListener('refresh', syncNow);
+  requestAnimationFrame(syncNow);
 }
 
 function initSignalCursor(root) {

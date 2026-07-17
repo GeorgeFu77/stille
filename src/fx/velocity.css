@@ -1,0 +1,14 @@
+/* Chromatic aberration on display type, driven by --chroma (px, 0 at rest).
+   Violet ghost trails one way, cyan the other — crisp the moment you stop. */
+.hero-title,
+.wave-title,
+.reveal-title,
+.sweep-title,
+.material-title,
+.ledger-title,
+.finale-title {
+  --chroma: 0;
+  text-shadow:
+    calc(var(--chroma) * 1px) 0 rgba(157, 123, 255, 0.55),
+    calc(var(--chroma) * -1px) 0 rgba(79, 216, 255, 0.5);
+}

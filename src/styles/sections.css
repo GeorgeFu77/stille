@@ -55,6 +55,7 @@
 
 .hero-aperture__ring--outer {
   inset: 0;
+  /* deliberate: near-threshold spectral atmosphere on the aperture instrument */
   box-shadow: inset 0 0 80px rgba(91, 108, 255, 0.025), 0 0 90px rgba(157, 123, 255, 0.035);
 }
 
@@ -142,7 +143,8 @@
   align-self: end;
   justify-self: center;
   width: 100%;
-  font-size: var(--text-hero);
+  /* seven words now, not two — sized so each written line stays one line */
+  font-size: clamp(2.4rem, 6.6vw, 6.4rem);
   text-shadow: 0 0 70px rgba(233, 238, 246, 0.055);
 }
 
