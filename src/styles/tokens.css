@@ -34,8 +34,8 @@
      crossfade never passes through unreadable grey-on-grey */
   --daylight-fg: min(calc(var(--daylight) * 1.7), 1);
   --page-fg: color-mix(in srgb, var(--ice), var(--glacier-ink) calc(var(--daylight-fg) * 100%));
-  --page-muted: color-mix(in srgb, var(--ice-60), rgba(16, 19, 27, 0.76) calc(var(--daylight-fg) * 100%));
-  --page-faint: color-mix(in srgb, var(--ice-38), rgba(16, 19, 27, 0.56) calc(var(--daylight-fg) * 100%));
+  --page-muted: color-mix(in srgb, var(--ice-60), rgba(16, 19, 27, 0.9) calc(var(--daylight-fg) * 100%));
+  --page-faint: color-mix(in srgb, var(--ice-38), rgba(16, 19, 27, 0.72) calc(var(--daylight-fg) * 100%));
 
   /* Metal (speaker + swatches) — swapped by [data-finish] */
   --metal-hi: #3a4150;

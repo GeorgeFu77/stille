@@ -76,6 +76,7 @@ export function initSweep(ctx) {
   let plotH = 0;
   let t = 0.4477; // 440 Hz
   let interacted = false;
+  let sectionActive = false;
   let nudgeCall = null;
   let seekTween = null;
 
@@ -107,7 +108,9 @@ export function initSweep(ctx) {
     soundSet(f, db);
     thread.audio.freq = t;
     thread.audio.level = audioState.enabled ? 0.9 : 0;
-    grain.setAudio(t, audioState.enabled ? 0.8 : 0.22);
+    // only drive the aurora shimmer while the sweep owns the stage —
+    // boot-time updates must not leak a permanent site-wide shimmer
+    if (sectionActive) grain.setAudio(t, audioState.enabled ? 0.8 : 0.22);
   }
 
   function stopHints() {
@@ -231,6 +234,7 @@ export function initSweep(ctx) {
     start: 'top 55%',
     end: 'bottom 30%',
     onToggle(self) {
+      sectionActive = self.isActive;
       if (self.isActive) {
         thread.morph('lowThird', 'sweepPlot');
         if (ctx.reduceMotion) {

@@ -193,7 +193,11 @@ export function initGrain(ctx) {
     gl.viewport(0, 0, w, h);
   }
   resize();
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', () => {
+    resize();
+    // resizing clears the GL buffer; reduced-motion renders once, so re-render
+    if (ctx.reduceMotion) render(0.5, 0);
+  });
 
   // Smoothed cursor (GL coords: y up)
   let mx = window.innerWidth / 2;

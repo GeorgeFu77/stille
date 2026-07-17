@@ -49,6 +49,9 @@ export function initInterface(ctx) {
       if (target) {
         const destination = document.querySelector(target);
         if (destination) {
+          // keep keyboard focus travelling WITH the navigation, not reset to body
+          destination.setAttribute('tabindex', '-1');
+          destination.focus({ preventScroll: true });
           if (ctx.lenis) ctx.lenis.scrollTo(destination, { duration: 1.25 });
           else destination.scrollIntoView({ behavior: ctx.reduceMotion ? 'auto' : 'smooth' });
           history.replaceState(null, '', target);

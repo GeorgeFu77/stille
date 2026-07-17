@@ -121,7 +121,11 @@ export function initThread(ctx) {
     c.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
   resize();
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', () => {
+    resize();
+    // resizing wipes the bitmap; reduced-motion has no ticker to repaint it
+    if (ctx.reduceMotion) draw(0);
+  });
 
   const P = thread.P;
   const N = 180;
