@@ -1,6 +1,6 @@
 import '@fontsource-variable/fraunces';
 import '@fontsource-variable/archivo';
-import '@fontsource/ibm-plex-mono';
+import '@fontsource/ibm-plex-mono/500.css';
 import './styles/tokens.css';
 import './styles/base.css';
 import './styles/sections.css';

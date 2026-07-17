@@ -238,7 +238,7 @@ html.js .hero-axis {
 }
 
 .wave-p {
-  font-variation-settings: 'wght' 380;
+  font-variation-settings: 'wght' var(--weight-body);
   color: var(--page-muted);
 }
 
@@ -565,7 +565,8 @@ html.js .hero-axis {
 .panel-quote {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 1.15em;
+  font-size: 1.22em;
+  font-variation-settings: 'opsz' 72, 'wght' var(--weight-display);
   color: var(--page-muted);
   max-width: 24em;
 }
@@ -984,7 +985,8 @@ html.listening .site-foot {
 .material-quote p {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+  font-size: clamp(1.5rem, 2.35vw, 2rem);
+  font-variation-settings: 'opsz' 72, 'wght' var(--weight-display);
   line-height: 1.35;
   margin-bottom: 1rem;
 }
@@ -1072,7 +1074,7 @@ html.listening .site-foot {
   padding: 0.95em 0;
   text-align: left;
   vertical-align: baseline;
-  font-weight: 380;
+  font-weight: var(--weight-body);
 }
 
 .ledger-table th {
@@ -1156,8 +1158,8 @@ html.listening .site-foot {
 .finale-cta {
   display: inline-block;
   font-family: var(--font-body);
-  font-variation-settings: 'wght' 470;
-  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  font-variation-settings: 'wght' 580;
+  font-size: clamp(1.2rem, 1.75vw, 1.55rem);
   letter-spacing: 0.04em;
   padding: 0.4em 0.1em 0.65em;
   color: var(--page-fg);

@@ -69,7 +69,7 @@ export function initWave(ctx) {
     // and warms each word to full white — never a fade up through grey.
     // Literal hexes only: GSAP can't interpolate a var() that resolves to
     // color-mix(), and tweens toward it collapse to black mid-flight.
-    gsap.set(words, { fontVariationSettings: "'wght' 400", color: '#c9d5ff' });
+    gsap.set(words, { fontVariationSettings: "'wght' 470", color: '#c9d5ff' });
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -91,7 +91,7 @@ export function initWave(ctx) {
       .to(
         words,
         {
-          fontVariationSettings: "'wght' 560",
+          fontVariationSettings: "'wght' 650",
           color: '#e9eef6',
           duration: 0.32,
           stagger: { each: 0.35 / words.length },

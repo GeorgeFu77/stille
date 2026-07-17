@@ -21,8 +21,12 @@ body {
   color: var(--page-fg);
   font-family: var(--font-body);
   font-size: var(--text-body);
-  font-variation-settings: 'wght' 380;
+  font-weight: var(--weight-body);
+  font-variation-settings: 'wght' var(--weight-body);
+  font-kerning: normal;
+  font-optical-sizing: auto;
   line-height: 1.6;
+  letter-spacing: 0.008em;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
@@ -35,11 +39,16 @@ body {
 
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 380;
-  font-variation-settings: 'opsz' 144, 'wght' 380;
-  line-height: 1.02;
+  font-weight: var(--weight-display);
+  font-variation-settings: 'opsz' 144, 'wght' var(--weight-display);
+  line-height: 1.04;
   letter-spacing: -0.015em;
   text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
 }
 
 a {
@@ -145,8 +154,8 @@ html.has-loader .signal-cursor {
 .u-mono {
   font-family: var(--font-mono);
   font-size: var(--text-mono);
-  font-weight: 400;
-  letter-spacing: 0.14em;
+  font-weight: var(--weight-label);
+  letter-spacing: 0.11em;
   line-height: 1.5;
   color: var(--page-muted);
 }
@@ -444,7 +453,7 @@ html.index-open body {
 
 .site-index__kicker {
   grid-column: 1;
-  color: var(--ice-38);
+  color: var(--ice-60);
 }
 
 .site-index__title {
@@ -512,14 +521,14 @@ html.index-open body {
 
 .site-index__number,
 .site-index__meta {
-  color: var(--ice-38);
+  color: var(--ice-60);
   transition: color var(--dur-fast) ease, transform var(--dur-med) var(--ease-out);
 }
 
 .site-index__name {
   font-family: var(--font-display);
   font-size: clamp(1.65rem, 3.4vw, 3.7rem);
-  font-variation-settings: 'opsz' 144, 'wght' 320;
+  font-variation-settings: 'opsz' 144, 'wght' 430;
   line-height: 1;
   letter-spacing: -0.02em;
   transition: color var(--dur-fast) ease, transform var(--dur-med) var(--ease-out), font-variation-settings var(--dur-med) var(--ease-out);
@@ -533,7 +542,7 @@ html.index-open body {
 
 .site-index__link:hover .site-index__name,
 .site-index__link:focus-visible .site-index__name {
-  font-variation-settings: 'opsz' 144, 'wght' 520;
+  font-variation-settings: 'opsz' 144, 'wght' 620;
   transform: translateX(0.5rem);
 }
 
@@ -548,7 +557,7 @@ html.index-open body {
   justify-content: space-between;
   gap: 2rem;
   padding-top: clamp(1rem, 2.5vh, 2rem);
-  color: var(--ice-38);
+  color: var(--ice-60);
 }
 
 .eyebrow {

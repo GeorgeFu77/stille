@@ -21,11 +21,11 @@
   --spectra-cyan: #4fd8ff;
   --spectra: linear-gradient(100deg, var(--spectra-violet), var(--spectra-blue) 55%, var(--spectra-cyan));
   --glacier: #d8dee8;
-  --glacier-ink: #16214d;
+  --glacier-ink: #101833;
   /* Copy is never grey: cold signal-blue on the void, deep navy on the glacier.
      Hierarchy comes from temperature, not dimness. */
   --copy-cool: #c9d5ff;
-  --copy-cool-soft: rgba(158, 176, 238, 0.8);
+  --copy-cool-soft: rgba(180, 194, 244, 0.9);
   /* daylight-aware: ice rules in the dark, ink rules on the glacier */
   --hairline: color-mix(in srgb, rgba(233, 238, 246, 0.14), rgba(16, 19, 27, 0.28) calc(var(--daylight) * 100%));
   --hairline-faint: color-mix(in srgb, rgba(233, 238, 246, 0.07), rgba(16, 19, 27, 0.16) calc(var(--daylight) * 100%));
@@ -39,7 +39,7 @@
   --daylight-fg: min(calc(var(--daylight) * 1.7), 1);
   --page-fg: color-mix(in srgb, var(--ice), var(--glacier-ink) calc(var(--daylight-fg) * 100%));
   --page-muted: color-mix(in srgb, var(--copy-cool), var(--glacier-ink) calc(var(--daylight-fg) * 100%));
-  --page-faint: color-mix(in srgb, var(--copy-cool-soft), rgba(22, 33, 77, 0.88) calc(var(--daylight-fg) * 100%));
+  --page-faint: color-mix(in srgb, var(--copy-cool-soft), rgba(16, 24, 51, 0.92) calc(var(--daylight-fg) * 100%));
 
   /* Metal (speaker + swatches) — swapped by [data-finish] */
   --metal-hi: #3a4150;
@@ -53,11 +53,15 @@
   --font-mono: 'IBM Plex Mono', 'SF Mono', Menlo, monospace;
 
   --text-hero: clamp(3.4rem, 10.5vw, 9.5rem);
-  --text-h2: clamp(2.2rem, 5.6vw, 4.6rem);
-  --text-h3: clamp(1.6rem, 3vw, 2.4rem);
-  --text-body: clamp(1.02rem, 1.1vw, 1.2rem);
-  --text-mono: clamp(0.68rem, 0.75vw, 0.78rem);
-  --text-stat: clamp(1.7rem, 3.4vw, 3rem);
+  --text-h2: clamp(2.35rem, 5.8vw, 4.9rem);
+  --text-h3: clamp(1.75rem, 3.2vw, 2.65rem);
+  --text-body: clamp(1.125rem, 1.2vw, 1.3rem);
+  --text-mono: clamp(0.75rem, 0.8vw, 0.875rem);
+  --text-stat: clamp(2rem, 3.6vw, 3.25rem);
+
+  --weight-body: 470;
+  --weight-display: 450;
+  --weight-label: 500;
 
   /* Space & layout */
   --gutter: clamp(1.25rem, 5vw, 6rem);
