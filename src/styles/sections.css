@@ -660,6 +660,13 @@ html.listening .s-sweep::after {
   translate: -100% 0;
 }
 
+/* narrow plots: endpoint labels only — midpoints collide at this width */
+@media (max-width: 540px) {
+  .sweep-lab:not(.sweep-lab--first):not(.sweep-lab--last) {
+    display: none;
+  }
+}
+
 .sweep-handle {
   position: absolute;
   top: 0;
