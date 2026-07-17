@@ -25,6 +25,7 @@ export function initVelocity(ctx) {
 
   let lastY = window.scrollY;
   let v = 0; // smoothed, px/frame-ish
+  let lastChroma = -1;
 
   gsap.ticker.add(() => {
     if (document.hidden) return;
@@ -41,6 +42,10 @@ export function initVelocity(ctx) {
     for (const to of skews) to(skew);
 
     const chroma = Math.min(6, av * 0.09);
-    for (const el of chromaEls) el.style.setProperty('--chroma', chroma.toFixed(2));
+    if (Math.abs(chroma - lastChroma) > 0.04) {
+      lastChroma = chroma;
+      const value = chroma.toFixed(2);
+      for (const el of chromaEls) el.style.setProperty('--chroma', value);
+    }
   });
 }

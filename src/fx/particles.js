@@ -259,6 +259,8 @@ export function initParticles(ctx) {
   const K = 0.055;
   const DAMP = 0.86;
   let lastScroll = window.scrollY;
+  let frame = -1;
+  let daylight = 0;
 
   gsap.ticker.add((time, dt) => {
     if (document.hidden) return;
@@ -306,7 +308,10 @@ export function initParticles(ctx) {
     }
 
     // the daylight passage dims the field so the pale ground stays clean
-    const daylight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--daylight')) || 0;
+    // (style read sampled, not per-frame — getComputedStyle isn't free)
+    if ((frame = (frame + 1) % 8) === 0) {
+      daylight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--daylight')) || 0;
+    }
 
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
