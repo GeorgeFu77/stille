@@ -21,7 +21,11 @@
   --spectra-cyan: #4fd8ff;
   --spectra: linear-gradient(100deg, var(--spectra-violet), var(--spectra-blue) 55%, var(--spectra-cyan));
   --glacier: #d8dee8;
-  --glacier-ink: #10131b;
+  --glacier-ink: #16214d;
+  /* Copy is never grey: cold signal-blue on the void, deep navy on the glacier.
+     Hierarchy comes from temperature, not dimness. */
+  --copy-cool: #c9d5ff;
+  --copy-cool-soft: rgba(158, 176, 238, 0.8);
   /* daylight-aware: ice rules in the dark, ink rules on the glacier */
   --hairline: color-mix(in srgb, rgba(233, 238, 246, 0.14), rgba(16, 19, 27, 0.28) calc(var(--daylight) * 100%));
   --hairline-faint: color-mix(in srgb, rgba(233, 238, 246, 0.07), rgba(16, 19, 27, 0.16) calc(var(--daylight) * 100%));
@@ -34,8 +38,8 @@
      crossfade never passes through unreadable grey-on-grey */
   --daylight-fg: min(calc(var(--daylight) * 1.7), 1);
   --page-fg: color-mix(in srgb, var(--ice), var(--glacier-ink) calc(var(--daylight-fg) * 100%));
-  --page-muted: color-mix(in srgb, var(--ice-60), var(--glacier-ink) calc(var(--daylight-fg) * 100%));
-  --page-faint: color-mix(in srgb, var(--ice-38), rgba(16, 19, 27, 0.85) calc(var(--daylight-fg) * 100%));
+  --page-muted: color-mix(in srgb, var(--copy-cool), var(--glacier-ink) calc(var(--daylight-fg) * 100%));
+  --page-faint: color-mix(in srgb, var(--copy-cool-soft), rgba(22, 33, 77, 0.88) calc(var(--daylight-fg) * 100%));
 
   /* Metal (speaker + swatches) — swapped by [data-finish] */
   --metal-hi: #3a4150;

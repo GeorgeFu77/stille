@@ -65,9 +65,11 @@ export function initWave(ctx) {
 
   mm.add('(min-width: 861px)', () => {
     const words = paras.flatMap((p) => SplitText.create(p, { type: 'words' }).words);
-    // start legible: full-white, medium weight. The wake-up thickens the
-    // weight — it never fades up through grey (that read as unreadable).
-    gsap.set(words, { fontVariationSettings: "'wght' 400", color: 'var(--page-fg)' });
+    // start legible: cold signal-blue at reading weight. The wake-up thickens
+    // and warms each word to full white — never a fade up through grey.
+    // Literal hexes only: GSAP can't interpolate a var() that resolves to
+    // color-mix(), and tweens toward it collapse to black mid-flight.
+    gsap.set(words, { fontVariationSettings: "'wght' 400", color: '#c9d5ff' });
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -90,6 +92,7 @@ export function initWave(ctx) {
         words,
         {
           fontVariationSettings: "'wght' 560",
+          color: '#e9eef6',
           duration: 0.32,
           stagger: { each: 0.35 / words.length },
           ease: 'none',
