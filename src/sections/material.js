@@ -31,13 +31,17 @@ export function initMaterial(ctx) {
     return;
   }
 
+  // Reach full daylight EARLY — while the copy is still entering from below —
+  // and hold it until the section is nearly gone. Parking anywhere in the
+  // reading zone lands on daylight 1, where body text is solid ink. A ramp
+  // that finished at reading height left the copy grey-on-half-lit.
   gsap.fromTo(
     root,
     { '--daylight': 0 },
     {
       '--daylight': 1,
       ease: 'none',
-      scrollTrigger: { trigger: section, start: 'top 80%', end: 'top 30%', scrub: 0.5 },
+      scrollTrigger: { trigger: section, start: 'top 90%', end: 'top 55%', scrub: 0.5 },
     },
   );
 
@@ -49,7 +53,7 @@ export function initMaterial(ctx) {
     {
       '--grain-opacity': 0.04,
       ease: 'power2.out',
-      scrollTrigger: { trigger: section, start: 'top 80%', end: 'top 30%', scrub: 0.5 },
+      scrollTrigger: { trigger: section, start: 'top 90%', end: 'top 55%', scrub: 0.5 },
     },
   );
 
@@ -60,7 +64,7 @@ export function initMaterial(ctx) {
       '--daylight': 0,
       ease: 'none',
       immediateRender: false,
-      scrollTrigger: { trigger: section, start: 'bottom 70%', end: 'bottom 20%', scrub: 0.5 },
+      scrollTrigger: { trigger: section, start: 'bottom 45%', end: 'bottom 12%', scrub: 0.5 },
     },
   );
 
@@ -71,7 +75,7 @@ export function initMaterial(ctx) {
       '--grain-opacity': 1,
       ease: 'power2.in',
       immediateRender: false,
-      scrollTrigger: { trigger: section, start: 'bottom 70%', end: 'bottom 20%', scrub: 0.5 },
+      scrollTrigger: { trigger: section, start: 'bottom 45%', end: 'bottom 12%', scrub: 0.5 },
     },
   );
 
