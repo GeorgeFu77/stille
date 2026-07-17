@@ -184,7 +184,8 @@ function initStoryHud(ctx) {
   // resync to whatever section actually sits at viewport center
   const syncNow = () => {
     const mid = window.innerHeight * 0.5;
-    for (const section of document.querySelectorAll('main > section[data-section]')) {
+    // descendant selector: pinned sections live inside pin-spacers, not main
+    for (const section of document.querySelectorAll('main section[data-section]')) {
       const r = section.getBoundingClientRect();
       if (r.top <= mid && r.bottom >= mid) {
         update(section.dataset.section);

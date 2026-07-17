@@ -796,13 +796,13 @@ html.listening .sweep-handle-dot {
 
 /* ——— Listening mode: sound on, the page dims around the instrument ——— */
 .site-head,
-main > section,
+main section[data-section],
 .site-foot {
   transition: opacity 0.9s var(--ease-in-out);
 }
 
 html.listening .site-head,
-html.listening main > section:not(.s-sweep),
+html.listening main section[data-section]:not(.s-sweep),
 html.listening .site-foot {
   opacity: 0.16;
 }

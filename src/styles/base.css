@@ -574,7 +574,7 @@ section {
   padding: var(--section-pad) var(--gutter);
 }
 
-main > section {
+main section[data-section] {
   isolation: isolate;
 }
 
