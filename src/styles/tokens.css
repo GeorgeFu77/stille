@@ -1,0 +1,74 @@
+/* ————————————————————————————————————————————
+   STILLE design tokens
+   Palette: void · ice · signal · aurora
+   ———————————————————————————————————————————— */
+
+:root {
+  /* Color */
+  --void: #05060b;
+  --ink: #0b0e16;
+  --ice: #e9eef6;
+  --ice-60: rgba(233, 238, 246, 0.6);
+  --ice-38: rgba(233, 238, 246, 0.38);
+  --signal: #5b6cff;
+  --signal-dim: rgba(91, 108, 255, 0.55);
+  --aurora: #9d7bff;
+  --glacier: #d8dee8;
+  --glacier-ink: #10131b;
+  --hairline: rgba(233, 238, 246, 0.14);
+  --hairline-faint: rgba(233, 238, 246, 0.07);
+
+  /* The Daylight Passage drives one number; CSS derives the live page colors. */
+  --daylight: 0;
+  --grain-opacity: 1;
+  --page-bg: color-mix(in srgb, var(--ink), var(--glacier) calc(var(--daylight) * 100%));
+  --page-fg: color-mix(in srgb, var(--ice), var(--glacier-ink) calc(var(--daylight) * 100%));
+  --page-muted: color-mix(in srgb, var(--ice-60), rgba(16, 19, 27, 0.62) calc(var(--daylight) * 100%));
+  --page-faint: color-mix(in srgb, var(--ice-38), rgba(16, 19, 27, 0.48) calc(var(--daylight) * 100%));
+
+  /* Metal (speaker + swatches) — swapped by [data-finish] */
+  --metal-hi: #3a4150;
+  --metal-mid: #252b37;
+  --metal-lo: #141824;
+  --metal-sheen: rgba(233, 238, 246, 0.11);
+
+  /* Type */
+  --font-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SF Mono', Menlo, monospace;
+
+  --text-hero: clamp(3.4rem, 10.5vw, 9.5rem);
+  --text-h2: clamp(2.2rem, 5.6vw, 4.6rem);
+  --text-h3: clamp(1.6rem, 3vw, 2.4rem);
+  --text-body: clamp(1.02rem, 1.1vw, 1.2rem);
+  --text-mono: clamp(0.68rem, 0.75vw, 0.78rem);
+  --text-stat: clamp(1.7rem, 3.4vw, 3rem);
+
+  /* Space & layout */
+  --gutter: clamp(1.25rem, 5vw, 6rem);
+  --measure: 34em;
+  --section-pad: clamp(6rem, 14vh, 11rem);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);      /* expo-ish arrive */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);  /* state change */
+  --dur-fast: 180ms;
+  --dur-med: 420ms;
+  --page-progress: 0;
+  --rule-scale: 0;
+
+  /* Z layers */
+  --z-grain: 0;
+  --z-scene: 1;
+  --z-thread: 2;
+  --z-content: 3;
+  --z-head: 10;
+}
+
+/* Ice finish swaps the product's metal tokens (configurator). */
+:root[data-finish='ice'] {
+  --metal-hi: #d9dee8;
+  --metal-mid: #c4cbd7;
+  --metal-lo: #a8b0bf;
+  --metal-sheen: rgba(233, 238, 246, 0.35);
+}

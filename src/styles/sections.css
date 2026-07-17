@@ -1,0 +1,1291 @@
+/* ————————————————————————————————————————————
+   Sections 00–07
+   ———————————————————————————————————————————— */
+
+/* ——— 00 · Threshold ——— */
+
+.s-hero {
+  overflow: clip;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: minmax(1rem, 1fr) auto auto clamp(4.5rem, 12vh, 7.5rem) auto minmax(3.5rem, 1fr);
+  grid-template-areas:
+    '.'
+    'title'
+    'label'
+    'thread'
+    'sub'
+    'cue';
+  padding: clamp(6.5rem, 14vh, 9rem) var(--gutter) clamp(1.4rem, 4vh, 2.6rem);
+  text-align: center;
+}
+
+.hero-aperture {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.hero-aperture__field {
+  position: relative;
+  width: min(58vw, 72vh, 47rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  opacity: 0.72;
+  will-change: transform, opacity;
+}
+
+.hero-aperture__field::before {
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91, 108, 255, 0.1), rgba(157, 123, 255, 0.035) 42%, transparent 70%);
+  filter: blur(12px);
+  content: '';
+}
+
+.hero-aperture__ring {
+  position: absolute;
+  border: 1px solid var(--hairline-faint);
+  border-radius: 50%;
+}
+
+.hero-aperture__ring--outer {
+  inset: 0;
+  box-shadow: inset 0 0 80px rgba(91, 108, 255, 0.025), 0 0 90px rgba(157, 123, 255, 0.035);
+}
+
+.hero-aperture__ring--outer::after {
+  position: absolute;
+  inset: -1px;
+  border-top: 1px solid rgba(91, 108, 255, 0.72);
+  border-right: 1px solid transparent;
+  border-bottom: 1px solid rgba(157, 123, 255, 0.16);
+  border-left: 1px solid transparent;
+  border-radius: inherit;
+  content: '';
+}
+
+.hero-aperture__ring--inner {
+  inset: 24%;
+  border-color: rgba(233, 238, 246, 0.09);
+}
+
+.hero-aperture__ring--inner::before,
+.hero-aperture__ring--inner::after {
+  position: absolute;
+  background: var(--ice-38);
+  content: '';
+}
+
+.hero-aperture__ring--inner::before {
+  top: 50%;
+  right: -5px;
+  left: -5px;
+  height: 1px;
+}
+
+.hero-aperture__ring--inner::after {
+  top: -5px;
+  bottom: -5px;
+  left: 50%;
+  width: 1px;
+}
+
+.hero-aperture__scan {
+  position: absolute;
+  top: 50%;
+  right: 6%;
+  left: 6%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--signal) 30%, var(--ice) 50%, var(--signal) 70%, transparent);
+  box-shadow: 0 0 24px rgba(91, 108, 255, 0.4);
+  opacity: 0.55;
+  transform: scaleX(0.2);
+  transform-origin: center;
+}
+
+.hero-axis {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  color: var(--page-faint);
+  letter-spacing: 0.2em;
+  pointer-events: none;
+  writing-mode: vertical-rl;
+}
+
+.hero-axis--left {
+  left: max(1rem, calc(var(--gutter) * 0.45));
+}
+
+.hero-axis--right {
+  right: max(1rem, calc(var(--gutter) * 0.45));
+}
+
+.hero-label {
+  position: relative;
+  z-index: 2;
+  grid-area: label;
+  justify-self: center;
+  margin-top: clamp(0.8rem, 2vh, 1.25rem);
+  color: var(--page-faint);
+}
+
+.hero-title {
+  position: relative;
+  z-index: 2;
+  grid-area: title;
+  align-self: end;
+  justify-self: center;
+  width: 100%;
+  font-size: var(--text-hero);
+  text-shadow: 0 0 70px rgba(233, 238, 246, 0.055);
+}
+
+.hero-title .char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.hero-thread-slot {
+  grid-area: thread;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero-sub {
+  position: relative;
+  z-index: 2;
+  grid-area: sub;
+  justify-self: center;
+  color: var(--page-muted);
+  max-width: 28em;
+}
+
+.scroll-cue {
+  position: relative;
+  z-index: 2;
+  grid-area: cue;
+  align-self: end;
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  color: var(--page-faint);
+}
+
+.scroll-cue-tick {
+  display: inline-block;
+  width: 34px;
+  height: 12px;
+  background:
+    linear-gradient(to right, transparent 0 12px, var(--page-faint) 12px 13px, transparent 13px 16px, var(--page-faint) 16px 17px, transparent 17px) center / 100% 1px no-repeat;
+}
+
+/* JS-present: hero elements hidden until the entrance timeline reveals them.
+   (The initial no-JS paint keeps the headline visible for LCP.) */
+html.js .hero-title,
+html.js .hero-label,
+html.js .hero-sub,
+html.js .scroll-cue,
+html.js .hero-aperture,
+html.js .hero-axis {
+  visibility: hidden;
+}
+
+/* ——— 01 · The First Wave ——— */
+
+.s-wave {
+  min-height: 100svh;
+}
+
+/* Desktop pinned composition: copy above the Thread (60svh), stats read out
+   beneath it like an instrument panel. */
+.wave-inner {
+  width: min(100%, 46rem);
+  margin-inline: auto;
+  text-align: center;
+  padding-top: 13svh;
+}
+
+.wave-title {
+  font-size: var(--text-h2);
+  margin-bottom: clamp(1.6rem, 4vh, 2.8rem);
+}
+
+.wave-copy {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.2rem;
+  margin-inline: auto;
+  max-width: 44rem;
+  text-align: left;
+}
+
+@media (max-width: 860px) {
+  .wave-copy {
+    grid-template-columns: 1fr;
+    max-width: var(--measure);
+    gap: 1.1em;
+  }
+}
+
+.wave-p {
+  font-variation-settings: 'wght' 380;
+  color: var(--page-muted);
+}
+
+.wave-stats {
+  position: absolute;
+  top: calc(60svh + 4rem);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+@media (max-width: 860px) {
+  .wave-stats {
+    position: static;
+    flex-direction: column;
+    gap: 1.6rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .wave-inner {
+    padding-top: 0;
+  }
+}
+
+.stat dt {
+  color: var(--page-faint);
+  margin-bottom: 0.5em;
+}
+
+.stat-value {
+  font-size: var(--text-stat);
+  letter-spacing: 0.02em;
+  color: var(--page-fg);
+}
+
+/* ——— 02 · Mono One reveal ——— */
+
+.s-reveal {
+  min-height: 100svh;
+}
+
+.reveal-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+  max-width: 90rem;
+  margin-inline: auto;
+}
+
+.reveal-title {
+  font-size: var(--text-h2);
+  margin-bottom: 1.6rem;
+}
+
+.reveal-sub {
+  color: var(--page-muted);
+  max-width: 26em;
+}
+
+.speaker-stage {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+.speaker-aura {
+  position: absolute;
+  z-index: -1;
+  width: min(70vw, 42rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(157, 123, 255, 0.1), rgba(233, 238, 246, 0.035) 32%, transparent 68%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+/* The column must live entirely inside the pinned viewport */
+.speaker-stage svg {
+  height: 88svh;
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: 600 / 1100;
+  margin-inline: auto;
+}
+
+@media (max-width: 860px) {
+  .speaker-stage svg {
+    height: auto;
+    width: min(100%, 22rem);
+  }
+}
+
+/* Speaker technical drawing: wire = hairline ink, solid = gradient matter */
+.speaker-svg .wire {
+  stroke: var(--page-fg);
+  stroke-width: 0.9;
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: square;
+}
+
+.speaker-svg .wire.w2 {
+  stroke-opacity: 0.5;
+  stroke-width: 0.75;
+}
+
+.speaker-svg .wire.w3 {
+  stroke-opacity: 0.26;
+  stroke-width: 0.75;
+}
+
+.speaker-svg .wire.signal {
+  stroke: var(--signal);
+  stroke-opacity: 0.9;
+  stroke-width: 0.85;
+}
+
+.speaker-svg .lbl {
+  font-family: var(--font-mono);
+  font-size: 12px; /* SVG user units — renders ~11px at stage width */
+  letter-spacing: 0.07em;
+  fill: var(--page-fg);
+  stroke: none;
+}
+
+.speaker-svg .lbl.dim {
+  fill-opacity: 0.5;
+}
+
+.speaker-svg .lbl.dim2 {
+  fill-opacity: 0.28;
+}
+
+.speaker-svg .marker {
+  fill: var(--signal);
+}
+
+/* Finish configurator: the ledger's chips refinish the casting site-wide */
+:root[data-finish='ice'] .speaker-svg .shell-fill {
+  fill: url(#d-mBodyIce);
+}
+
+/* ——— 03 · Anatomy filmstrip ——— */
+
+.s-anatomy {
+  --film-progress: 0;
+  padding-inline: 0;
+}
+
+.anatomy-eyebrow {
+  padding-inline: var(--gutter);
+}
+
+.film-status {
+  position: absolute;
+  top: var(--section-pad);
+  right: var(--gutter);
+  color: var(--page-faint);
+}
+
+.film-status::after {
+  display: block;
+  width: 5rem;
+  height: 1px;
+  margin-top: 0.65rem;
+  background: linear-gradient(90deg, var(--signal) 50%, var(--hairline-faint) 50%);
+  background-position: right;
+  background-size: 200% 100%;
+  content: '';
+  transform: scaleX(var(--film-progress));
+  transform-origin: left;
+}
+
+[data-film-current] {
+  color: var(--signal);
+}
+
+.film-viewport {
+  overflow-x: auto;      /* no-JS fallback; pinned mode overrides */
+  scroll-snap-type: x mandatory;
+}
+
+/* JS drives the strip with a scrubbed transform on desktop */
+@media (min-width: 861px) {
+  html.js .film-viewport {
+    overflow: hidden;
+    scroll-snap-type: none;
+  }
+}
+
+.film-track {
+  display: flex;
+  width: max-content;
+}
+
+.s-anatomy.is-static .film-viewport {
+  overflow: visible;
+  scroll-snap-type: none;
+}
+
+.s-anatomy.is-static .film-track {
+  flex-direction: column;
+  width: auto;
+}
+
+.s-anatomy.is-static .film-panel {
+  width: auto;
+  min-height: auto;
+  border-top: 1px solid var(--hairline-faint);
+  border-left: 0;
+}
+
+.s-anatomy.is-static .film-status {
+  display: none;
+}
+
+/* Small screens: the strip stacks vertically, panels ink in on entry */
+@media (max-width: 860px) {
+  .film-viewport {
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .film-track {
+    flex-direction: column;
+    width: auto;
+  }
+
+  .film-panel {
+    width: auto;
+    min-height: auto;
+    border-left: 0;
+    border-top: 1px solid var(--hairline-faint);
+  }
+}
+
+.film-panel {
+  position: relative;
+  scroll-snap-align: center;
+  width: min(84vw, 44rem);
+  min-height: 78svh;
+  padding: clamp(2rem, 6vh, 4rem) clamp(1.6rem, 4vw, 4rem);
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto auto;
+  border-left: 1px solid var(--hairline-faint);
+  isolation: isolate;
+  transform-origin: center;
+  transition: border-color var(--dur-med) var(--ease-out);
+}
+
+.film-panel::before {
+  position: absolute;
+  z-index: -1;
+  inset: 8% 4%;
+  background: radial-gradient(circle at 50% 48%, rgba(157, 123, 255, 0.055), transparent 62%);
+  content: '';
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease-out);
+}
+
+.film-panel.is-current {
+  border-left-color: var(--signal-dim);
+}
+
+.film-panel.is-current::before {
+  opacity: 1;
+}
+
+.panel-index {
+  font-size: clamp(4rem, 9vw, 8rem);
+  letter-spacing: 0;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--hairline);
+  margin-bottom: 1.4rem;
+  transition: -webkit-text-stroke-color var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .film-panel:hover .panel-index {
+    -webkit-text-stroke-color: rgba(91, 108, 255, 0.3);
+  }
+}
+
+.panel-title {
+  font-size: var(--text-h3);
+  margin-bottom: 0.4rem;
+}
+
+.panel-lede {
+  color: var(--page-muted);
+  margin-bottom: 2rem;
+}
+
+.panel-art {
+  min-height: 12rem;
+  margin-bottom: 2rem;
+}
+
+.panel-art svg {
+  width: 100%;
+  height: 100%;
+  max-height: 16rem;
+}
+
+.panel-specs {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.45em;
+  margin-bottom: 1.8rem;
+}
+
+.panel-specs li {
+  color: var(--page-faint);
+}
+
+.panel-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15em;
+  color: var(--page-muted);
+  max-width: 24em;
+}
+
+/* ——— 04 · The Sweep ——— */
+
+.s-sweep {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+.s-sweep::after {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  background: var(--void);
+  content: '';
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.9s var(--ease-in-out);
+}
+
+html.listening .s-sweep::after {
+  opacity: 0.48;
+}
+
+.sweep-inner {
+  width: min(100%, 72rem);
+}
+
+.sweep-title {
+  font-size: var(--text-h2);
+  margin-bottom: 1rem;
+}
+
+.sweep-sub {
+  color: var(--page-muted);
+  max-width: var(--measure);
+  margin-bottom: clamp(2.6rem, 6vh, 4.4rem);
+}
+
+.sweep-chart {
+  width: 100%;
+}
+
+.sweep-plot {
+  --signal-x: 44.77%;
+  --signal-y: 42%;
+  position: relative;
+  aspect-ratio: 21 / 9;
+  border-block: 1px solid var(--hairline-faint);
+  background: radial-gradient(circle 12rem at var(--signal-x) var(--signal-y), rgba(157, 123, 255, 0.065), transparent 62%);
+  cursor: crosshair;
+  touch-action: pan-y;
+}
+
+.sweep-plot svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* measurement grid drawn by JS */
+.sweep-grid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sweep-grid line {
+  stroke: var(--hairline-faint);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.sweep-lab {
+  position: absolute;
+  bottom: -1.9rem;
+  translate: -50% 0;
+  color: var(--page-faint);
+}
+
+.sweep-lab--first {
+  translate: 0 0;
+}
+
+.sweep-lab--last {
+  translate: -100% 0;
+}
+
+.sweep-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px; /* GSAP x/y drive the center point */
+  display: grid;
+  place-items: center;
+  touch-action: none;
+  cursor: grab;
+  z-index: 3;
+}
+
+.sweep-handle:active {
+  cursor: grabbing;
+}
+
+.sweep-handle-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid var(--page-fg);
+  background: var(--ink);
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+
+.sweep-handle-ring {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--signal-dim);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.55);
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-med) var(--ease-out);
+}
+
+.sweep-handle-value {
+  position: absolute;
+  bottom: calc(100% + 0.3rem);
+  left: 50%;
+  padding: 0.3rem 0.45rem;
+  border: 1px solid var(--hairline-faint);
+  background: rgba(5, 6, 11, 0.86);
+  color: var(--page-fg);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px);
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-med) var(--ease-out);
+  white-space: nowrap;
+}
+
+.sweep-handle:hover .sweep-handle-ring,
+.sweep-handle:focus-visible .sweep-handle-ring,
+.sweep-handle.is-active .sweep-handle-ring,
+html.listening .sweep-handle-ring {
+  opacity: 0.85;
+  transform: scale(1);
+}
+
+.sweep-handle:hover .sweep-handle-value,
+.sweep-handle:focus-visible .sweep-handle-value,
+.sweep-handle.is-active .sweep-handle-value,
+html.listening .sweep-handle-value {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.sweep-cursor {
+  position: absolute;
+  z-index: 1;
+  top: var(--signal-y);
+  left: var(--signal-x);
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.sweep-cursor::before,
+.sweep-cursor::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--signal-dim);
+  content: '';
+  opacity: 0.24;
+  transform: translate(-50%, -50%) scale(0.2);
+  transition: opacity var(--dur-med) var(--ease-out), transform var(--dur-med) var(--ease-out);
+}
+
+.sweep-cursor::before {
+  width: 1px;
+  height: var(--plot-height, 12rem);
+  transform-origin: center;
+}
+
+.sweep-cursor::after {
+  width: 3rem;
+  height: 1px;
+}
+
+.sweep-plot:hover .sweep-cursor::before,
+.sweep-plot:hover .sweep-cursor::after,
+html.listening .sweep-cursor::before,
+html.listening .sweep-cursor::after {
+  opacity: 0.45;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.sweep-handle:hover .sweep-handle-dot,
+.sweep-handle.is-active .sweep-handle-dot,
+html.listening .sweep-handle-dot {
+  border-color: var(--signal);
+  background: var(--signal);
+}
+
+.sweep-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2.4rem; /* clears the frequency labels under the plot */
+}
+
+/* one soft wink when the idle nudge fires — a single pulse, never a loop */
+.sound-toggle--wink {
+  animation: toggle-wink 1.3s var(--ease-in-out) 1;
+}
+
+@keyframes toggle-wink {
+  0%, 100% { border-color: var(--hairline); }
+  40% { border-color: var(--signal); color: var(--signal); }
+}
+
+/* ——— Listening mode: sound on, the page dims around the instrument ——— */
+.site-head,
+main > section,
+.site-foot {
+  transition: opacity 0.9s var(--ease-in-out);
+}
+
+html.listening .site-head,
+html.listening main > section:not(.s-sweep),
+html.listening .site-foot {
+  opacity: 0.16;
+}
+
+.sweep-readout {
+  color: var(--page-fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.sound-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.7em 1.1em;
+  border: 1px solid var(--hairline);
+  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.sound-toggle:hover {
+  border-color: var(--page-muted);
+  color: var(--page-fg);
+}
+
+.sound-toggle[aria-pressed='true'] {
+  border-color: var(--signal);
+  color: var(--signal);
+}
+
+.sound-toggle-mark {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+}
+
+.sound-toggle-mark::after {
+  position: absolute;
+  inset: -5px;
+  border: 1px solid currentColor;
+  border-radius: inherit;
+  content: '';
+  opacity: 0;
+}
+
+.sound-toggle[aria-pressed='true'] .sound-toggle-mark {
+  background: currentColor;
+}
+
+.sound-toggle[aria-pressed='true'] .sound-toggle-mark::after {
+  animation: sound-breathe 1.8s ease-out infinite;
+}
+
+@keyframes sound-breathe {
+  0% { opacity: 0.6; transform: scale(0.55); }
+  70%, 100% { opacity: 0; transform: scale(1.25); }
+}
+
+/* ——— 05 · Material ——— */
+
+.s-material {
+  overflow: clip;
+}
+
+.daylight .swatch-face {
+  border-color: color-mix(in srgb, var(--hairline-faint), rgba(16, 19, 27, 0.18) calc(var(--daylight) * 100%));
+}
+
+.daylight .material-numeral {
+  -webkit-text-stroke-color: var(--page-faint);
+}
+
+.material-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  max-width: 80rem;
+  margin-inline: auto;
+}
+
+.s-material .eyebrow,
+.material-title {
+  grid-column: 1 / -1;
+}
+
+.material-title {
+  font-size: var(--text-h2);
+  margin-bottom: clamp(2rem, 5vh, 3.4rem);
+}
+
+.material-body {
+  display: grid;
+  gap: 1.2em;
+  color: var(--page-muted);
+  max-width: var(--measure);
+}
+
+.swatches {
+  display: grid;
+  gap: clamp(1.4rem, 3vh, 2.4rem);
+}
+
+.swatch-face {
+  --sheen-x: 50%;
+  --sheen-y: 50%;
+  position: relative;
+  height: clamp(9rem, 22vh, 13rem);
+  border: 1px solid var(--hairline-faint);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform-origin: center;
+  transition: border-color var(--dur-med) var(--ease-out), box-shadow var(--dur-med) var(--ease-out);
+  will-change: transform;
+}
+
+.swatch-face::after {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--sheen-x) var(--sheen-y), rgba(233, 238, 246, 0.16), transparent 38%);
+  content: '';
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease-out);
+  pointer-events: none;
+}
+
+.swatch.is-lit .swatch-face {
+  border-color: var(--signal-dim);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24);
+}
+
+.swatch.is-lit .swatch-face::after {
+  opacity: 0.55;
+}
+
+/* brushed metal: stacked vertical sheens, light angle set by --sheen-x (JS) */
+.swatch--metal .swatch-face {
+  background:
+    linear-gradient(105deg, transparent calc(var(--sheen-x) - 18%), var(--metal-sheen) var(--sheen-x), transparent calc(var(--sheen-x) + 18%)),
+    repeating-linear-gradient(90deg, rgba(233, 238, 246, 0.028) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, var(--metal-hi), var(--metal-mid) 55%, var(--metal-lo));
+}
+
+/* wool weave: two dot grids offset + soft depth */
+.swatch--wool .swatch-face {
+  background:
+    radial-gradient(circle at var(--sheen-x) 30%, rgba(233, 238, 246, 0.1), transparent 60%),
+    radial-gradient(rgba(233, 238, 246, 0.16) 1px, transparent 1.5px),
+    radial-gradient(rgba(16, 19, 27, 0.6) 1px, transparent 1.5px),
+    #cbd3df;
+  background-size: 100% 100%, 7px 7px, 7px 7px, 100% 100%;
+  background-position: 0 0, 0 0, 3.5px 3.5px, 0 0;
+}
+
+.swatch figcaption {
+  margin-top: 0.8rem;
+  color: var(--page-faint);
+  transition: color var(--dur-med) var(--ease-out), transform var(--dur-med) var(--ease-out);
+}
+
+.swatch.is-lit figcaption {
+  color: var(--page-muted);
+  transform: translateX(0.45rem);
+}
+
+.material-quote {
+  grid-column: 1 / -1;
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+  max-width: 30em;
+}
+
+.material-quote p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+  line-height: 1.35;
+  margin-bottom: 1rem;
+}
+
+.material-quote cite {
+  font-style: normal;
+  color: var(--page-faint);
+}
+
+.material-numeral {
+  position: absolute;
+  right: -0.05em;
+  bottom: -0.18em;
+  z-index: -1;
+  font-size: clamp(10rem, 24vw, 22rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--hairline-faint);
+  user-select: none;
+}
+
+/* ——— 06 · The Ledger ——— */
+
+.ledger-inner {
+  position: relative;
+  max-width: 62rem;
+  margin-inline: auto;
+}
+
+.s-ledger {
+  --finish-flash: 0;
+}
+
+.s-ledger::before {
+  position: absolute;
+  z-index: -1;
+  inset: 15% 0;
+  background: radial-gradient(circle at 70% 65%, rgba(157, 123, 255, 0.12), transparent 45%);
+  content: '';
+  opacity: var(--finish-flash);
+  pointer-events: none;
+}
+
+.ledger-title {
+  font-size: var(--text-h2);
+  margin-bottom: clamp(2.4rem, 6vh, 4rem);
+}
+
+.ledger-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ledger-table tr {
+  border-top: 1px solid var(--hairline-faint);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.ledger-table th,
+.ledger-table td {
+  transition: color var(--dur-fast) var(--ease-out), transform var(--dur-med) var(--ease-out);
+}
+
+.ledger-table tr:last-child {
+  border-bottom: 1px solid var(--hairline-faint);
+}
+
+.ledger-table tr:hover,
+.ledger-table tr.is-active {
+  border-top-color: var(--signal-dim);
+}
+
+.ledger-table tr.is-active th {
+  color: var(--signal);
+  transform: translateX(0.35rem);
+}
+
+.ledger-table tr.is-active td {
+  transform: translateX(0.35rem);
+}
+
+.ledger-table th,
+.ledger-table td {
+  padding: 0.95em 0;
+  text-align: left;
+  vertical-align: baseline;
+  font-weight: 380;
+}
+
+.ledger-table th {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--page-faint);
+  width: 38%;
+}
+
+.ledger-table td {
+  color: var(--page-fg);
+}
+
+.finish-chips {
+  display: inline-flex;
+  gap: 0.6rem;
+}
+
+.chip {
+  padding: 0.55em 1em;
+  border: 1px solid var(--hairline);
+  color: var(--page-muted);
+  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.chip:hover {
+  border-color: var(--page-muted);
+  color: var(--page-fg);
+}
+
+.chip[aria-checked='true'] {
+  border-color: var(--signal);
+  color: var(--page-fg);
+}
+
+.ledger-diagram {
+  position: absolute;
+  top: 0;
+  right: calc(-1 * clamp(0rem, 4vw, 5rem));
+  width: 72px;
+  height: 72px;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* ——— 07 · Return to Silence ——— */
+
+.s-finale {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  isolation: isolate;
+}
+
+.s-finale::before {
+  position: absolute;
+  z-index: -1;
+  width: min(80vw, 52rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(157, 123, 255, 0.07), rgba(233, 238, 246, 0.025) 34%, transparent 68%);
+  content: '';
+  opacity: 0;
+  transform: scale(0.78);
+  transition: opacity 1.4s var(--ease-in-out), transform 1.8s var(--ease-out);
+}
+
+.s-finale.is-current::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.finale-title {
+  font-size: var(--text-hero);
+  margin-bottom: 16vh; /* the Thread settles here, becoming the CTA underline */
+}
+
+.finale-cta {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-variation-settings: 'wght' 470;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  letter-spacing: 0.04em;
+  padding: 0.4em 0.1em 0.65em;
+  color: var(--page-fg);
+  will-change: transform;
+}
+
+.finale-cta .char {
+  display: inline-block;
+}
+
+.finale-note {
+  margin-top: 2.2rem;
+  color: var(--page-faint);
+}
+
+/* ——— Responsive ——— */
+
+/* Mid-width windows use an editorial split instead of a squeezed desktop stack. */
+@media (min-width: 541px) and (max-width: 1100px) {
+  .s-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(10rem, 0.42fr);
+    grid-template-rows: minmax(0.5rem, 1fr) auto auto clamp(3.25rem, 9vh, 5.25rem) auto minmax(2rem, 0.55fr);
+    grid-template-areas:
+      '. .'
+      'title title'
+      'label label'
+      'thread thread'
+      'sub cue'
+      '. .';
+    column-gap: clamp(1.5rem, 5vw, 3.5rem);
+    padding-top: clamp(5.75rem, 11vh, 7.5rem);
+    text-align: left;
+  }
+
+  .hero-title,
+  .hero-label,
+  .hero-sub {
+    justify-self: start;
+  }
+
+  .hero-title {
+    font-size: clamp(4rem, 10.5vw, 5.65rem);
+  }
+
+  .hero-label {
+    margin-top: 0.55rem;
+  }
+
+  .hero-sub {
+    max-width: 23em;
+  }
+
+  .scroll-cue {
+    align-self: start;
+    justify-self: end;
+    margin-top: 0.25rem;
+  }
+
+  .hero-aperture__field {
+    width: min(72vw, 75vh, 40rem);
+    margin-left: 18vw;
+  }
+}
+
+@media (max-width: 1100px) {
+  .hero-axis {
+    display: none;
+  }
+}
+
+/* Height, not only width, determines whether the opening composition fits. */
+@media (max-height: 700px) {
+  .s-hero {
+    grid-template-rows: minmax(0.25rem, 0.45fr) auto auto clamp(2.25rem, 7vh, 3.5rem) auto minmax(1.25rem, 0.35fr);
+    padding-top: clamp(4.75rem, 11vh, 6rem);
+    padding-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-size: clamp(3.15rem, min(9vw, 13vh), 7rem);
+  }
+
+  .hero-label {
+    margin-top: 0.35rem;
+  }
+
+  .hero-sub {
+    font-size: clamp(0.92rem, 2.3vh, 1.08rem);
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 860px) {
+  .film-status {
+    display: none;
+  }
+
+  .reveal-inner,
+  .material-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .speaker-stage {
+    min-height: auto;
+  }
+
+  .ledger-table th {
+    width: 44%;
+  }
+
+  .ledger-diagram {
+    display: none;
+  }
+
+  .sweep-plot {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 540px) {
+  .hero-title {
+    font-size: clamp(2.8rem, 14vw, 3.4rem);
+  }
+
+  .hero-aperture__field {
+    width: min(104vw, 72vh, 34rem);
+    margin-left: 0;
+  }
+
+  .sweep-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .sound-toggle {
+    align-self: stretch;
+    justify-content: center;
+  }
+}

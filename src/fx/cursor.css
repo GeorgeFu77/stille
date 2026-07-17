@@ -1,0 +1,111 @@
+/* ——— FX · custom cursor ——— */
+
+.fx-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2600;
+  color: var(--ice);
+  mix-blend-mode: difference;
+  opacity: 0;
+  pointer-events: none;
+  /* exit: long soft fade */
+  transition: opacity 420ms ease;
+}
+
+.fx-cursor.is-visible {
+  opacity: 1;
+  /* enter: quick */
+  transition-duration: 160ms;
+}
+
+.fx-cursor__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  will-change: transform;
+}
+
+.fx-cursor__trail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.fx-cursor.is-hot .fx-cursor__trail {
+  color: var(--signal);
+}
+
+.fx-cursor__ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.6;
+  transform: translate(-50%, -50%);
+  transition: transform 320ms ease, opacity 320ms ease;
+}
+
+.fx-cursor.is-hot .fx-cursor__ring {
+  opacity: 0.9;
+  /* 28px → ~44px */
+  transform: translate(-50%, -50%) scale(1.571);
+  transition: transform 240ms var(--ease-out), opacity 240ms var(--ease-out);
+}
+
+.fx-cursor__glyph {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  line-height: 1;
+  opacity: 0;
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+
+.fx-cursor__glyph--l {
+  transform: translate(calc(-50% - 20px), -50%);
+}
+
+.fx-cursor__glyph--r {
+  transform: translate(calc(-50% + 20px), -50%);
+}
+
+.fx-cursor.is-drag .fx-cursor__glyph {
+  opacity: 1;
+  transition: transform 220ms var(--ease-out), opacity 220ms var(--ease-out);
+}
+
+.fx-cursor.is-drag .fx-cursor__glyph--l {
+  transform: translate(calc(-50% - 32px), -50%);
+}
+
+.fx-cursor.is-drag .fx-cursor__glyph--r {
+  transform: translate(calc(-50% + 32px), -50%);
+}
+
+@media (pointer: fine) {
+  html.has-fx-cursor,
+  html.has-fx-cursor * {
+    cursor: none !important;
+  }
+}
+
+/* This module supersedes the interface.js signal cursor. */
+html.has-fx-cursor .signal-cursor {
+  display: none !important;
+}
+
+/* The boot loader owns the screen; no cursor until the site does. */
+html.has-loader .fx-cursor {
+  opacity: 0 !important;
+}

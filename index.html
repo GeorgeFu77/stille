@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en" data-finish="graphite">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STILLE — Mono One · Silence, engineered.</title>
+  <meta name="description" content="The Mono One is a single-driver, crossoverless loudspeaker cast from one piece of aluminium. Noise floor −142 dB. First casting Q1 2027: 500 units." />
+  <meta property="og:title" content="STILLE — Mono One" />
+  <meta property="og:description" content="Silence, engineered. A single-driver loudspeaker cast from one piece of aluminium." />
+  <meta name="theme-color" content="#0B0E16" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2305060B'/%3E%3Cpath d='M4 16h8l2-6 4 12 2-6h8' stroke='%235B6CFF' stroke-width='2' fill='none'/%3E%3C/svg%3E" />
+  <script>
+    try {
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !sessionStorage.getItem('stille-seen')) {
+        document.documentElement.classList.add('has-loader');
+      }
+    } catch {}
+  </script>
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="boot-loader" aria-hidden="true">
+    <div class="boot-loader__signal">
+      <span class="boot-loader__glyphs u-mono">− − − − − − −</span>
+      <span class="boot-loader__line"></span>
+    </div>
+  </div>
+
+  <!-- Fixed layers (bottom to top): grain shader, 3D object, the Thread. Content sits above all three. -->
+  <canvas id="grain" class="layer layer--grain" aria-hidden="true"></canvas>
+  <canvas id="scene" class="layer layer--scene" aria-hidden="true"></canvas>
+  <canvas id="thread" class="layer layer--thread" aria-hidden="true"></canvas>
+
+  <div class="signal-cursor" aria-hidden="true">
+    <span class="signal-cursor__ring"></span>
+    <span class="signal-cursor__dot"></span>
+  </div>
+
+  <header class="site-head">
+    <a class="wordmark" href="#top"><span data-wordmark>STILLE</span><sup>®</sup></a>
+    <button class="head-index u-mono" type="button" aria-expanded="false" aria-controls="site-index" data-index-open>
+      <span>INDEX</span><span class="head-index__mark" aria-hidden="true"></span>
+    </button>
+    <a class="head-cta u-mono" href="#reserve">RESERVE</a>
+    <span class="site-progress" aria-hidden="true"><span class="site-progress__bar"></span></span>
+  </header>
+
+  <div class="site-index" id="site-index" role="dialog" aria-modal="true" aria-labelledby="site-index-title" hidden>
+    <div class="site-index__head">
+      <p class="site-index__kicker u-mono">STILLE® / MONO ONE</p>
+      <h2 class="site-index__title" id="site-index-title">Signal index.</h2>
+      <button class="site-index__close u-mono" type="button" data-index-close>
+        CLOSE <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <nav class="site-index__nav" aria-label="Story index">
+      <a class="site-index__link" href="#top" data-index-link>
+        <span class="site-index__number u-mono">00</span><span class="site-index__name">Threshold</span><span class="site-index__meta u-mono">ABSOLUTE ZERO</span>
+      </a>
+      <a class="site-index__link" href="#principle" data-index-link>
+        <span class="site-index__number u-mono">01</span><span class="site-index__name">First wave</span><span class="site-index__meta u-mono">THE PRINCIPLE</span>
+      </a>
+      <a class="site-index__link" href="#mono-one" data-index-link>
+        <span class="site-index__number u-mono">02</span><span class="site-index__name">Mono One</span><span class="site-index__meta u-mono">THE OBJECT</span>
+      </a>
+      <a class="site-index__link" href="#anatomy" data-index-link>
+        <span class="site-index__number u-mono">03</span><span class="site-index__name">Anatomy</span><span class="site-index__meta u-mono">FOUR PARTS</span>
+      </a>
+      <a class="site-index__link" href="#sweep" data-index-link>
+        <span class="site-index__number u-mono">04</span><span class="site-index__name">The sweep</span><span class="site-index__meta u-mono">20 HZ – 20 KHZ</span>
+      </a>
+      <a class="site-index__link" href="#material" data-index-link>
+        <span class="site-index__number u-mono">05</span><span class="site-index__name">Cold matter</span><span class="site-index__meta u-mono">ALUMINIUM / WOOL</span>
+      </a>
+      <a class="site-index__link" href="#ledger" data-index-link>
+        <span class="site-index__number u-mono">06</span><span class="site-index__name">The ledger</span><span class="site-index__meta u-mono">MEASURED / PROVEN</span>
+      </a>
+      <a class="site-index__link" href="#reserve" data-index-link>
+        <span class="site-index__number u-mono">07</span><span class="site-index__name">Return to silence</span><span class="site-index__meta u-mono">500 UNITS</span>
+      </a>
+    </nav>
+    <div class="site-index__foot u-mono">
+      <span>COPENHAGEN / 55.6761° N</span><span>NOISE FLOOR / −142 DB</span>
+    </div>
+  </div>
+
+  <div class="story-hud u-mono" aria-hidden="true">
+    <span class="story-hud__index" data-story-index>00</span>
+    <span class="story-hud__track"><span class="story-hud__progress"></span></span>
+    <span class="story-hud__name" data-story-name>THRESHOLD</span>
+  </div>
+
+  <main id="main">
+
+    <!-- 00 · THRESHOLD -->
+    <section class="s-hero" id="top" data-section="hero" data-cursor="drag">
+      <div class="hero-aperture" aria-hidden="true">
+        <div class="hero-aperture__field" data-hero-aperture>
+          <span class="hero-aperture__ring hero-aperture__ring--outer"></span>
+          <span class="hero-aperture__ring hero-aperture__ring--inner"></span>
+          <span class="hero-aperture__scan"></span>
+        </div>
+      </div>
+      <p class="hero-axis hero-axis--left u-mono" aria-hidden="true">MONO ONE / SIGNAL 00</p>
+      <p class="hero-axis hero-axis--right u-mono" aria-hidden="true">55.6761° N / 12.5683° E</p>
+      <h1 class="hero-title">Silence,<br />engineered.</h1>
+      <p class="hero-label u-mono">NOISE FLOOR · −142 dB</p>
+      <div class="hero-thread-slot" data-thread-slot aria-hidden="true"></div>
+      <p class="hero-sub">Every note the Mono One plays begins at absolute zero.</p>
+      <p class="scroll-cue u-mono" aria-hidden="true">SCROLL<span class="scroll-cue-tick"></span></p>
+    </section>
+
+    <!-- 01 · THE FIRST WAVE -->
+    <section class="s-wave" id="principle" data-section="wave">
+      <div class="wave-inner">
+        <p class="eyebrow u-mono">01 · PRINCIPLE</p>
+        <h2 class="wave-title">Everything above the noise floor is a&nbsp;choice.</h2>
+        <div class="wave-copy">
+          <p class="wave-p" data-weight-scrub>Most loudspeakers are built to make sound. The Mono One is built to make nothing at all: a floor of perfect stillness on which every note stands alone.</p>
+          <p class="wave-p" data-weight-scrub>Start from silence, and reproduction becomes arithmetic. What we add is the music. We add nothing else.</p>
+        </div>
+        <dl class="wave-stats">
+          <div class="stat">
+            <dt class="u-mono">NOISE FLOOR</dt>
+            <dd class="stat-value u-mono" data-scramble>−142 dB</dd>
+          </div>
+          <div class="stat">
+            <dt class="u-mono">DISTORTION</dt>
+            <dd class="stat-value u-mono" data-scramble>0.0004 %</dd>
+          </div>
+          <div class="stat">
+            <dt class="u-mono">LOWEST NOTE</dt>
+            <dd class="stat-value u-mono" data-scramble>19 Hz</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- 02 · MONO ONE — PRODUCT REVEAL -->
+    <section class="s-reveal" id="mono-one" data-section="reveal">
+      <div class="reveal-inner">
+        <header class="reveal-head">
+          <p class="eyebrow u-mono">02 · MONO ONE</p>
+          <h2 class="reveal-title">One column.<br />One driver. One&nbsp;job.</h2>
+          <p class="reveal-sub">Cast in a single piece of aluminium. Driven by a single concentric unit. Built to disappear.</p>
+        </header>
+        <figure class="speaker-stage" aria-label="Technical drawing of the Mono One loudspeaker, assembling from an exploded view">
+          <span class="speaker-aura" aria-hidden="true"></span>
+          <!-- Winning speaker SVG lands here -->
+          <svg class="speaker-svg" viewBox="0 0 600 1100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- shell body: horizontal anodized sheen, bright band left-of-center (light upper-left) -->
+    <linearGradient id="d-mBody" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#202632"/>
+      <stop offset="0.08" stop-color="#303746"/>
+      <stop offset="0.22" stop-color="#3A4150"/>
+      <stop offset="0.36" stop-color="#353D4B"/>
+      <stop offset="0.55" stop-color="#272D39"/>
+      <stop offset="0.78" stop-color="#1A1F2B"/>
+      <stop offset="1"    stop-color="#141824"/>
+    </linearGradient>
+    <!-- vertical falloff: top-lit column darkens toward the plinth -->
+    <linearGradient id="d-mBodyIce" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#A8B0BF"/>
+      <stop offset="0.08" stop-color="#C7CEDB"/>
+      <stop offset="0.22" stop-color="#D9DEE8"/>
+      <stop offset="0.36" stop-color="#D5DBE5"/>
+      <stop offset="0.55" stop-color="#C0C7D3"/>
+      <stop offset="0.78" stop-color="#B3BBC9"/>
+      <stop offset="1"    stop-color="#A8B0BF"/>
+    </linearGradient>
+    <linearGradient id="d-mVert" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"    stop-color="#000000" stop-opacity="0"/>
+      <stop offset="0.45" stop-color="#000000" stop-opacity="0.05"/>
+      <stop offset="0.80" stop-color="#000000" stop-opacity="0.20"/>
+      <stop offset="1"    stop-color="#000000" stop-opacity="0.32"/>
+    </linearGradient>
+    <!-- faint light wash over the crown -->
+    <linearGradient id="d-mTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"    stop-color="#E9EEF6" stop-opacity="0.055"/>
+      <stop offset="0.05" stop-color="#E9EEF6" stop-opacity="0.022"/>
+      <stop offset="0.12" stop-color="#E9EEF6" stop-opacity="0"/>
+    </linearGradient>
+    <!-- ambient-occlusion edge shading -->
+    <linearGradient id="d-aoL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000000" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="d-aoR" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.44"/>
+    </linearGradient>
+    <linearGradient id="d-aoBot" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"    stop-color="#000000" stop-opacity="0"/>
+      <stop offset="0.65" stop-color="#000000" stop-opacity="0.18"/>
+      <stop offset="1"    stop-color="#000000" stop-opacity="0.42"/>
+    </linearGradient>
+    <!-- the one disciplined vertical specular -->
+    <linearGradient id="d-specH" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#F4F7FC" stop-opacity="0"/>
+      <stop offset="0.35" stop-color="#F4F7FC" stop-opacity="0.4"/>
+      <stop offset="0.5"  stop-color="#F4F7FC" stop-opacity="1"/>
+      <stop offset="0.65" stop-color="#F4F7FC" stop-opacity="0.4"/>
+      <stop offset="1"    stop-color="#F4F7FC" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="d-specFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"    stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="0.08" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="0.22" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="0.50" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="0.75" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="1"    stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="d-specMask" maskUnits="userSpaceOnUse" x="246" y="220" width="50" height="660">
+      <rect x="246" y="220" width="50" height="660" fill="url(#d-specFade)"/>
+    </mask>
+    <!-- top edge catching the key light -->
+    <linearGradient id="d-edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#E9EEF6" stop-opacity="0.12"/>
+      <stop offset="0.12" stop-color="#E9EEF6" stop-opacity="0.55"/>
+      <stop offset="0.30" stop-color="#E9EEF6" stop-opacity="0.32"/>
+      <stop offset="0.65" stop-color="#E9EEF6" stop-opacity="0.10"/>
+      <stop offset="1"    stop-color="#E9EEF6" stop-opacity="0.03"/>
+    </linearGradient>
+    <!-- plinth: sits in shell shadow, one grade darker -->
+    <linearGradient id="d-plinth" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#121620"/>
+      <stop offset="0.15" stop-color="#222936"/>
+      <stop offset="0.5"  stop-color="#1A1F2B"/>
+      <stop offset="1"    stop-color="#0A0D15"/>
+    </linearGradient>
+    <linearGradient id="d-plinthAO" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000000" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="d-floor" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0"    stop-color="#000000" stop-opacity="0.5"/>
+      <stop offset="0.55" stop-color="#000000" stop-opacity="0.26"/>
+      <stop offset="1"    stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <!-- driver -->
+    <linearGradient id="d-trim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0"    stop-color="#4A5363"/>
+      <stop offset="0.3"  stop-color="#3A4150"/>
+      <stop offset="0.65" stop-color="#202632"/>
+      <stop offset="1"    stop-color="#10141D"/>
+    </linearGradient>
+    <linearGradient id="d-trimIn" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0"   stop-color="#10141D"/>
+      <stop offset="0.5" stop-color="#202632"/>
+      <stop offset="1"   stop-color="#353D4B"/>
+    </linearGradient>
+    <radialGradient id="d-cone" cx="0.5" cy="0.5" r="0.55" fx="0.4" fy="0.36">
+      <stop offset="0"    stop-color="#414A5A"/>
+      <stop offset="0.35" stop-color="#2C3340"/>
+      <stop offset="0.72" stop-color="#1B202B"/>
+      <stop offset="1"    stop-color="#111620"/>
+    </radialGradient>
+    <radialGradient id="d-dome" cx="0.5" cy="0.5" r="0.6" fx="0.38" fy="0.34">
+      <stop offset="0"   stop-color="#596476"/>
+      <stop offset="0.3" stop-color="#434C5D"/>
+      <stop offset="0.7" stop-color="#252C38"/>
+      <stop offset="1"   stop-color="#131822"/>
+    </radialGradient>
+    <clipPath id="d-clipShell"><path d="M 219 831 L 219 270 A 40 40 0 0 1 259 230 L 341 230 A 40 40 0 0 1 381 270 L 381 831 A 10 10 0 0 1 371 841 L 229 841 A 10 10 0 0 1 219 831 Z"/></clipPath>
+  </defs>
+
+  <!-- ========================== PLINTH ========================== -->
+  <g id="g-plinth" data-part="plinth" transform="translate(0,0)">
+    <!-- solid -->
+    <ellipse class="solid" cx="300" cy="874" rx="120" ry="8" fill="url(#d-floor)"/>
+    <ellipse class="solid" cx="300" cy="872.5" rx="78" ry="4" fill="#000000" opacity="0.35"/>
+    <rect class="solid" x="221" y="840" width="158" height="9" fill="#060810"/>
+    <path class="solid" d="M 229 848 L 371 848 L 371 865 A 5 5 0 0 1 366 870 L 234 870 A 5 5 0 0 1 229 865 Z" fill="url(#d-plinth)"/>
+    <rect class="solid" x="229" y="848" width="142" height="10" fill="url(#d-plinthAO)"/>
+    <line class="solid" x1="232" y1="848.8" x2="368" y2="848.8"
+          stroke="#E9EEF6" stroke-opacity="0.13" stroke-width="0.8"/>
+    <line class="solid" x1="234" y1="869.3" x2="366" y2="869.3"
+          stroke="#000000" stroke-opacity="0.5" stroke-width="1"/>
+    <!-- wire -->
+    <path class="wire" vector-effect="non-scaling-stroke" d="M 229 848 L 371 848 L 371 865 A 5 5 0 0 1 366 870 L 234 870 A 5 5 0 0 1 229 865 Z"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="233" y1="855.5" x2="367" y2="855.5"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="233" y1="864.5" x2="367" y2="864.5"/>
+    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="252" cy="860" r="3"/>
+    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="300" cy="860" r="3"/>
+    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="348" cy="860" r="3"/>
+  </g>
+
+  <!-- ========================= INTERNALS ========================
+       Ring braces + constrained-layer damping run. Fully enclosed
+       when assembled, so this part carries wireframe geometry only
+       (no visible .solid surface by design). -->
+  <g id="g-internals" data-part="internals" transform="translate(0,0)">
+    <path class="wire w2" vector-effect="non-scaling-stroke" d="M 228 470 H 372 V 476 H 228 Z"/>
+    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="300" cy="473" r="8"/>
+    <path class="wire w2" vector-effect="non-scaling-stroke" d="M 228 590 H 372 V 596 H 228 Z"/>
+    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="300" cy="593" r="8"/>
+    <path class="wire w2" vector-effect="non-scaling-stroke" d="M 228 710 H 372 V 716 H 228 Z"/>
+    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="300" cy="713" r="8"/>
+    <line class="wire w3" vector-effect="non-scaling-stroke" x1="226.5" y1="450" x2="226.5" y2="745" stroke-dasharray="5 4"/>
+    <line class="wire w3" vector-effect="non-scaling-stroke" x1="373.5" y1="450" x2="373.5" y2="745" stroke-dasharray="5 4"/>
+  </g>
+
+  <!-- =========================== SHELL ========================== -->
+  <g id="g-shell" data-part="shell" transform="translate(0,0)">
+    <!-- solid: layered anodized casting -->
+    <path class="solid shell-fill" d="M 219 831 L 219 270 A 40 40 0 0 1 259 230 L 341 230 A 40 40 0 0 1 381 270 L 381 831 A 10 10 0 0 1 371 841 L 229 841 A 10 10 0 0 1 219 831 Z" fill="url(#d-mBody)"/>
+    <path class="solid" d="M 219 831 L 219 270 A 40 40 0 0 1 259 230 L 341 230 A 40 40 0 0 1 381 270 L 381 831 A 10 10 0 0 1 371 841 L 229 841 A 10 10 0 0 1 219 831 Z" fill="url(#d-mVert)"/>
+    <path class="solid" d="M 219 831 L 219 270 A 40 40 0 0 1 259 230 L 341 230 A 40 40 0 0 1 381 270 L 381 831 A 10 10 0 0 1 371 841 L 229 841 A 10 10 0 0 1 219 831 Z" fill="url(#d-mTop)"/>
+    <g class="solid" clip-path="url(#d-clipShell)">
+        <line class="solid" x1="224" y1="232" x2="224" y2="883" stroke="#000000" stroke-opacity="0.08" stroke-width="0.8"/>
+        <line class="solid" x1="231" y1="232" x2="231" y2="883" stroke="#E9EEF6" stroke-opacity="0.032" stroke-width="0.6"/>
+        <line class="solid" x1="243" y1="232" x2="243" y2="883" stroke="#000000" stroke-opacity="0.11" stroke-width="1"/>
+        <line class="solid" x1="252" y1="232" x2="252" y2="883" stroke="#E9EEF6" stroke-opacity="0.045" stroke-width="0.6"/>
+        <line class="solid" x1="261" y1="232" x2="261" y2="883" stroke="#000000" stroke-opacity="0.06" stroke-width="0.7"/>
+        <line class="solid" x1="272" y1="232" x2="272" y2="883" stroke="#E9EEF6" stroke-opacity="0.03" stroke-width="0.6"/>
+        <line class="solid" x1="284" y1="232" x2="284" y2="883" stroke="#000000" stroke-opacity="0.09" stroke-width="0.9"/>
+        <line class="solid" x1="295" y1="232" x2="295" y2="883" stroke="#E9EEF6" stroke-opacity="0.04" stroke-width="0.6"/>
+        <line class="solid" x1="303" y1="232" x2="303" y2="883" stroke="#000000" stroke-opacity="0.08" stroke-width="0.7"/>
+        <line class="solid" x1="314" y1="232" x2="314" y2="883" stroke="#E9EEF6" stroke-opacity="0.032" stroke-width="0.6"/>
+        <line class="solid" x1="326" y1="232" x2="326" y2="883" stroke="#000000" stroke-opacity="0.11" stroke-width="1"/>
+        <line class="solid" x1="337" y1="232" x2="337" y2="883" stroke="#E9EEF6" stroke-opacity="0.035" stroke-width="0.6"/>
+        <line class="solid" x1="347" y1="232" x2="347" y2="883" stroke="#000000" stroke-opacity="0.07" stroke-width="0.7"/>
+        <line class="solid" x1="356" y1="232" x2="356" y2="883" stroke="#E9EEF6" stroke-opacity="0.028" stroke-width="0.6"/>
+        <line class="solid" x1="366" y1="232" x2="366" y2="883" stroke="#000000" stroke-opacity="0.09" stroke-width="0.9"/>
+        <line class="solid" x1="374" y1="232" x2="374" y2="883" stroke="#E9EEF6" stroke-opacity="0.022" stroke-width="0.6"/>
+    </g>
+    <g class="solid" clip-path="url(#d-clipShell)">
+      <rect x="219" y="230" width="18" height="611" fill="url(#d-aoL)"/>
+      <rect x="361" y="230" width="20" height="611" fill="url(#d-aoR)"/>
+      <rect x="219" y="770" width="162" height="71" fill="url(#d-aoBot)"/>
+    </g>
+    <circle class="solid" cx="300" cy="368" r="51.5" fill="none"
+            stroke="#000000" stroke-opacity="0.18" stroke-width="5"/>
+    <circle class="solid" cx="300" cy="368" r="49.8" fill="none"
+            stroke="#000000" stroke-opacity="0.3" stroke-width="1.6"/>
+    <g class="solid" clip-path="url(#d-clipShell)">
+      <rect x="256" y="230" width="24" height="612" fill="url(#d-specH)"
+            mask="url(#d-specMask)" opacity="0.18"/>
+      <rect x="264" y="230" width="7"  height="612" fill="url(#d-specH)"
+            mask="url(#d-specMask)" opacity="0.14"/>
+    </g>
+    <path class="solid" d="M 219 298 L 219 270 A 40 40 0 0 1 259 230 L 341 230 A 40 40 0 0 1 381 270 L 381 290" fill="none"
+          stroke="url(#d-edge)" stroke-width="1.1" opacity="0.9"/>
+    <!-- wire -->
+    <path class="wire" vector-effect="non-scaling-stroke" d="M 219 831 L 219 270 A 40 40 0 0 1 259 230 L 341 230 A 40 40 0 0 1 381 270 L 381 831 A 10 10 0 0 1 371 841 L 229 841 A 10 10 0 0 1 219 831 Z"/>
+    <path class="wire w2" vector-effect="non-scaling-stroke" d="M 226 834 L 226 271 A 34 34 0 0 1 260 237 L 340 237 A 34 34 0 0 1 374 271 L 374 834 L 226 834"/>
+    <circle class="wire" vector-effect="non-scaling-stroke" cx="300" cy="368" r="49"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="211" y1="368" x2="219" y2="368"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="381" y1="368" x2="389" y2="368"/>
+  </g>
+
+  <!-- ========================== DRIVER ========================== -->
+  <g id="g-driver" data-part="driver" transform="translate(0,0)">
+    <!-- solid -->
+    <circle class="solid" cx="300" cy="368" r="49" fill="#070A11"/>
+    <circle class="solid" cx="300" cy="368" r="48" fill="none"
+            stroke="#000000" stroke-opacity="0.55" stroke-width="2"/>
+    <circle class="solid" cx="300" cy="368" r="46.5" fill="url(#d-trim)"/>
+    <circle class="solid" cx="300" cy="368" r="40.5" fill="url(#d-trimIn)"/>
+    <circle class="solid" cx="300" cy="368" r="38.5" fill="#0D111A"/>
+    <circle class="solid" cx="300" cy="368" r="36"   fill="url(#d-cone)"/>
+    <circle class="solid" cx="300" cy="368" r="28" fill="none"
+            stroke="#000000" stroke-opacity="0.45" stroke-width="0.9"/>
+    <circle class="solid" cx="300" cy="368" r="27.2" fill="none"
+            stroke="#E9EEF6" stroke-opacity="0.07" stroke-width="0.6"/>
+    <circle class="solid" cx="300" cy="368" r="20" fill="none"
+            stroke="#000000" stroke-opacity="0.45" stroke-width="0.9"/>
+    <circle class="solid" cx="300" cy="368" r="19.2" fill="none"
+            stroke="#E9EEF6" stroke-opacity="0.07" stroke-width="0.6"/>
+    <path class="solid" d="M 267.1 356 A 35 35 0 0 1 332.9 356" fill="none"
+          stroke="#000000" stroke-opacity="0.32" stroke-width="2.4"/>
+    <circle class="solid" cx="300" cy="368" r="10" fill="url(#d-dome)"/>
+    <ellipse class="solid" cx="296.6" cy="364.6" rx="2.6" ry="1.5"
+             transform="rotate(-38 296.6 364.6)" fill="#E9EEF6" opacity="0.22"/>
+    <path class="solid" d="M 255.6 356.1 A 46 46 0 0 1 304 322.2" fill="none"
+          stroke="#F4F7FC" stroke-opacity="0.16" stroke-width="1"/>
+    <path class="solid" d="M 338.3 382 A 40.8 40.8 0 0 1 314 406.3" fill="none"
+          stroke="#E9EEF6" stroke-opacity="0.10" stroke-width="0.8"/>
+    <!-- wire -->
+    <circle class="wire" vector-effect="non-scaling-stroke" cx="300" cy="368" r="46.5"/>
+    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="300" cy="368" r="36"/>
+    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="300" cy="368" r="28"/>
+    <circle class="wire" vector-effect="non-scaling-stroke" cx="300" cy="368" r="10"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="300" y1="310" x2="300" y2="317"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="300" y1="419" x2="300" y2="426"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="242" y1="368" x2="249" y2="368"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="351" y1="368" x2="358" y2="368"/>
+  </g>
+
+  <!-- ========================== LABELS ==========================
+       Drawn in exploded-space coordinates; state <style> hides the
+       whole annotation layer in the assembled rendering. -->
+  <g id="g-labels" data-part="labels">
+    <line class="wire w3" vector-effect="non-scaling-stroke" x1="300" y1="64" x2="300" y2="1072"
+          stroke-dasharray="12 5 3 5"/>
+
+    <circle class="marker lbl" cx="362" cy="122" r="2.2"/>
+    <line class="wire signal" vector-effect="non-scaling-stroke" x1="364" y1="122" x2="416" y2="122"/>
+    <text class="lbl"      x="424" y="118.5">DRIVER 01</text>
+    <text class="lbl dim"  x="424" y="132">CONCENTRIC FULL-RANGE</text>
+    <text class="lbl dim2" x="424" y="145.5">&#216; 160 MM</text>
+
+    <circle class="marker lbl" cx="300" cy="174" r="2.2" style="animation-delay:.7s"/>
+    <line class="wire signal" vector-effect="non-scaling-stroke" x1="298" y1="174" x2="184" y2="174"/>
+    <text class="lbl"     x="176" y="170.5" text-anchor="end">CROSSOVER</text>
+    <text class="lbl dim" x="176" y="184"   text-anchor="end">NONE</text>
+
+    <circle class="marker lbl" cx="219" cy="430" r="2.2" style="animation-delay:1.4s"/>
+    <line class="wire signal" vector-effect="non-scaling-stroke" x1="217" y1="430" x2="160" y2="430"/>
+    <text class="lbl"      x="152" y="426.5" text-anchor="end">SHELL</text>
+    <text class="lbl dim"  x="152" y="440"   text-anchor="end">MONOCOQUE CASTING</text>
+    <text class="lbl dim2" x="152" y="453.5" text-anchor="end">W 280 &#183; H 1100 MM</text>
+
+    <circle class="marker lbl" cx="374" cy="1029" r="2.2" style="animation-delay:2.1s"/>
+    <line class="wire signal" vector-effect="non-scaling-stroke" x1="376" y1="1029" x2="420" y2="1029"/>
+    <text class="lbl"     x="428" y="1025.5">PLINTH</text>
+    <text class="lbl dim" x="428" y="1039">CONSTRAINED-LAYER</text>
+  </g>
+          </svg>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 03 · ANATOMY — FILMSTRIP -->
+    <section class="s-anatomy" id="anatomy" data-section="anatomy">
+      <p class="eyebrow u-mono anatomy-eyebrow">03 · ANATOMY</p>
+      <p class="film-status u-mono" aria-hidden="true"><span data-film-current>01</span> / 04</p>
+      <div class="film-viewport" data-cursor="drag">
+        <div class="film-track">
+          <article class="film-panel">
+            <p class="panel-index u-mono" aria-hidden="true">01</p>
+            <h3 class="panel-title">The Driver</h3>
+            <p class="panel-lede">One membrane, every octave.</p>
+            <div class="panel-art" data-art="driver" aria-hidden="true">
+              <svg viewBox="0 0 400 220" fill="none" stroke="currentColor" stroke-width="1">
+                <circle class="wire" cx="200" cy="110" r="88" />
+                <circle class="wire" cx="200" cy="110" r="72" />
+                <circle class="wire" cx="200" cy="110" r="46" />
+                <circle class="wire" cx="200" cy="110" r="24" />
+                <circle class="wire" cx="200" cy="110" r="7" />
+                <path class="wire" d="M200 22v-14M200 212v14M112 110H96M288 110h16" />
+                <path class="wire" d="M138 48l-10-10M262 48l10-10M138 172l-10 10M262 172l10 10" />
+                <path class="wire" d="M164 110a36 36 0 0 1 72 0" stroke-dasharray="2 4" />
+              </svg>
+            </div>
+            <ul class="panel-specs u-mono">
+              <li>160 MM CONCENTRIC UNIT</li>
+              <li>BERYLLIUM DOME</li>
+              <li>19 Hz – 24 kHz</li>
+            </ul>
+            <p class="panel-quote">“Two drivers can’t agree on time. One never argues.”</p>
+          </article>
+          <article class="film-panel">
+            <p class="panel-index u-mono" aria-hidden="true">02</p>
+            <h3 class="panel-title">The Crossover</h3>
+            <p class="panel-lede">There isn’t one.</p>
+            <div class="panel-art" data-art="crossover" aria-hidden="true">
+              <svg viewBox="0 0 400 220" fill="none" stroke="currentColor" stroke-width="1">
+                <path class="wire" d="M40 140h320" />
+                <circle class="wire" cx="40" cy="140" r="4" />
+                <circle class="wire" cx="360" cy="140" r="4" />
+                <path class="wire" d="M120 84v-24M128 84v-24M104 72h16M132 72h16" opacity="0.4" />
+                <path class="wire" d="M186 60c6 0 6 12 12 12s6-12 12-12 6 12 12 12" opacity="0.4" />
+                <path class="wire" d="M280 60l8 8 -16 8 16 8 -16 8 8 8" opacity="0.4" />
+                <path class="wire" d="M96 96L172 36M178 96L254 36M258 96L334 36" />
+                <path class="wire" d="M40 156v10M360 156v10M40 161h320" stroke-dasharray="1 5" opacity="0.5" />
+              </svg>
+            </div>
+            <ul class="panel-specs u-mono">
+              <li>COMPONENTS · 0</li>
+              <li>PHASE SHIFT · NONE</li>
+              <li>SIGNAL PATH · 240 MM</li>
+            </ul>
+            <p class="panel-quote">“The best crossover is the one you never build.”</p>
+          </article>
+          <article class="film-panel">
+            <p class="panel-index u-mono" aria-hidden="true">03</p>
+            <h3 class="panel-title">The Shell</h3>
+            <p class="panel-lede">Cast, not assembled.</p>
+            <div class="panel-art" data-art="shell" aria-hidden="true">
+              <svg viewBox="0 0 400 220" fill="none" stroke="currentColor" stroke-width="1">
+                <path class="wire" d="M164 200V44a36 36 0 0 1 72 0v156" />
+                <path class="wire" d="M176 200V48a24 24 0 0 1 48 0v152" opacity="0.6" />
+                <path class="wire" d="M170 196l-14 14M182 188l-22 22M194 180l-20 20" opacity="0.45" />
+                <path class="wire" d="M230 180l20 20M218 188l22 22" opacity="0.45" />
+                <path class="wire" d="M200 8v24" stroke-dasharray="2 4" />
+                <path class="wire" d="M252 44a52 52 0 0 0-24-30" stroke-dasharray="2 4" opacity="0.6" />
+                <path class="wire" d="M140 200h120" />
+                <path class="wire" d="M148 60h8M148 100h12M148 140h16M148 180h20" opacity="0.5" />
+              </svg>
+            </div>
+            <ul class="panel-specs u-mono">
+              <li>SINGLE-PIECE MONOCOQUE</li>
+              <li>WALL · 12 – 31 MM</li>
+              <li>SEAMS · 0</li>
+            </ul>
+            <p class="panel-quote">“Resonance hides in joints. So we removed the joints.”</p>
+          </article>
+          <article class="film-panel">
+            <p class="panel-index u-mono" aria-hidden="true">04</p>
+            <h3 class="panel-title">The Plinth</h3>
+            <p class="panel-lede">Where vibration goes to die.</p>
+            <div class="panel-art" data-art="plinth" aria-hidden="true">
+              <svg viewBox="0 0 400 220" fill="none" stroke="currentColor" stroke-width="1">
+                <path class="wire" d="M140 60h120v22H140z" />
+                <path class="wire" d="M132 96h136v14H132z" />
+                <path class="wire" d="M136 98l8 10M152 98l8 10M168 98l8 10M184 98l8 10M200 98l8 10M216 98l8 10M232 98l8 10M248 98l8 10" opacity="0.5" />
+                <path class="wire" d="M120 124h160v28H120z" />
+                <path class="wire" d="M100 178h200" />
+                <path class="wire" d="M112 178l-8 10M136 178l-8 10M160 178l-8 10M184 178l-8 10M208 178l-8 10M232 178l-8 10M256 178l-8 10M280 178l-8 10M304 178l-8 10" opacity="0.4" />
+                <path class="wire" d="M200 152v26" stroke-dasharray="2 4" />
+                <path class="wire" d="M292 82v14M288 86l4-4 4 4M288 92l4 4 4-4" opacity="0.7" />
+              </svg>
+            </div>
+            <ul class="panel-specs u-mono">
+              <li>CONSTRAINED-LAYER DAMPING</li>
+              <li>11.2 KG</li>
+              <li>DECOUPLED · ±0.3 MM</li>
+            </ul>
+            <p class="panel-quote">“The floor is part of your system. We fired it.”</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · THE SWEEP -->
+    <section class="s-sweep" id="sweep" data-section="sweep">
+      <div class="sweep-inner">
+        <p class="eyebrow u-mono">04 · MEASUREMENT</p>
+        <h2 class="sweep-title">Flat is a feature.</h2>
+        <p class="sweep-sub">20 Hz to 20 kHz within half a decibel. Drag the signal. The curve is real, and so is the sound.</p>
+        <figure class="sweep-chart" role="group" aria-label="Interactive frequency response chart, 20 hertz to 20 kilohertz, flat within plus or minus 0.5 decibels">
+          <div class="sweep-plot" data-sweep-plot>
+            <button class="sweep-handle" type="button" role="slider" data-cursor="drag" aria-label="Frequency" aria-orientation="horizontal" aria-valuemin="20" aria-valuemax="20000" aria-valuenow="440" aria-valuetext="440 hertz, minus 0.2 decibels">
+              <span class="sweep-handle-ring" aria-hidden="true"></span>
+              <span class="sweep-handle-dot"></span>
+              <span class="sweep-handle-value u-mono" aria-hidden="true">440 HZ</span>
+            </button>
+          </div>
+          <figcaption class="sweep-meta">
+            <output class="sweep-readout u-mono" aria-live="off">440 Hz · −0.2 dB</output>
+            <button class="sound-toggle u-mono" type="button" aria-pressed="false">
+              <span class="sound-toggle-mark" aria-hidden="true"></span>
+              <span class="sound-toggle-label" data-label>ENABLE SOUND</span>
+            </button>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 05 · MATERIAL -->
+    <section class="s-material daylight" id="material" data-section="material">
+      <div class="material-inner">
+        <p class="eyebrow u-mono">05 · MATERIAL</p>
+        <h2 class="material-title">Metal, wool, and nothing&nbsp;else.</h2>
+        <div class="material-body">
+          <p>The shell is poured as one piece at 700&nbsp;°C, machined for nine hours, and anodised twice. There is no cabinet joinery, because there is no cabinet. Only casting.</p>
+          <p>The grille is woven wool over an ice-anodised frame. It is the only part of the Mono One you are meant to touch.</p>
+        </div>
+        <div class="swatches">
+          <figure class="swatch swatch--metal">
+            <div class="swatch-face" aria-hidden="true"></div>
+            <figcaption class="u-mono">ANODISED ALUMINIUM · <span data-finish-label>GRAPHITE</span></figcaption>
+          </figure>
+          <figure class="swatch swatch--wool">
+            <div class="swatch-face" aria-hidden="true"></div>
+            <figcaption class="u-mono">WOOL GRILLE · ICE</figcaption>
+          </figure>
+        </div>
+        <blockquote class="material-quote">
+          <p>“You should hear the room disappear before the first note ends.”</p>
+          <cite class="u-mono">— SIGNE DAHL, FOUNDER</cite>
+        </blockquote>
+        <p class="material-numeral u-mono" aria-hidden="true">700°</p>
+      </div>
+    </section>
+
+    <!-- 06 · THE LEDGER -->
+    <section class="s-ledger" id="ledger" data-section="ledger">
+      <div class="ledger-inner">
+        <p class="eyebrow u-mono">06 · SPECIFICATIONS</p>
+        <h2 class="ledger-title">The ledger.</h2>
+        <table class="ledger-table">
+          <tbody>
+            <tr data-part="column"><th scope="row">Configuration</th><td>Single full-range column</td></tr>
+            <tr data-part="driver"><th scope="row">Driver</th><td>160 mm concentric, beryllium dome</td></tr>
+            <tr data-part="crossover"><th scope="row">Crossover</th><td>None</td></tr>
+            <tr data-part="curve"><th scope="row">Frequency response</th><td>19 Hz – 24 kHz, ±0.5 dB</td></tr>
+            <tr data-part="floor"><th scope="row">Noise floor</th><td>−142 dB</td></tr>
+            <tr data-part="thd"><th scope="row">Distortion</th><td>0.0004 % THD at 90 dB / 1 m</td></tr>
+            <tr data-part="sens"><th scope="row">Sensitivity</th><td>89 dB / 2.83 V / 1 m</td></tr>
+            <tr data-part="ohm"><th scope="row">Impedance</th><td>6 Ω nominal, 4.1 Ω minimum</td></tr>
+            <tr data-part="power"><th scope="row">Recommended power</th><td>50 – 300 W</td></tr>
+            <tr data-part="shell"><th scope="row">Enclosure</th><td>Single-piece cast aluminium monocoque</td></tr>
+            <tr data-part="plinth"><th scope="row">Damping</th><td>Constrained-layer plinth, decoupled</td></tr>
+            <tr data-part="dims"><th scope="row">Dimensions</th><td>1 120 × 280 × 240 mm</td></tr>
+            <tr data-part="mass"><th scope="row">Mass</th><td>31 kg</td></tr>
+            <tr data-part="finish"><th scope="row">Finishes</th><td>
+              <span class="finish-chips" role="radiogroup" aria-label="Finish">
+                <button class="chip chip--graphite u-mono" type="button" role="radio" aria-checked="true" data-finish-pick="graphite">GRAPHITE</button>
+                <button class="chip chip--ice u-mono" type="button" role="radio" aria-checked="false" data-finish-pick="ice">ICE</button>
+              </span>
+            </td></tr>
+            <tr data-part="price"><th scope="row">Price</th><td>€12,400</td></tr>
+          </tbody>
+        </table>
+        <div class="ledger-diagram" aria-hidden="true" data-ledger-diagram></div>
+      </div>
+    </section>
+
+    <!-- 07 · RETURN TO SILENCE -->
+    <section class="s-finale" id="reserve" data-section="finale">
+      <div class="finale-inner">
+        <h2 class="finale-title">Hear nothing else.</h2>
+        <a class="finale-cta" href="mailto:reserve@stille.audio?subject=Mono%20One%20reservation" data-magnetic>
+          Reserve the Mono&nbsp;One
+        </a>
+        <p class="finale-note u-mono">FIRST CASTING · Q1 2027 · 500 UNITS</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-foot">
+    <p class="foot-wordmark">STILLE<sup>®</sup></p>
+    <nav class="foot-links u-mono" aria-label="Footer">
+      <a href="#reserve">RESERVE</a>
+      <a href="mailto:press@stille.audio">PRESS</a>
+      <a href="mailto:hello@stille.audio">CONTACT</a>
+    </nav>
+    <p class="colophon u-mono">SET IN FRAUNCES, ARCHIVO &amp; IBM PLEX MONO. EVERY PIXEL GENERATED IN CODE. NO STOCK ASSETS.</p>
+  </footer>
+</body>
+</html>
