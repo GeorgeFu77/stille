@@ -122,7 +122,12 @@ html.has-loader .signal-cursor {
   inset-block: 0;
   display: grid;
   place-items: center;
-  color: var(--signal);
+  /* deliberate: the loader glyphs are emissive — the spectrum clipped to the letterforms */
+  background: var(--spectra);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
   text-align: center;
   white-space: nowrap;
 }
@@ -130,9 +135,9 @@ html.has-loader .signal-cursor {
 .boot-loader__line {
   top: 50%;
   height: 1px;
-  background: var(--signal);
-  /* deliberate: the loader line is a light source, tuned tight like an LED */
-  box-shadow: 0 0 9px rgba(91, 108, 255, 0.22);
+  /* deliberate: the loader line is a light source, tuned tight like an LED — violet-blue */
+  background: var(--spectra);
+  box-shadow: 0 0 9px rgba(124, 115, 255, 0.22);
   transform-origin: center;
 }
 

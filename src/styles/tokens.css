@@ -13,6 +13,13 @@
   --signal: #5b6cff;
   --signal-dim: rgba(91, 108, 255, 0.55);
   --aurora: #9d7bff;
+
+  /* Spectral light — violet → ultramarine → cyan. Carried only by live chrome;
+     the ground stays void. */
+  --spectra-violet: #9d7bff;
+  --spectra-blue: #5b6cff;
+  --spectra-cyan: #4fd8ff;
+  --spectra: linear-gradient(100deg, var(--spectra-violet), var(--spectra-blue) 55%, var(--spectra-cyan));
   --glacier: #d8dee8;
   --glacier-ink: #10131b;
   --hairline: rgba(233, 238, 246, 0.14);

@@ -2,10 +2,13 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 /*
- * The grain — a near-threshold WebGL field of "air pressure" behind everything.
- * Cursor disturbs it like a hand through still air; a scroll pulse sweeps down
- * on first scroll; total page progress blooms into aurora mid-page
- * and cools it back to still black at the finale. Audio makes it shimmer.
+ * The aurora — a WebGL field of spectral light behind everything.
+ * Three slow curtains of domain-warped light flow diagonally across the void,
+ * colored violet → ultramarine → cyan. Cursor and ripples bend them like wind
+ * through the bands; a scroll pulse sweeps down on first scroll; total page
+ * progress blooms the field mid-page and cools it back toward still black at
+ * the finale. Audio makes the curtains shimmer. Fine film grain rides on top,
+ * and the edges always pool to near-black — light lives where the page does.
  */
 
 const VERT = `

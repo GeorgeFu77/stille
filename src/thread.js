@@ -9,6 +9,16 @@ import gsap from 'gsap';
 
 const ICE = [233, 238, 246];
 const SIGNAL = [91, 108, 255];
+const VIOLET = [157, 123, 255];
+const CYAN = [79, 216, 255];
+
+// When the line is alive it carries the full spectrum, violet → signal → cyan,
+// blended back toward ice as it falls asleep.
+function spectralStop(base, liveMix) {
+  return `rgb(${Math.round(ICE[0] + (base[0] - ICE[0]) * liveMix)},${Math.round(
+    ICE[1] + (base[1] - ICE[1]) * liveMix,
+  )},${Math.round(ICE[2] + (base[2] - ICE[2]) * liveMix)})`;
+}
 
 // Frequency-response silhouette: gentle bass shelf, flat mids, soft top rise.
 // t: 0..1 across the span → offset in "dB" (positive = up on screen).
@@ -137,9 +147,16 @@ export function initThread(ctx) {
     const pxPerDb = plotH > 0 ? plotH / 16 : Math.min(h * 0.02, 14);
 
     const liveMix = thread.audio.level > 0.05 ? 1 : P.colorMix;
-    const r = Math.round(ICE[0] + (SIGNAL[0] - ICE[0]) * liveMix);
-    const g = Math.round(ICE[1] + (SIGNAL[1] - ICE[1]) * liveMix);
-    const b = Math.round(ICE[2] + (SIGNAL[2] - ICE[2]) * liveMix);
+    let stroke = `rgba(${ICE[0]},${ICE[1]},${ICE[2]},${P.alpha})`;
+    let halo = stroke;
+    if (liveMix > 0.02) {
+      const grad = c.createLinearGradient(lo, 0, lo + span, 0);
+      grad.addColorStop(0, spectralStop(VIOLET, liveMix));
+      grad.addColorStop(0.55, spectralStop(SIGNAL, liveMix));
+      grad.addColorStop(1, spectralStop(CYAN, liveMix));
+      stroke = grad;
+      halo = grad;
+    }
 
     c.beginPath();
     c.lineCap = 'round';
@@ -164,27 +181,31 @@ export function initThread(ctx) {
     if (liveMix > 0.05) {
       c.save();
       c.globalCompositeOperation = 'lighter';
-      c.strokeStyle = `rgba(${SIGNAL[0]},${SIGNAL[1]},${SIGNAL[2]},${P.alpha * (0.08 + liveMix * 0.12)})`;
+      c.globalAlpha = P.alpha * (0.08 + liveMix * 0.12);
+      c.strokeStyle = halo;
       c.lineWidth = P.width + 2.5 + thread.audio.level * 2;
       c.stroke();
       c.restore();
     }
 
-    c.strokeStyle = `rgba(${r},${g},${b},${P.alpha})`;
+    c.save();
+    if (liveMix > 0.02) c.globalAlpha = P.alpha;
+    c.strokeStyle = stroke;
     c.lineWidth = P.width;
     c.stroke();
+    c.restore();
 
     // filmstrip progress dot
     if (P.dot >= 0) {
       const dx = lo + span * P.dot;
       c.beginPath();
       c.arc(dx, y, 7, 0, Math.PI * 2);
-      c.strokeStyle = `rgba(${SIGNAL[0]},${SIGNAL[1]},${SIGNAL[2]},${P.alpha * 0.18})`;
+      c.strokeStyle = `rgba(${CYAN[0]},${CYAN[1]},${CYAN[2]},${P.alpha * 0.2})`;
       c.lineWidth = 1;
       c.stroke();
       c.beginPath();
       c.arc(dx, y, 2.5, 0, Math.PI * 2);
-      c.fillStyle = `rgba(${SIGNAL[0]},${SIGNAL[1]},${SIGNAL[2]},${Math.min(1, P.alpha + 0.15)})`;
+      c.fillStyle = `rgba(${CYAN[0]},${CYAN[1]},${CYAN[2]},${Math.min(1, P.alpha + 0.15)})`;
       c.fill();
     }
   }
