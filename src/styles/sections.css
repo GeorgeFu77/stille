@@ -1289,3 +1289,110 @@ html.listening .site-foot {
     justify-content: center;
   }
 }
+
+/* ——— 05 · Material — recent-build cards (.build-card minis) ———
+   Miniature fake landing pages in pure CSS inside the existing .swatch /
+   .swatch-face chrome (sheen + tilt JS in material.js untouched). Pale card
+   ground for the daylight passage; one trade accent per client site. */
+
+.build-card--amber { --build-accent: #b9791f; }
+.build-card--teal { --build-accent: #1f857c; }
+.build-card--red { --build-accent: #bd5244; }
+
+.build-card .swatch-face {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1.4vh, 0.8rem);
+  padding: clamp(0.8rem, 2vh, 1.15rem);
+  background: linear-gradient(180deg, #f6f8fb, #e5eaf2);
+}
+
+/* ice sheen reads as white gloss on the pale ground */
+.build-card .swatch-face::after {
+  background: radial-gradient(circle at var(--sheen-x) var(--sheen-y), rgba(255, 255, 255, 0.55), transparent 42%);
+}
+
+.build-card .swatch-face > span {
+  display: flex;
+}
+
+.build-mini-nav {
+  align-items: center;
+  gap: 0.45rem;
+  padding-bottom: clamp(0.45rem, 1.2vh, 0.7rem);
+  border-bottom: 1px solid rgba(16, 19, 27, 0.12);
+}
+
+.build-mini-logo {
+  width: 1.1rem;
+  height: 0.4rem;
+  background: var(--build-accent);
+}
+
+.build-mini-link {
+  width: 0.75rem;
+  height: 2px;
+  background: rgba(16, 19, 27, 0.3);
+}
+
+.build-mini-logo + .build-mini-link {
+  margin-left: auto;
+}
+
+.build-mini-headline {
+  flex-direction: column;
+  gap: 0.32rem;
+  margin-top: 0.2rem;
+}
+
+.build-mini-headline span {
+  height: clamp(0.5rem, 1.3vh, 0.7rem);
+  background: #161b26;
+}
+
+.build-mini-headline span:first-child {
+  width: 82%;
+}
+
+.build-mini-headline span:last-child {
+  width: 58%;
+}
+
+.build-mini-stars {
+  gap: 0.3rem;
+}
+
+.build-mini-stars span {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--build-accent);
+  clip-path: polygon(50% 0%, 63% 36%, 100% 38%, 70% 61%, 81% 100%, 50% 77%, 19% 100%, 30% 61%, 0% 38%, 37% 36%);
+}
+
+.build-mini-call {
+  align-items: center;
+  gap: 0.3rem;
+  width: 42%;
+  min-width: 3.4rem;
+  height: clamp(1rem, 2.4vh, 1.3rem);
+  margin-top: auto;
+  padding-inline: 0.4rem;
+  border-radius: 999px;
+  background: var(--build-accent);
+}
+
+.build-mini-call::before {
+  width: 0.32rem;
+  height: 0.32rem;
+  border-radius: 50%;
+  background: rgba(246, 248, 251, 0.9);
+  content: '';
+}
+
+.build-mini-call::after {
+  flex: 1;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(246, 248, 251, 0.55);
+  content: '';
+}

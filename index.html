@@ -150,7 +150,7 @@
           <!-- Winning speaker SVG lands here -->
           <svg class="speaker-svg" viewBox="0 0 600 1100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- shell body: horizontal anodized sheen, bright band left-of-center (light upper-left) -->
+    <!-- frame ring: horizontal anodized sheen, bright band left-of-center (light upper-left) -->
     <linearGradient id="d-mBody" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0"    stop-color="#202632"/>
       <stop offset="0.08" stop-color="#303746"/>
@@ -160,7 +160,6 @@
       <stop offset="0.78" stop-color="#1A1F2B"/>
       <stop offset="1"    stop-color="#141824"/>
     </linearGradient>
-    <!-- vertical falloff: top-lit column darkens toward the plinth -->
     <linearGradient id="d-mBodyIce" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0"    stop-color="#A8B0BF"/>
       <stop offset="0.08" stop-color="#C7CEDB"/>
@@ -170,51 +169,25 @@
       <stop offset="0.78" stop-color="#B3BBC9"/>
       <stop offset="1"    stop-color="#A8B0BF"/>
     </linearGradient>
-    <linearGradient id="d-mVert" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0"    stop-color="#000000" stop-opacity="0"/>
-      <stop offset="0.45" stop-color="#000000" stop-opacity="0.05"/>
-      <stop offset="0.80" stop-color="#000000" stop-opacity="0.20"/>
-      <stop offset="1"    stop-color="#000000" stop-opacity="0.32"/>
+    <!-- screen face: cold glass, dark toward the foot -->
+    <linearGradient id="d-screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#131826"/>
+      <stop offset="0.4" stop-color="#0D1119"/>
+      <stop offset="1"   stop-color="#080B12"/>
     </linearGradient>
-    <!-- faint light wash over the crown -->
-    <linearGradient id="d-mTop" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0"    stop-color="#E9EEF6" stop-opacity="0.055"/>
-      <stop offset="0.05" stop-color="#E9EEF6" stop-opacity="0.022"/>
-      <stop offset="0.12" stop-color="#E9EEF6" stop-opacity="0"/>
+    <!-- UI panels: one grade up from the glass -->
+    <linearGradient id="d-panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"    stop-color="#1C2230"/>
+      <stop offset="0.55" stop-color="#161B26"/>
+      <stop offset="1"    stop-color="#10141D"/>
     </linearGradient>
-    <!-- ambient-occlusion edge shading -->
-    <linearGradient id="d-aoL" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#000000" stop-opacity="0.34"/>
-      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    <!-- footer bar: sits in screen shadow, one grade darker -->
+    <linearGradient id="d-plinth" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#121620"/>
+      <stop offset="0.15" stop-color="#222936"/>
+      <stop offset="0.5"  stop-color="#1A1F2B"/>
+      <stop offset="1"    stop-color="#0A0D15"/>
     </linearGradient>
-    <linearGradient id="d-aoR" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#000000" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000000" stop-opacity="0.44"/>
-    </linearGradient>
-    <linearGradient id="d-aoBot" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0"    stop-color="#000000" stop-opacity="0"/>
-      <stop offset="0.65" stop-color="#000000" stop-opacity="0.18"/>
-      <stop offset="1"    stop-color="#000000" stop-opacity="0.42"/>
-    </linearGradient>
-    <!-- the one disciplined vertical specular -->
-    <linearGradient id="d-specH" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0"    stop-color="#F4F7FC" stop-opacity="0"/>
-      <stop offset="0.35" stop-color="#F4F7FC" stop-opacity="0.4"/>
-      <stop offset="0.5"  stop-color="#F4F7FC" stop-opacity="1"/>
-      <stop offset="0.65" stop-color="#F4F7FC" stop-opacity="0.4"/>
-      <stop offset="1"    stop-color="#F4F7FC" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="d-specFade" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0"    stop-color="#ffffff" stop-opacity="0.12"/>
-      <stop offset="0.08" stop-color="#ffffff" stop-opacity="0.95"/>
-      <stop offset="0.22" stop-color="#ffffff" stop-opacity="1"/>
-      <stop offset="0.50" stop-color="#ffffff" stop-opacity="0.5"/>
-      <stop offset="0.75" stop-color="#ffffff" stop-opacity="0.18"/>
-      <stop offset="1"    stop-color="#ffffff" stop-opacity="0"/>
-    </linearGradient>
-    <mask id="d-specMask" maskUnits="userSpaceOnUse" x="246" y="220" width="50" height="660">
-      <rect x="246" y="220" width="50" height="660" fill="url(#d-specFade)"/>
-    </mask>
     <!-- top edge catching the key light -->
     <linearGradient id="d-edge" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0"    stop-color="#E9EEF6" stop-opacity="0.12"/>
@@ -223,200 +196,200 @@
       <stop offset="0.65" stop-color="#E9EEF6" stop-opacity="0.10"/>
       <stop offset="1"    stop-color="#E9EEF6" stop-opacity="0.03"/>
     </linearGradient>
-    <!-- plinth: sits in shell shadow, one grade darker -->
-    <linearGradient id="d-plinth" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0"    stop-color="#121620"/>
-      <stop offset="0.15" stop-color="#222936"/>
-      <stop offset="0.5"  stop-color="#1A1F2B"/>
-      <stop offset="1"    stop-color="#0A0D15"/>
-    </linearGradient>
-    <linearGradient id="d-plinthAO" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#000000" stop-opacity="0.5"/>
-      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
-    </linearGradient>
     <radialGradient id="d-floor" cx="0.5" cy="0.5" r="0.5">
       <stop offset="0"    stop-color="#000000" stop-opacity="0.5"/>
       <stop offset="0.55" stop-color="#000000" stop-opacity="0.26"/>
       <stop offset="1"    stop-color="#000000" stop-opacity="0"/>
     </radialGradient>
-    <!-- driver -->
-    <linearGradient id="d-trim" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0"    stop-color="#4A5363"/>
-      <stop offset="0.3"  stop-color="#3A4150"/>
-      <stop offset="0.65" stop-color="#202632"/>
-      <stop offset="1"    stop-color="#10141D"/>
-    </linearGradient>
-    <linearGradient id="d-trimIn" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0"   stop-color="#10141D"/>
-      <stop offset="0.5" stop-color="#202632"/>
-      <stop offset="1"   stop-color="#353D4B"/>
-    </linearGradient>
-    <radialGradient id="d-cone" cx="0.5" cy="0.5" r="0.55" fx="0.4" fy="0.36">
-      <stop offset="0"    stop-color="#414A5A"/>
-      <stop offset="0.35" stop-color="#2C3340"/>
-      <stop offset="0.72" stop-color="#1B202B"/>
-      <stop offset="1"    stop-color="#111620"/>
-    </radialGradient>
-    <radialGradient id="d-dome" cx="0.5" cy="0.5" r="0.6" fx="0.38" fy="0.34">
-      <stop offset="0"   stop-color="#596476"/>
-      <stop offset="0.3" stop-color="#434C5D"/>
-      <stop offset="0.7" stop-color="#252C38"/>
-      <stop offset="1"   stop-color="#131822"/>
-    </radialGradient>
-    <clipPath id="d-clipShell"><path d="M 219 831 L 219 270 A 40 40 0 0 1 259 230 L 341 230 A 40 40 0 0 1 381 270 L 381 831 A 10 10 0 0 1 371 841 L 229 841 A 10 10 0 0 1 219 831 Z"/></clipPath>
   </defs>
 
-  <!-- ========================== PLINTH ========================== -->
-  <g id="g-plinth" data-part="plinth" transform="translate(0,0)">
+  <!-- =========================== SHELL ==========================
+       Phone frame + screen bezel. The ring is the casting; the
+       glass is the page everything else assembles onto. -->
+  <g id="g-shell" data-part="shell" transform="translate(0,0)">
     <!-- solid -->
-    <ellipse class="solid" cx="300" cy="874" rx="120" ry="8" fill="url(#d-floor)"/>
-    <ellipse class="solid" cx="300" cy="872.5" rx="78" ry="4" fill="#000000" opacity="0.35"/>
-    <rect class="solid" x="221" y="840" width="158" height="9" fill="#060810"/>
-    <path class="solid" d="M 229 848 L 371 848 L 371 865 A 5 5 0 0 1 366 870 L 234 870 A 5 5 0 0 1 229 865 Z" fill="url(#d-plinth)"/>
-    <rect class="solid" x="229" y="848" width="142" height="10" fill="url(#d-plinthAO)"/>
-    <line class="solid" x1="232" y1="848.8" x2="368" y2="848.8"
-          stroke="#E9EEF6" stroke-opacity="0.13" stroke-width="0.8"/>
-    <line class="solid" x1="234" y1="869.3" x2="366" y2="869.3"
-          stroke="#000000" stroke-opacity="0.5" stroke-width="1"/>
+    <ellipse class="solid" cx="300" cy="938" rx="128" ry="9" fill="url(#d-floor)"/>
+    <ellipse class="solid" cx="300" cy="936.5" rx="84" ry="4.5" fill="#000000" opacity="0.3"/>
+    <path class="solid shell-fill" fill-rule="evenodd" fill="url(#d-mBody)"
+          d="M 195 862 L 195 358 A 38 38 0 0 1 233 320 L 367 320 A 38 38 0 0 1 405 358 L 405 862 A 38 38 0 0 1 367 900 L 233 900 A 38 38 0 0 1 195 862 Z
+             M 207 861 L 207 359 A 27 27 0 0 1 234 332 L 366 332 A 27 27 0 0 1 393 359 L 393 861 A 27 27 0 0 1 366 888 L 234 888 A 27 27 0 0 1 207 861 Z"/>
+    <path class="solid" fill="url(#d-screen)"
+          d="M 207 861 L 207 359 A 27 27 0 0 1 234 332 L 366 332 A 27 27 0 0 1 393 359 L 393 861 A 27 27 0 0 1 366 888 L 234 888 A 27 27 0 0 1 207 861 Z"/>
+    <path class="solid" fill="none" stroke="#000000" stroke-opacity="0.45" stroke-width="1.4"
+          d="M 207 861 L 207 359 A 27 27 0 0 1 234 332 L 366 332 A 27 27 0 0 1 393 359 L 393 861 A 27 27 0 0 1 366 888 L 234 888 A 27 27 0 0 1 207 861 Z"/>
+    <!-- antenna seams in the casting -->
+    <line class="solid" x1="195" y1="508" x2="207" y2="508" stroke="#05070C" stroke-opacity="0.55" stroke-width="1"/>
+    <line class="solid" x1="393" y1="508" x2="405" y2="508" stroke="#05070C" stroke-opacity="0.55" stroke-width="1"/>
+    <line class="solid" x1="195" y1="760" x2="207" y2="760" stroke="#05070C" stroke-opacity="0.55" stroke-width="1"/>
+    <line class="solid" x1="393" y1="760" x2="405" y2="760" stroke="#05070C" stroke-opacity="0.55" stroke-width="1"/>
+    <line class="solid" x1="278" y1="326" x2="322" y2="326" stroke="#05070C" stroke-opacity="0.6" stroke-width="2.5"/>
+    <circle class="solid" cx="336" cy="326" r="2.2" fill="#05070C"/>
+    <circle class="solid" cx="335.3" cy="325.3" r="0.6" fill="#E9EEF6" opacity="0.35"/>
+    <line class="solid" x1="272" y1="894" x2="328" y2="894" stroke="#E9EEF6" stroke-opacity="0.28" stroke-width="2"/>
+    <path class="solid" d="M 195 386 L 195 358 A 38 38 0 0 1 233 320 L 367 320 A 38 38 0 0 1 405 358 L 405 378" fill="none"
+          stroke="url(#d-edge)" stroke-width="1.1" opacity="0.9"/>
     <!-- wire -->
-    <path class="wire" vector-effect="non-scaling-stroke" d="M 229 848 L 371 848 L 371 865 A 5 5 0 0 1 366 870 L 234 870 A 5 5 0 0 1 229 865 Z"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="233" y1="855.5" x2="367" y2="855.5"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="233" y1="864.5" x2="367" y2="864.5"/>
-    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="252" cy="860" r="3"/>
-    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="300" cy="860" r="3"/>
-    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="348" cy="860" r="3"/>
+    <path class="wire" vector-effect="non-scaling-stroke" d="M 195 862 L 195 358 A 38 38 0 0 1 233 320 L 367 320 A 38 38 0 0 1 405 358 L 405 862 A 38 38 0 0 1 367 900 L 233 900 A 38 38 0 0 1 195 862 Z"/>
+    <path class="wire w2" vector-effect="non-scaling-stroke" d="M 207 861 L 207 359 A 27 27 0 0 1 234 332 L 366 332 A 27 27 0 0 1 393 359 L 393 861 A 27 27 0 0 1 366 888 L 234 888 A 27 27 0 0 1 207 861 Z"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="278" y1="326" x2="322" y2="326"/>
+    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="336" cy="326" r="2"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="192.7" y1="424" x2="192.7" y2="452"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="192.7" y1="464" x2="192.7" y2="500"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="407.3" y1="440" x2="407.3" y2="488"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="272" y1="894" x2="328" y2="894"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="187" y1="610" x2="195" y2="610"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="405" y1="610" x2="413" y2="610"/>
+  </g>
+
+  <!-- ========================== DRIVER ==========================
+       Header bar: mark on the left, click-to-call pill on the
+       right. The pill is the one live surface on the page. -->
+  <g id="g-driver" data-part="driver" transform="translate(0,0)">
+    <!-- solid -->
+    <rect class="solid" x="213" y="338" width="174" height="54" rx="7" fill="url(#d-panel)"/>
+    <line class="solid" x1="218" y1="338.5" x2="382" y2="338.5" stroke="#E9EEF6" stroke-opacity="0.07" stroke-width="0.8"/>
+    <line class="solid" x1="213" y1="392.4" x2="387" y2="392.4" stroke="#000000" stroke-opacity="0.5" stroke-width="1"/>
+    <rect class="solid" x="227" y="356" width="18" height="18" rx="3" fill="#2A3242"/>
+    <line class="solid" x1="231" y1="370" x2="241" y2="360" stroke="#E9EEF6" stroke-opacity="0.55" stroke-width="1.4"/>
+    <rect class="solid" x="250" y="347" width="133" height="36" rx="18" style="fill:var(--signal)"/>
+    <path class="solid" transform="translate(264 363.5)" fill="none" style="stroke:var(--void)" stroke-width="1.2"
+          d="M -5.4 -2.2 L -3.4 -4.2 A 1.1 1.1 0 0 1 -1.9 -4.2 L -0.6 -2.9 A 1.1 1.1 0 0 1 -0.6 -1.4 L -1.5 -0.5 A 8.2 8.2 0 0 0 2.1 3.1 L 3 2.2 A 1.1 1.1 0 0 1 4.5 2.2 L 5.8 3.5 A 1.1 1.1 0 0 1 5.8 5 L 3.8 7 A 2 2 0 0 1 1.6 7.4 A 13.6 13.6 0 0 1 -5.8 0 A 2 2 0 0 1 -5.4 -2.2 Z"/>
+    <text class="lbl solid" x="276" y="368.5" style="fill:var(--void);letter-spacing:0.02em">(___) ___-____</text>
+    <!-- wire -->
+    <rect class="wire" vector-effect="non-scaling-stroke" x="213" y="338" width="174" height="54" rx="7"/>
+    <rect class="wire w2" vector-effect="non-scaling-stroke" x="227" y="356" width="18" height="18" rx="3"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="231" y1="370" x2="241" y2="360"/>
+    <rect class="wire" vector-effect="non-scaling-stroke" x="250" y="347" width="133" height="36" rx="18"/>
+    <path class="wire w2" vector-effect="non-scaling-stroke" transform="translate(264 363.5)"
+          d="M -5.4 -2.2 L -3.4 -4.2 A 1.1 1.1 0 0 1 -1.9 -4.2 L -0.6 -2.9 A 1.1 1.1 0 0 1 -0.6 -1.4 L -1.5 -0.5 A 8.2 8.2 0 0 0 2.1 3.1 L 3 2.2 A 1.1 1.1 0 0 1 4.5 2.2 L 5.8 3.5 A 1.1 1.1 0 0 1 5.8 5 L 3.8 7 A 2 2 0 0 1 1.6 7.4 A 13.6 13.6 0 0 1 -5.8 0 A 2 2 0 0 1 -5.4 -2.2 Z"/>
   </g>
 
   <!-- ========================= INTERNALS ========================
-       Ring braces + constrained-layer damping run. Fully enclosed
-       when assembled, so this part carries wireframe geometry only
-       (no visible .solid surface by design). -->
+       The page itself: review row, two service cards, running
+       copy. Skeleton in wire; surfaces arrive with assembly. -->
   <g id="g-internals" data-part="internals" transform="translate(0,0)">
-    <path class="wire w2" vector-effect="non-scaling-stroke" d="M 228 470 H 372 V 476 H 228 Z"/>
-    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="300" cy="473" r="8"/>
-    <path class="wire w2" vector-effect="non-scaling-stroke" d="M 228 590 H 372 V 596 H 228 Z"/>
-    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="300" cy="593" r="8"/>
-    <path class="wire w2" vector-effect="non-scaling-stroke" d="M 228 710 H 372 V 716 H 228 Z"/>
-    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="300" cy="713" r="8"/>
-    <line class="wire w3" vector-effect="non-scaling-stroke" x1="226.5" y1="450" x2="226.5" y2="745" stroke-dasharray="5 4"/>
-    <line class="wire w3" vector-effect="non-scaling-stroke" x1="373.5" y1="450" x2="373.5" y2="745" stroke-dasharray="5 4"/>
-  </g>
-
-  <!-- =========================== SHELL ========================== -->
-  <g id="g-shell" data-part="shell" transform="translate(0,0)">
-    <!-- solid: layered anodized casting -->
-    <path class="solid shell-fill" d="M 219 831 L 219 270 A 40 40 0 0 1 259 230 L 341 230 A 40 40 0 0 1 381 270 L 381 831 A 10 10 0 0 1 371 841 L 229 841 A 10 10 0 0 1 219 831 Z" fill="url(#d-mBody)"/>
-    <path class="solid" d="M 219 831 L 219 270 A 40 40 0 0 1 259 230 L 341 230 A 40 40 0 0 1 381 270 L 381 831 A 10 10 0 0 1 371 841 L 229 841 A 10 10 0 0 1 219 831 Z" fill="url(#d-mVert)"/>
-    <path class="solid" d="M 219 831 L 219 270 A 40 40 0 0 1 259 230 L 341 230 A 40 40 0 0 1 381 270 L 381 831 A 10 10 0 0 1 371 841 L 229 841 A 10 10 0 0 1 219 831 Z" fill="url(#d-mTop)"/>
-    <g class="solid" clip-path="url(#d-clipShell)">
-        <line class="solid" x1="224" y1="232" x2="224" y2="883" stroke="#000000" stroke-opacity="0.08" stroke-width="0.8"/>
-        <line class="solid" x1="231" y1="232" x2="231" y2="883" stroke="#E9EEF6" stroke-opacity="0.032" stroke-width="0.6"/>
-        <line class="solid" x1="243" y1="232" x2="243" y2="883" stroke="#000000" stroke-opacity="0.11" stroke-width="1"/>
-        <line class="solid" x1="252" y1="232" x2="252" y2="883" stroke="#E9EEF6" stroke-opacity="0.045" stroke-width="0.6"/>
-        <line class="solid" x1="261" y1="232" x2="261" y2="883" stroke="#000000" stroke-opacity="0.06" stroke-width="0.7"/>
-        <line class="solid" x1="272" y1="232" x2="272" y2="883" stroke="#E9EEF6" stroke-opacity="0.03" stroke-width="0.6"/>
-        <line class="solid" x1="284" y1="232" x2="284" y2="883" stroke="#000000" stroke-opacity="0.09" stroke-width="0.9"/>
-        <line class="solid" x1="295" y1="232" x2="295" y2="883" stroke="#E9EEF6" stroke-opacity="0.04" stroke-width="0.6"/>
-        <line class="solid" x1="303" y1="232" x2="303" y2="883" stroke="#000000" stroke-opacity="0.08" stroke-width="0.7"/>
-        <line class="solid" x1="314" y1="232" x2="314" y2="883" stroke="#E9EEF6" stroke-opacity="0.032" stroke-width="0.6"/>
-        <line class="solid" x1="326" y1="232" x2="326" y2="883" stroke="#000000" stroke-opacity="0.11" stroke-width="1"/>
-        <line class="solid" x1="337" y1="232" x2="337" y2="883" stroke="#E9EEF6" stroke-opacity="0.035" stroke-width="0.6"/>
-        <line class="solid" x1="347" y1="232" x2="347" y2="883" stroke="#000000" stroke-opacity="0.07" stroke-width="0.7"/>
-        <line class="solid" x1="356" y1="232" x2="356" y2="883" stroke="#E9EEF6" stroke-opacity="0.028" stroke-width="0.6"/>
-        <line class="solid" x1="366" y1="232" x2="366" y2="883" stroke="#000000" stroke-opacity="0.09" stroke-width="0.9"/>
-        <line class="solid" x1="374" y1="232" x2="374" y2="883" stroke="#E9EEF6" stroke-opacity="0.022" stroke-width="0.6"/>
-    </g>
-    <g class="solid" clip-path="url(#d-clipShell)">
-      <rect x="219" y="230" width="18" height="611" fill="url(#d-aoL)"/>
-      <rect x="361" y="230" width="20" height="611" fill="url(#d-aoR)"/>
-      <rect x="219" y="770" width="162" height="71" fill="url(#d-aoBot)"/>
-    </g>
-    <circle class="solid" cx="300" cy="368" r="51.5" fill="none"
-            stroke="#000000" stroke-opacity="0.18" stroke-width="5"/>
-    <circle class="solid" cx="300" cy="368" r="49.8" fill="none"
-            stroke="#000000" stroke-opacity="0.3" stroke-width="1.6"/>
-    <g class="solid" clip-path="url(#d-clipShell)">
-      <rect x="256" y="230" width="24" height="612" fill="url(#d-specH)"
-            mask="url(#d-specMask)" opacity="0.18"/>
-      <rect x="264" y="230" width="7"  height="612" fill="url(#d-specH)"
-            mask="url(#d-specMask)" opacity="0.14"/>
-    </g>
-    <path class="solid" d="M 219 298 L 219 270 A 40 40 0 0 1 259 230 L 341 230 A 40 40 0 0 1 381 270 L 381 290" fill="none"
-          stroke="url(#d-edge)" stroke-width="1.1" opacity="0.9"/>
-    <!-- wire -->
-    <path class="wire" vector-effect="non-scaling-stroke" d="M 219 831 L 219 270 A 40 40 0 0 1 259 230 L 341 230 A 40 40 0 0 1 381 270 L 381 831 A 10 10 0 0 1 371 841 L 229 841 A 10 10 0 0 1 219 831 Z"/>
-    <path class="wire w2" vector-effect="non-scaling-stroke" d="M 226 834 L 226 271 A 34 34 0 0 1 260 237 L 340 237 A 34 34 0 0 1 374 271 L 374 834 L 226 834"/>
-    <circle class="wire" vector-effect="non-scaling-stroke" cx="300" cy="368" r="49"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="211" y1="368" x2="219" y2="368"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="381" y1="368" x2="389" y2="368"/>
-  </g>
-
-  <!-- ========================== DRIVER ========================== -->
-  <g id="g-driver" data-part="driver" transform="translate(0,0)">
     <!-- solid -->
-    <circle class="solid" cx="300" cy="368" r="49" fill="#070A11"/>
-    <circle class="solid" cx="300" cy="368" r="48" fill="none"
-            stroke="#000000" stroke-opacity="0.55" stroke-width="2"/>
-    <circle class="solid" cx="300" cy="368" r="46.5" fill="url(#d-trim)"/>
-    <circle class="solid" cx="300" cy="368" r="40.5" fill="url(#d-trimIn)"/>
-    <circle class="solid" cx="300" cy="368" r="38.5" fill="#0D111A"/>
-    <circle class="solid" cx="300" cy="368" r="36"   fill="url(#d-cone)"/>
-    <circle class="solid" cx="300" cy="368" r="28" fill="none"
-            stroke="#000000" stroke-opacity="0.45" stroke-width="0.9"/>
-    <circle class="solid" cx="300" cy="368" r="27.2" fill="none"
-            stroke="#E9EEF6" stroke-opacity="0.07" stroke-width="0.6"/>
-    <circle class="solid" cx="300" cy="368" r="20" fill="none"
-            stroke="#000000" stroke-opacity="0.45" stroke-width="0.9"/>
-    <circle class="solid" cx="300" cy="368" r="19.2" fill="none"
-            stroke="#E9EEF6" stroke-opacity="0.07" stroke-width="0.6"/>
-    <path class="solid" d="M 267.1 356 A 35 35 0 0 1 332.9 356" fill="none"
-          stroke="#000000" stroke-opacity="0.32" stroke-width="2.4"/>
-    <circle class="solid" cx="300" cy="368" r="10" fill="url(#d-dome)"/>
-    <ellipse class="solid" cx="296.6" cy="364.6" rx="2.6" ry="1.5"
-             transform="rotate(-38 296.6 364.6)" fill="#E9EEF6" opacity="0.22"/>
-    <path class="solid" d="M 255.6 356.1 A 46 46 0 0 1 304 322.2" fill="none"
-          stroke="#F4F7FC" stroke-opacity="0.16" stroke-width="1"/>
-    <path class="solid" d="M 338.3 382 A 40.8 40.8 0 0 1 314 406.3" fill="none"
-          stroke="#E9EEF6" stroke-opacity="0.10" stroke-width="0.8"/>
+    <path class="solid" transform="translate(244 442)" fill="#CBD2DF" fill-opacity="0.92"
+          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
+    <path class="solid" transform="translate(272 442)" fill="#CBD2DF" fill-opacity="0.92"
+          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
+    <path class="solid" transform="translate(300 442)" fill="#CBD2DF" fill-opacity="0.92"
+          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
+    <path class="solid" transform="translate(328 442)" fill="#CBD2DF" fill-opacity="0.92"
+          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
+    <path class="solid" transform="translate(356 442)" style="fill:var(--signal)"
+          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
+    <line class="solid" x1="233" y1="468" x2="367" y2="468" stroke="#E9EEF6" stroke-opacity="0.42" stroke-width="2"/>
+    <line class="solid" x1="233" y1="480" x2="322" y2="480" stroke="#E9EEF6" stroke-opacity="0.24" stroke-width="2"/>
+    <rect class="solid" x="221" y="500" width="72" height="110" rx="6" fill="url(#d-panel)"/>
+    <rect class="solid" x="307" y="500" width="72" height="110" rx="6" fill="url(#d-panel)"/>
+    <circle class="solid" cx="240" cy="527" r="9" fill="none" stroke="#E9EEF6" stroke-opacity="0.5" stroke-width="1.1"/>
+    <circle class="solid" cx="326" cy="527" r="9" fill="none" stroke="#E9EEF6" stroke-opacity="0.5" stroke-width="1.1"/>
+    <circle class="solid" cx="240" cy="527" r="1.8" fill="#E9EEF6" fill-opacity="0.5"/>
+    <circle class="solid" cx="326" cy="527" r="1.8" fill="#E9EEF6" fill-opacity="0.5"/>
+    <line class="solid" x1="231" y1="556" x2="283" y2="556" stroke="#E9EEF6" stroke-opacity="0.45" stroke-width="2"/>
+    <line class="solid" x1="231" y1="570" x2="269" y2="570" stroke="#E9EEF6" stroke-opacity="0.26" stroke-width="2"/>
+    <line class="solid" x1="231" y1="590" x2="255" y2="590" stroke="#E9EEF6" stroke-opacity="0.38" stroke-width="2"/>
+    <line class="solid" x1="317" y1="556" x2="369" y2="556" stroke="#E9EEF6" stroke-opacity="0.45" stroke-width="2"/>
+    <line class="solid" x1="317" y1="570" x2="355" y2="570" stroke="#E9EEF6" stroke-opacity="0.26" stroke-width="2"/>
+    <line class="solid" x1="317" y1="590" x2="341" y2="590" stroke="#E9EEF6" stroke-opacity="0.38" stroke-width="2"/>
+    <line class="solid" x1="221" y1="654" x2="379" y2="654" stroke="#E9EEF6" stroke-opacity="0.34" stroke-width="2"/>
+    <line class="solid" x1="221" y1="672" x2="356" y2="672" stroke="#E9EEF6" stroke-opacity="0.3" stroke-width="2"/>
+    <line class="solid" x1="221" y1="690" x2="379" y2="690" stroke="#E9EEF6" stroke-opacity="0.32" stroke-width="2"/>
+    <line class="solid" x1="221" y1="708" x2="332" y2="708" stroke="#E9EEF6" stroke-opacity="0.28" stroke-width="2"/>
+    <line class="solid" x1="221" y1="736" x2="300" y2="736" stroke="#E9EEF6" stroke-opacity="0.2" stroke-width="2"/>
+    <line class="solid" x1="221" y1="754" x2="281" y2="754" stroke="#E9EEF6" stroke-opacity="0.18" stroke-width="2"/>
+    <line class="solid" x1="221" y1="772" x2="259" y2="772" stroke="#E9EEF6" stroke-opacity="0.16" stroke-width="2"/>
     <!-- wire -->
-    <circle class="wire" vector-effect="non-scaling-stroke" cx="300" cy="368" r="46.5"/>
-    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="300" cy="368" r="36"/>
-    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="300" cy="368" r="28"/>
-    <circle class="wire" vector-effect="non-scaling-stroke" cx="300" cy="368" r="10"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="300" y1="310" x2="300" y2="317"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="300" y1="419" x2="300" y2="426"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="242" y1="368" x2="249" y2="368"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="351" y1="368" x2="358" y2="368"/>
+    <line class="wire w3" vector-effect="non-scaling-stroke" x1="221" y1="424" x2="221" y2="776" stroke-dasharray="5 4"/>
+    <line class="wire w3" vector-effect="non-scaling-stroke" x1="379" y1="424" x2="379" y2="776" stroke-dasharray="5 4"/>
+    <path class="wire" vector-effect="non-scaling-stroke" transform="translate(244 442)"
+          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
+    <path class="wire" vector-effect="non-scaling-stroke" transform="translate(272 442)"
+          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
+    <path class="wire" vector-effect="non-scaling-stroke" transform="translate(300 442)"
+          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
+    <path class="wire" vector-effect="non-scaling-stroke" transform="translate(328 442)"
+          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
+    <path class="wire" vector-effect="non-scaling-stroke" transform="translate(356 442)"
+          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="233" y1="468" x2="367" y2="468"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="233" y1="480" x2="322" y2="480"/>
+    <rect class="wire" vector-effect="non-scaling-stroke" x="221" y="500" width="72" height="110" rx="6"/>
+    <rect class="wire" vector-effect="non-scaling-stroke" x="307" y="500" width="72" height="110" rx="6"/>
+    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="240" cy="527" r="9"/>
+    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="326" cy="527" r="9"/>
+    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="240" cy="527" r="1.8"/>
+    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="326" cy="527" r="1.8"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="231" y1="556" x2="283" y2="556"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="231" y1="570" x2="269" y2="570"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="231" y1="590" x2="255" y2="590"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="317" y1="556" x2="369" y2="556"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="317" y1="570" x2="355" y2="570"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="317" y1="590" x2="341" y2="590"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="221" y1="654" x2="379" y2="654"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="221" y1="672" x2="356" y2="672"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="221" y1="690" x2="379" y2="690"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="221" y1="708" x2="332" y2="708"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="221" y1="736" x2="300" y2="736"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="221" y1="754" x2="281" y2="754"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="221" y1="772" x2="259" y2="772"/>
+  </g>
+
+  <!-- ========================== PLINTH ==========================
+       Footer bar: map pin, address skeleton, directions tick.
+       The part Google reads first. -->
+  <g id="g-plinth" data-part="plinth" transform="translate(0,0)">
+    <!-- solid -->
+    <path class="solid" fill="url(#d-plinth)"
+          d="M 207 830 L 393 830 L 393 861 A 27 27 0 0 1 366 888 L 234 888 A 27 27 0 0 1 207 861 Z"/>
+    <line class="solid" x1="207" y1="830.5" x2="393" y2="830.5" stroke="#000000" stroke-opacity="0.5" stroke-width="1"/>
+    <line class="solid" x1="212" y1="831.6" x2="388" y2="831.6" stroke="#E9EEF6" stroke-opacity="0.08" stroke-width="0.7"/>
+    <path class="solid" transform="translate(238 857)" fill="none" stroke="#E9EEF6" stroke-opacity="0.8" stroke-width="1.1"
+          d="M 0 -9 A 6.6 6.6 0 0 1 6.6 -2.4 C 6.6 1.6 0 9 0 9 C 0 9 -6.6 1.6 -6.6 -2.4 A 6.6 6.6 0 0 1 0 -9 Z"/>
+    <circle class="solid" cx="238" cy="854.6" r="1.6" fill="#E9EEF6" fill-opacity="0.6"/>
+    <line class="solid" x1="254" y1="852" x2="345" y2="852" stroke="#E9EEF6" stroke-opacity="0.5" stroke-width="2"/>
+    <line class="solid" x1="254" y1="864" x2="316" y2="864" stroke="#E9EEF6" stroke-opacity="0.28" stroke-width="2"/>
+    <path class="solid" fill="none" stroke="#E9EEF6" stroke-opacity="0.5" stroke-width="1.1"
+          d="M 364 863 L 373 854 M 366.5 854 H 373 V 860.5"/>
+    <!-- wire -->
+    <path class="wire" vector-effect="non-scaling-stroke" d="M 207 830 L 393 830 L 393 861 A 27 27 0 0 1 366 888 L 234 888 A 27 27 0 0 1 207 861 Z"/>
+    <path class="wire w2" vector-effect="non-scaling-stroke" transform="translate(238 857)"
+          d="M 0 -9 A 6.6 6.6 0 0 1 6.6 -2.4 C 6.6 1.6 0 9 0 9 C 0 9 -6.6 1.6 -6.6 -2.4 A 6.6 6.6 0 0 1 0 -9 Z"/>
+    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="238" cy="854.6" r="2.4"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="254" y1="852" x2="345" y2="852"/>
+    <line class="wire w2" vector-effect="non-scaling-stroke" x1="254" y1="864" x2="316" y2="864"/>
+    <path class="wire w2" vector-effect="non-scaling-stroke" d="M 364 863 L 373 854 M 366.5 854 H 373 V 860.5"/>
   </g>
 
   <!-- ========================== LABELS ==========================
-       Drawn in exploded-space coordinates; state <style> hides the
-       whole annotation layer in the assembled rendering. -->
+       Drawn in exploded-space coordinates; the timeline retires
+       the whole annotation layer before assembly completes. -->
   <g id="g-labels" data-part="labels">
     <line class="wire w3" vector-effect="non-scaling-stroke" x1="300" y1="64" x2="300" y2="1072"
           stroke-dasharray="12 5 3 5"/>
 
-    <circle class="marker lbl" cx="362" cy="122" r="2.2"/>
-    <line class="wire signal" vector-effect="non-scaling-stroke" x1="364" y1="122" x2="416" y2="122"/>
-    <text class="lbl"      x="424" y="118.5">DRIVER 01</text>
-    <text class="lbl dim"  x="424" y="132">CONCENTRIC FULL-RANGE</text>
-    <text class="lbl dim2" x="424" y="145.5">&#216; 160 MM</text>
+    <circle class="marker lbl" cx="407" cy="113" r="2.2"/>
+    <line class="wire signal" vector-effect="non-scaling-stroke" x1="409" y1="113" x2="444" y2="113"/>
+    <text class="lbl"      x="452" y="109.5">CLICK-TO-CALL</text>
+    <text class="lbl dim"  x="452" y="123">ONE TAP TO RING</text>
+    <text class="lbl dim2" x="452" y="136.5">HEADER &#183; FIXED</text>
 
-    <circle class="marker lbl" cx="300" cy="174" r="2.2" style="animation-delay:.7s"/>
-    <line class="wire signal" vector-effect="non-scaling-stroke" x1="298" y1="174" x2="184" y2="174"/>
-    <text class="lbl"     x="176" y="170.5" text-anchor="end">CROSSOVER</text>
-    <text class="lbl dim" x="176" y="184"   text-anchor="end">NONE</text>
+    <circle class="marker lbl" cx="211" cy="561" r="2.2" style="animation-delay:.7s"/>
+    <line class="wire signal" vector-effect="non-scaling-stroke" x1="209" y1="561" x2="160" y2="561"/>
+    <text class="lbl"     x="152" y="557.5" text-anchor="end">YOUR REVIEWS</text>
+    <text class="lbl dim" x="152" y="571"   text-anchor="end">FIVE-STAR PROOF</text>
 
-    <circle class="marker lbl" cx="219" cy="430" r="2.2" style="animation-delay:1.4s"/>
-    <line class="wire signal" vector-effect="non-scaling-stroke" x1="217" y1="430" x2="160" y2="430"/>
-    <text class="lbl"      x="152" y="426.5" text-anchor="end">SHELL</text>
-    <text class="lbl dim"  x="152" y="440"   text-anchor="end">MONOCOQUE CASTING</text>
-    <text class="lbl dim2" x="152" y="453.5" text-anchor="end">W 280 &#183; H 1100 MM</text>
+    <circle class="marker lbl" cx="373" cy="677" r="2.2" style="animation-delay:1.4s"/>
+    <line class="wire signal" vector-effect="non-scaling-stroke" x1="375" y1="677" x2="420" y2="677"/>
+    <text class="lbl"      x="428" y="673.5">YOUR SERVICES</text>
+    <text class="lbl dim"  x="428" y="687">PRICED AND LISTED</text>
+    <text class="lbl dim2" x="428" y="700.5">CARDS &#215; 2</text>
 
-    <circle class="marker lbl" cx="374" cy="1029" r="2.2" style="animation-delay:2.1s"/>
-    <line class="wire signal" vector-effect="non-scaling-stroke" x1="376" y1="1029" x2="420" y2="1029"/>
-    <text class="lbl"     x="428" y="1025.5">PLINTH</text>
-    <text class="lbl dim" x="428" y="1039">CONSTRAINED-LAYER</text>
+    <circle class="marker lbl" cx="214" cy="1025" r="2.2" style="animation-delay:2.1s"/>
+    <line class="wire signal" vector-effect="non-scaling-stroke" x1="212" y1="1025" x2="160" y2="1025"/>
+    <text class="lbl"     x="152" y="1021.5" text-anchor="end">FOUND ON GOOGLE</text>
+    <text class="lbl dim" x="152" y="1035"   text-anchor="end">MAP PIN + ADDRESS</text>
   </g>
           </svg>
         </figure>
@@ -435,14 +408,18 @@
             <p class="panel-lede">One tap, and their phone is ringing yours.</p>
             <div class="panel-art" data-art="driver" aria-hidden="true">
               <svg viewBox="0 0 400 220" fill="none" stroke="currentColor" stroke-width="1">
-                <circle class="wire" cx="200" cy="110" r="88" />
-                <circle class="wire" cx="200" cy="110" r="72" />
-                <circle class="wire" cx="200" cy="110" r="46" />
-                <circle class="wire" cx="200" cy="110" r="24" />
-                <circle class="wire" cx="200" cy="110" r="7" />
-                <path class="wire" d="M200 22v-14M200 212v14M112 110H96M288 110h16" />
-                <path class="wire" d="M138 48l-10-10M262 48l10-10M138 172l-10 10M262 172l10 10" />
-                <path class="wire" d="M164 110a36 36 0 0 1 72 0" stroke-dasharray="2 4" />
+                <rect class="wire" x="120" y="58" width="32" height="32" rx="10" />
+                <rect class="wire" x="228" y="58" width="32" height="32" rx="10" />
+                <path class="wire" d="M136 58C150 30 230 30 244 58" />
+                <path class="wire" d="M152 74C165 52 215 52 228 74" opacity="0.5" />
+                <path class="wire" d="M270 54a28 28 0 0 1 12 22" opacity="0.6" />
+                <path class="wire" d="M282 44a42 42 0 0 1 18 32" opacity="0.4" />
+                <path class="wire" d="M190 98v34" stroke-dasharray="2 4" opacity="0.5" />
+                <rect class="wire" x="130" y="140" width="120" height="32" rx="16" />
+                <path class="wire" d="M148 156h48" opacity="0.5" />
+                <circle class="wire" cx="224" cy="150" r="12" />
+                <circle class="wire" cx="224" cy="150" r="24" stroke-dasharray="2 4" opacity="0.5" />
+                <circle class="wire" cx="224" cy="150" r="34" stroke-dasharray="2 6" opacity="0.4" />
               </svg>
             </div>
             <ul class="panel-specs u-mono">
@@ -458,14 +435,17 @@
             <p class="panel-lede">Your five stars, front and center.</p>
             <div class="panel-art" data-art="crossover" aria-hidden="true">
               <svg viewBox="0 0 400 220" fill="none" stroke="currentColor" stroke-width="1">
-                <path class="wire" d="M40 140h320" />
-                <circle class="wire" cx="40" cy="140" r="4" />
-                <circle class="wire" cx="360" cy="140" r="4" />
-                <path class="wire" d="M120 84v-24M128 84v-24M104 72h16M132 72h16" opacity="0.4" />
-                <path class="wire" d="M186 60c6 0 6 12 12 12s6-12 12-12 6 12 12 12" opacity="0.4" />
-                <path class="wire" d="M280 60l8 8 -16 8 16 8 -16 8 8 8" opacity="0.4" />
-                <path class="wire" d="M96 96L172 36M178 96L254 36M258 96L334 36" />
-                <path class="wire" d="M40 156v10M360 156v10M40 161h320" stroke-dasharray="1 5" opacity="0.5" />
+                <path class="wire" d="M96 44l3.4 9.4 10 .2-8 6.2 2.8 9.6-8.2-5.8-8.2 5.8 2.8-9.6-8-6.2 10-.2z" />
+                <path class="wire" d="M148 44l3.4 9.4 10 .2-8 6.2 2.8 9.6-8.2-5.8-8.2 5.8 2.8-9.6-8-6.2 10-.2z" />
+                <path class="wire" d="M200 44l3.4 9.4 10 .2-8 6.2 2.8 9.6-8.2-5.8-8.2 5.8 2.8-9.6-8-6.2 10-.2z" />
+                <path class="wire" d="M200 46v17M196.5 54v12M203.5 54v12" />
+                <path class="wire" d="M252 44l3.4 9.4 10 .2-8 6.2 2.8 9.6-8.2-5.8-8.2 5.8 2.8-9.6-8-6.2 10-.2z" />
+                <path class="wire" d="M304 44l3.4 9.4 10 .2-8 6.2 2.8 9.6-8.2-5.8-8.2 5.8 2.8-9.6-8-6.2 10-.2z" />
+                <path class="wire" d="M200 76v18" stroke-dasharray="2 4" opacity="0.5" />
+                <rect class="wire" x="124" y="100" width="152" height="76" rx="6" />
+                <path class="wire" d="M140 120h72M140 134h104M140 148h88" opacity="0.5" />
+                <circle class="wire" cx="252" cy="158" r="10" />
+                <path class="wire" d="M247 158l4 4 7-8" opacity="0.6" />
               </svg>
             </div>
             <ul class="panel-specs u-mono">
@@ -481,14 +461,18 @@
             <p class="panel-lede">Show up when your town searches.</p>
             <div class="panel-art" data-art="shell" aria-hidden="true">
               <svg viewBox="0 0 400 220" fill="none" stroke="currentColor" stroke-width="1">
-                <path class="wire" d="M164 200V44a36 36 0 0 1 72 0v156" />
-                <path class="wire" d="M176 200V48a24 24 0 0 1 48 0v152" opacity="0.6" />
-                <path class="wire" d="M170 196l-14 14M182 188l-22 22M194 180l-20 20" opacity="0.45" />
-                <path class="wire" d="M230 180l20 20M218 188l22 22" opacity="0.45" />
-                <path class="wire" d="M200 8v24" stroke-dasharray="2 4" />
-                <path class="wire" d="M252 44a52 52 0 0 0-24-30" stroke-dasharray="2 4" opacity="0.6" />
-                <path class="wire" d="M140 200h120" />
-                <path class="wire" d="M148 60h8M148 100h12M148 140h16M148 180h20" opacity="0.5" />
+                <rect class="wire" x="100" y="32" width="200" height="28" rx="14" />
+                <circle class="wire" cx="121" cy="46" r="7" />
+                <path class="wire" d="M126 51l8 8" />
+                <path class="wire" d="M144 46h88" opacity="0.5" />
+                <path class="wire" d="M200 68v26" stroke-dasharray="2 4" opacity="0.6" />
+                <path class="wire" d="M200 162c-14-14-22-26-22-38a22 22 0 0 1 44 0c0 12-8 24-22 38z" />
+                <circle class="wire" cx="200" cy="124" r="8" />
+                <circle class="wire" cx="200" cy="170" r="13" stroke-dasharray="2 4" opacity="0.5" />
+                <path class="wire" d="M60 170h280" opacity="0.5" />
+                <path class="wire" d="M108 204l56-70" opacity="0.45" />
+                <path class="wire" d="M258 140l46 64" opacity="0.45" />
+                <path class="wire" d="M60 184h280" stroke-dasharray="1 5" opacity="0.4" />
               </svg>
             </div>
             <ul class="panel-specs u-mono">
@@ -504,14 +488,22 @@
             <p class="panel-lede">Because that’s where your customers are.</p>
             <div class="panel-art" data-art="plinth" aria-hidden="true">
               <svg viewBox="0 0 400 220" fill="none" stroke="currentColor" stroke-width="1">
-                <path class="wire" d="M140 60h120v22H140z" />
-                <path class="wire" d="M132 96h136v14H132z" />
-                <path class="wire" d="M136 98l8 10M152 98l8 10M168 98l8 10M184 98l8 10M200 98l8 10M216 98l8 10M232 98l8 10M248 98l8 10" opacity="0.5" />
-                <path class="wire" d="M120 124h160v28H120z" />
-                <path class="wire" d="M100 178h200" />
-                <path class="wire" d="M112 178l-8 10M136 178l-8 10M160 178l-8 10M184 178l-8 10M208 178l-8 10M232 178l-8 10M256 178l-8 10M280 178l-8 10M304 178l-8 10" opacity="0.4" />
-                <path class="wire" d="M200 152v26" stroke-dasharray="2 4" />
-                <path class="wire" d="M292 82v14M288 86l4-4 4 4M288 92l4 4 4-4" opacity="0.7" />
+                <rect class="wire" x="76" y="96" width="44" height="80" rx="6" />
+                <path class="wire" d="M86 108h24" />
+                <rect class="wire" x="86" y="116" width="24" height="16" />
+                <path class="wire" d="M86 142h24M86 150h17" opacity="0.5" />
+                <rect class="wire" x="150" y="76" width="76" height="100" rx="8" />
+                <path class="wire" d="M162 92h52" />
+                <rect class="wire" x="162" y="100" width="52" height="28" />
+                <path class="wire" d="M162 140h52M162 148h38" opacity="0.5" />
+                <rect class="wire" x="248" y="84" width="100" height="76" rx="4" />
+                <path class="wire" d="M260 100h64" />
+                <rect class="wire" x="260" y="108" width="64" height="24" />
+                <path class="wire" d="M260 142h64M260 150h48" opacity="0.5" />
+                <path class="wire" d="M244 160l-14 16h136l-14-16" />
+                <path class="wire" d="M36 112h24M28 132h32M36 152h24" opacity="0.5" />
+                <path class="wire" d="M130 90h12M126 106h16M234 94h10M230 110h14" opacity="0.45" />
+                <path class="wire" d="M60 190h296" stroke-dasharray="1 5" opacity="0.4" />
               </svg>
             </div>
             <ul class="panel-specs u-mono">
@@ -560,13 +552,32 @@
           <p>If you love it, it goes live on your domain within days. If you don’t, you owe me nothing.</p>
         </div>
         <div class="swatches">
-          <figure class="swatch swatch--metal">
-            <div class="swatch-face" aria-hidden="true"></div>
-            <figcaption class="u-mono">ANODISED ALUMINIUM · <span data-finish-label>GRAPHITE</span></figcaption>
+          <figure class="swatch build-card build-card--amber">
+            <div class="swatch-face" aria-hidden="true">
+              <span class="build-mini-nav"><span class="build-mini-logo"></span><span class="build-mini-link"></span><span class="build-mini-link"></span><span class="build-mini-link"></span></span>
+              <span class="build-mini-headline"><span></span><span></span></span>
+              <span class="build-mini-stars"><span></span><span></span><span></span><span></span><span></span></span>
+              <span class="build-mini-call"></span>
+            </div>
+            <figcaption class="u-mono">HANDYMAN · CHANDLER, AZ</figcaption>
           </figure>
-          <figure class="swatch swatch--wool">
-            <div class="swatch-face" aria-hidden="true"></div>
-            <figcaption class="u-mono">WOOL GRILLE · ICE</figcaption>
+          <figure class="swatch build-card build-card--teal">
+            <div class="swatch-face" aria-hidden="true">
+              <span class="build-mini-nav"><span class="build-mini-logo"></span><span class="build-mini-link"></span><span class="build-mini-link"></span><span class="build-mini-link"></span></span>
+              <span class="build-mini-headline"><span></span><span></span></span>
+              <span class="build-mini-stars"><span></span><span></span><span></span><span></span><span></span></span>
+              <span class="build-mini-call"></span>
+            </div>
+            <figcaption class="u-mono">ELECTRICIAN · DANVILLE, CA</figcaption>
+          </figure>
+          <figure class="swatch build-card build-card--red">
+            <div class="swatch-face" aria-hidden="true">
+              <span class="build-mini-nav"><span class="build-mini-logo"></span><span class="build-mini-link"></span><span class="build-mini-link"></span><span class="build-mini-link"></span></span>
+              <span class="build-mini-headline"><span></span><span></span></span>
+              <span class="build-mini-stars"><span></span><span></span><span></span><span></span><span></span></span>
+              <span class="build-mini-call"></span>
+            </div>
+            <figcaption class="u-mono">LOCKSMITH · BIRMINGHAM, AL</figcaption>
           </figure>
         </div>
         <blockquote class="material-quote">
