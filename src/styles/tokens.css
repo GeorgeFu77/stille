@@ -1,93 +1,52 @@
 /* ————————————————————————————————————————————
-   STILLE design tokens
-   Palette: void · ice · signal · aurora
+   STILLE design tokens — "Hi-Vis"
+   Black ground, bone type, one safety-orange voltage.
+   Copy is never grey: hierarchy comes from size and color, not dimness.
    ———————————————————————————————————————————— */
 
 :root {
   /* Color */
-  --void: #05060b;
-  --ink: #0b0e16;
-  --ice: #e9eef6;
-  --ice-60: rgba(233, 238, 246, 0.6);
-  --ice-38: rgba(233, 238, 246, 0.38);
-  --signal: #5b6cff;
-  --signal-dim: rgba(91, 108, 255, 0.55);
-  --aurora: #9d7bff;
+  --black: #0b0b0a;
+  --black-2: #161614;
+  --bone: #efebe3;
+  --bone-2: #e4dfd4;
+  --orange: #ff4d00;
+  --orange-hot: #ff8a3d;
+  --line-on-dark: rgba(239, 235, 227, 0.18);
+  --line-on-light: rgba(11, 11, 10, 0.2);
 
-  /* Spectral light — violet → ultramarine → cyan. Carried only by live chrome;
-     the ground stays void. */
-  --spectra-violet: #9d7bff;
-  --spectra-blue: #5b6cff;
-  --spectra-cyan: #4fd8ff;
-  --spectra: linear-gradient(100deg, var(--spectra-violet), var(--spectra-blue) 55%, var(--spectra-cyan));
-  --glacier: #d8dee8;
-  --glacier-ink: #101833;
-  /* Copy is never grey: cold signal-blue on the void, deep navy on the glacier.
-     Hierarchy comes from temperature, not dimness. */
-  --copy-cool: #c9d5ff;
-  --copy-cool-soft: rgba(180, 194, 244, 0.9);
-  /* daylight-aware: ice rules in the dark, ink rules on the glacier */
-  --hairline: color-mix(in srgb, rgba(233, 238, 246, 0.14), rgba(16, 19, 27, 0.28) calc(var(--daylight) * 100%));
-  --hairline-faint: color-mix(in srgb, rgba(233, 238, 246, 0.07), rgba(16, 19, 27, 0.16) calc(var(--daylight) * 100%));
-
-  /* The Daylight Passage drives one number; CSS derives the live page colors. */
-  --daylight: 0;
-  --grain-opacity: 1;
-  --page-bg: color-mix(in srgb, var(--ink), var(--glacier) calc(var(--daylight) * 100%));
-  /* text commits to ink ~1.7x faster than the ground brightens, so the
-     crossfade never passes through unreadable grey-on-grey */
-  --daylight-fg: min(calc(var(--daylight) * 1.7), 1);
-  --page-fg: color-mix(in srgb, var(--ice), var(--glacier-ink) calc(var(--daylight-fg) * 100%));
-  --page-muted: color-mix(in srgb, var(--copy-cool), var(--glacier-ink) calc(var(--daylight-fg) * 100%));
-  --page-faint: color-mix(in srgb, var(--copy-cool-soft), rgba(16, 24, 51, 0.92) calc(var(--daylight-fg) * 100%));
-
-  /* Metal (speaker + swatches) — swapped by [data-finish] */
-  --metal-hi: #3a4150;
-  --metal-mid: #252b37;
-  --metal-lo: #141824;
-  --metal-sheen: rgba(233, 238, 246, 0.11);
+  /* Theme slots (sections flip these) */
+  --bg: var(--black);
+  --fg: var(--bone);
+  --accent: var(--orange);
+  --line: var(--line-on-dark);
 
   /* Type */
-  --font-display: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
+  --font-display: 'Archivo Variable', 'Arial Narrow', 'Helvetica Neue', sans-serif;
+  --font-serif: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
   --font-body: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif;
   --font-mono: 'IBM Plex Mono', 'SF Mono', Menlo, monospace;
 
-  --text-hero: clamp(3.4rem, 10.5vw, 9.5rem);
-  --text-h2: clamp(2.35rem, 5.8vw, 4.9rem);
-  --text-h3: clamp(1.75rem, 3.2vw, 2.65rem);
-  --text-body: clamp(1.125rem, 1.2vw, 1.3rem);
-  --text-mono: clamp(0.75rem, 0.8vw, 0.875rem);
-  --text-stat: clamp(2rem, 3.6vw, 3.25rem);
-
-  --weight-body: 470;
-  --weight-display: 450;
-  --weight-label: 500;
+  --text-body: clamp(1.0625rem, 0.95rem + 0.4vw, 1.3rem);
+  --text-lead: clamp(1.25rem, 1rem + 0.9vw, 1.85rem);
+  --text-mono: clamp(0.6875rem, 0.64rem + 0.18vw, 0.8125rem);
+  --text-h2: clamp(3.4rem, 1.5rem + 8.4vw, 11.5rem);
+  --text-h3: clamp(2.4rem, 1.4rem + 4vw, 6rem);
 
   /* Space & layout */
-  --gutter: clamp(1.25rem, 5vw, 6rem);
-  --measure: 34em;
-  --section-pad: clamp(6rem, 14vh, 11rem);
+  --gutter: clamp(1rem, 0.4rem + 2.6vw, 3rem);
+  --section-pad: clamp(6rem, 4rem + 9vw, 13rem);
+  --head-h: 4.25rem;
 
   /* Motion */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);      /* expo-ish arrive */
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);  /* state change */
-  --dur-fast: 180ms;
-  --dur-med: 420ms;
-  --page-progress: 0;
-  --rule-scale: 0;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io: cubic-bezier(0.77, 0, 0.175, 1);
 
   /* Z layers */
-  --z-grain: 0;
-  --z-scene: 1;
-  --z-thread: 2;
-  --z-content: 3;
-  --z-head: 10;
-}
-
-/* Ice finish swaps the product's metal tokens (configurator). */
-:root[data-finish='ice'] {
-  --metal-hi: #d9dee8;
-  --metal-mid: #c4cbd7;
-  --metal-lo: #a8b0bf;
-  --metal-sheen: rgba(233, 238, 246, 0.35);
+  --z-content: 1;
+  --z-head: 20;
+  --z-menu: 30;
+  --z-grain: 40;
+  --z-cursor: 50;
+  --z-loader: 60;
 }

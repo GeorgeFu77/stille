@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-finish="graphite">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,9 +14,10 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://stillebuilds.netlify.app/og.jpg" />
   <link rel="canonical" href="https://stillebuilds.netlify.app/" />
-  <meta name="theme-color" content="#0B0E16" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2305060B'/%3E%3Cpath d='M4 16h8l2-6 4 12 2-6h8' stroke='%235B6CFF' stroke-width='2' fill='none'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#0B0B0A" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23FF4D00'/%3E%3Cpath d='M9 23 23 9' stroke='%230B0B0A' stroke-width='5' stroke-linecap='square'/%3E%3C/svg%3E" />
   <script>
+    document.documentElement.classList.add('js');
     try {
       if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !sessionStorage.getItem('stille-seen')) {
         document.documentElement.classList.add('has-loader');
@@ -28,617 +29,347 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="boot-loader" aria-hidden="true">
-    <div class="boot-loader__signal">
-      <span class="boot-loader__glyphs u-mono">− − − − − − −</span>
-      <span class="boot-loader__line"></span>
-    </div>
+  <div class="loader" aria-hidden="true">
+    <p class="loader__tag u-mono">STILLE® / LOADING THE PITCH</p>
+    <p class="loader__count"><span data-loader-count>0</span><span class="loader__pct">%</span></p>
+    <span class="loader__bar"><span data-loader-bar></span></span>
   </div>
 
-  <!-- Fixed layers (bottom to top): grain shader, 3D object, the Thread. Content sits above all three. -->
-  <canvas id="grain" class="layer layer--grain" aria-hidden="true"></canvas>
-  <canvas id="thread" class="layer layer--thread" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
 
-  <div class="signal-cursor" aria-hidden="true">
-    <span class="signal-cursor__ring"></span>
-    <span class="signal-cursor__dot"></span>
-  </div>
-
-  <header class="site-head">
-    <a class="wordmark" href="#top"><span data-wordmark>STILLE</span><sup>®</sup></a>
-    <button class="head-index u-mono" type="button" aria-expanded="false" aria-controls="site-index" data-index-open>
-      <span>INDEX</span><span class="head-index__mark" aria-hidden="true"></span>
+  <header class="head" data-head>
+    <span class="head__progress" aria-hidden="true"><span data-progress></span></span>
+    <a class="head__mark" href="#top" aria-label="STILLE, back to top">STILLE<sup>®</sup></a>
+    <p class="head__meta u-mono" aria-hidden="true">WEB DESIGN<span>/</span>$500 FLAT</p>
+    <button class="head__menu u-mono" type="button" aria-expanded="false" aria-controls="menu" data-menu-open>
+      <span class="head__menu-bars" aria-hidden="true"><span></span><span></span></span>MENU
     </button>
-    <a class="head-cta u-mono" href="#reserve">CALL / TEXT</a>
-    <span class="site-progress" aria-hidden="true"><span class="site-progress__bar"></span></span>
+    <a class="head__cta u-mono" href="#reserve" data-cursor="Call"><span class="head__cta-dot" aria-hidden="true"></span><span>CALL<span class="head__cta-more"> / TEXT</span></span></a>
   </header>
 
-  <div class="site-index" id="site-index" role="dialog" aria-modal="true" aria-labelledby="site-index-title" hidden>
-    <div class="site-index__head">
-      <p class="site-index__kicker u-mono">STILLE® / THE PITCH</p>
-      <h2 class="site-index__title" id="site-index-title">Signal index.</h2>
-      <button class="site-index__close u-mono" type="button" data-index-close>
-        CLOSE <span aria-hidden="true">×</span>
-      </button>
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-labelledby="menu-title" hidden>
+    <div class="menu__top">
+      <p class="menu__kicker u-mono" id="menu-title">STILLE® / INDEX</p>
+      <button class="menu__close u-mono" type="button" data-menu-close>CLOSE <span aria-hidden="true">✕</span></button>
     </div>
-    <nav class="site-index__nav" aria-label="Story index">
-      <a class="site-index__link" href="#top" data-index-link>
-        <span class="site-index__number u-mono">00</span><span class="site-index__name">Threshold</span><span class="site-index__meta u-mono">THE HOOK</span>
-      </a>
-      <a class="site-index__link" href="#principle" data-index-link>
-        <span class="site-index__number u-mono">01</span><span class="site-index__name">Dead pages</span><span class="site-index__meta u-mono">THE PROBLEM</span>
-      </a>
-      <a class="site-index__link" href="#mono-one" data-index-link>
-        <span class="site-index__number u-mono">02</span><span class="site-index__name">Your site</span><span class="site-index__meta u-mono">EVERY PIECE</span>
-      </a>
-      <a class="site-index__link" href="#anatomy" data-index-link>
-        <span class="site-index__number u-mono">03</span><span class="site-index__name">What you get</span><span class="site-index__meta u-mono">FOUR PARTS</span>
-      </a>
-      <a class="site-index__link" href="#sweep" data-index-link>
-        <span class="site-index__number u-mono">04</span><span class="site-index__name">Craft</span><span class="site-index__meta u-mono">FEEL IT</span>
-      </a>
-      <a class="site-index__link" href="#material" data-index-link>
-        <span class="site-index__number u-mono">05</span><span class="site-index__name">Recent builds</span><span class="site-index__meta u-mono">DEMO FIRST</span>
-      </a>
-      <a class="site-index__link" href="#ledger" data-index-link>
-        <span class="site-index__number u-mono">06</span><span class="site-index__name">The deal</span><span class="site-index__meta u-mono">$500 FLAT</span>
-      </a>
-      <a class="site-index__link" href="#reserve" data-index-link>
-        <span class="site-index__number u-mono">07</span><span class="site-index__name">Let’s build yours</span><span class="site-index__meta u-mono">CALL / TEXT</span>
-      </a>
+    <nav class="menu__nav" aria-label="Sections">
+      <a class="menu__link" href="#top" data-menu-link><span class="menu__num u-mono">00</span><span class="menu__name">Start</span></a>
+      <a class="menu__link" href="#problem" data-menu-link><span class="menu__num u-mono">01</span><span class="menu__name">The problem</span></a>
+      <a class="menu__link" href="#site" data-menu-link><span class="menu__num u-mono">02</span><span class="menu__name">Your site</span></a>
+      <a class="menu__link" href="#process" data-menu-link><span class="menu__num u-mono">03</span><span class="menu__name">How it works</span></a>
+      <a class="menu__link" href="#builds" data-menu-link><span class="menu__num u-mono">04</span><span class="menu__name">Recent builds</span></a>
+      <a class="menu__link" href="#deal" data-menu-link><span class="menu__num u-mono">05</span><span class="menu__name">The deal</span></a>
+      <a class="menu__link" href="#reserve" data-menu-link><span class="menu__num u-mono">06</span><span class="menu__name">Let’s build yours</span></a>
     </nav>
-    <div class="site-index__foot u-mono">
-      <span>BUILT BY HAND / NO TEMPLATES</span><span>%VITE_PHONE_AREA% %VITE_PHONE_LINE%</span>
+    <div class="menu__foot u-mono">
+      <a href="tel:%VITE_PHONE_TEL%" data-phone>%VITE_PHONE_AREA% %VITE_PHONE_LINE%</a>
+      <a href="mailto:Stille.Builds@gmail.com">STILLE.BUILDS@GMAIL.COM</a>
+      <span>BUILT BY HAND / NO TEMPLATES</span>
     </div>
-  </div>
-
-  <div class="story-hud u-mono" aria-hidden="true">
-    <span class="story-hud__index" data-story-index>00</span>
-    <span class="story-hud__track"><span class="story-hud__progress"></span></span>
-    <span class="story-hud__name" data-story-name>THRESHOLD</span>
   </div>
 
   <main id="main">
 
-    <!-- 00 · THRESHOLD -->
-    <section class="s-hero" id="top" data-section="hero">
-      <div class="hero-aperture" aria-hidden="true">
-        <div class="hero-aperture__field" data-hero-aperture>
-          <span class="hero-aperture__ring hero-aperture__ring--outer"></span>
-          <span class="hero-aperture__ring hero-aperture__ring--inner"></span>
-          <span class="hero-aperture__scan"></span>
+    <!-- 00 · HERO -->
+    <section class="hero" id="top" data-theme="dark">
+      <div class="hero__stage" data-hero-stage>
+        <canvas class="hero__gl" data-hero-gl aria-hidden="true"></canvas>
+        <div class="hero__inner">
+          <div class="hero__top u-mono" aria-hidden="true">
+            <span>( HAND-BUILT WEBSITES )</span>
+            <span>FOR LOCAL BUSINESSES</span>
+            <span>%VITE_PHONE_AREA% %VITE_PHONE_LINE%</span>
+          </div>
+          <h1 class="hero__title" data-hero-title>
+            <span class="hero__row" data-fit-row><span class="hero__chunk" data-fit-chunk>I build</span> <span class="hero__chunk" data-fit-chunk>websites</span></span>
+            <span class="hero__row" data-fit-row><span class="hero__chunk" data-fit-chunk>that <em class="serif">feel</em></span></span>
+            <span class="hero__row" data-fit-row><span class="hero__chunk" data-fit-chunk>like this.</span></span>
+          </h1>
+          <div class="hero__foot">
+            <p class="hero__sub">For local businesses that don’t have one&nbsp;yet. No templates, built by&nbsp;hand.</p>
+            <ul class="hero__facts u-mono" aria-label="The deal at a glance">
+              <li><b>$500</b> FLAT</li>
+              <li><b>7 DAYS</b> TO LIVE</li>
+              <li><b>100%</b> YOURS</li>
+            </ul>
+            <p class="hero__scroll u-mono" aria-hidden="true"><span>SCROLL</span><span class="hero__scroll-line"></span></p>
+          </div>
         </div>
       </div>
-      <p class="hero-axis hero-axis--left u-mono" aria-hidden="true">STILLE / THE PITCH</p>
-      <p class="hero-axis hero-axis--right u-mono" aria-hidden="true">%VITE_PHONE_AREA% %VITE_PHONE_LINE% / TEXT ME</p>
-      <h1 class="hero-title">I build websites<br />that feel like this.</h1>
-      <p class="hero-label u-mono">NO TEMPLATES · BUILT BY HAND</p>
-      <div class="hero-thread-slot" data-thread-slot aria-hidden="true"></div>
-      <p class="hero-sub">For local businesses that don’t have one yet.</p>
-      <p class="scroll-cue u-mono" aria-hidden="true">SCROLL<span class="scroll-cue-tick"></span></p>
     </section>
 
-    <!-- 01 · THE FIRST WAVE -->
-    <section class="s-wave" id="principle" data-section="wave">
-      <div class="wave-inner">
-        <p class="eyebrow u-mono">01 · PRINCIPLE</p>
-        <h2 class="wave-title">Most local business sites are dead&nbsp;pages.</h2>
-        <div class="wave-copy">
-          <p class="wave-p" data-weight-scrub>Yours could open like this. Alive, fast, unmistakably yours: the kind of site that makes a customer trust you before they ever pick up the phone.</p>
-          <p class="wave-p" data-weight-scrub>No page builders. No template rental. Built by hand for your trade and your town, with your real reviews doing the talking.</p>
+    <div class="tapes" aria-hidden="true">
+      <div class="tape tape--orange" data-tape="1">
+        <div class="tape__track"><span>No templates ✶ Built by hand ✶ $500 flat ✶ Live in 7 days ✶ You own 100% ✶ Demo first ✶&nbsp;</span></div>
+      </div>
+      <div class="tape tape--bone" data-tape="-1">
+        <div class="tape__track"><span>Click-to-call ✶ Real reviews ✶ Found on Google ✶ Fast on every phone ✶ No contracts ✶&nbsp;</span></div>
+      </div>
+    </div>
+
+    <!-- 01 · THE PROBLEM -->
+    <section class="problem" id="problem" data-theme="light">
+      <div class="wrap">
+        <p class="eyebrow u-mono"><span>01</span>The problem</p>
+        <h2 class="problem__title display" data-scrub-words>
+          Most local business sites are <span class="strike" data-strike>dead&nbsp;pages.</span>
+        </h2>
+        <p class="problem__turn"><em class="serif" data-alive>Yours could feel alive.</em></p>
+        <div class="problem__copy">
+          <p data-rise>Yours could open like this. Alive, fast, unmistakably yours: the kind of site that makes a customer trust you before they ever pick up the phone.</p>
+          <p data-rise>No page builders. No template rental. Built by hand for your trade and your town, with your real reviews doing the talking.</p>
         </div>
-        <dl class="wave-stats">
-          <div class="stat">
-            <dt class="u-mono">PRICE</dt>
-            <dd class="stat-value u-mono" data-scramble>$500 flat</dd>
+        <dl class="stats">
+          <div class="stat" data-rise>
+            <dt class="u-mono">Price</dt>
+            <dd class="stat__value display"><span class="stat__unit">$</span><span data-count="500">500</span></dd>
+            <dd class="stat__note u-mono">FLAT. ONE TIME.</dd>
           </div>
-          <div class="stat">
-            <dt class="u-mono">LIVE IN</dt>
-            <dd class="stat-value u-mono" data-scramble>7 days</dd>
+          <div class="stat" data-rise>
+            <dt class="u-mono">Live in</dt>
+            <dd class="stat__value display"><span data-count="7">7</span><span class="stat__unit stat__unit--after">days</span></dd>
+            <dd class="stat__note u-mono">FROM YES TO LIVE.</dd>
           </div>
-          <div class="stat">
-            <dt class="u-mono">YOU OWN</dt>
-            <dd class="stat-value u-mono" data-scramble>100 %</dd>
+          <div class="stat" data-rise>
+            <dt class="u-mono">You own</dt>
+            <dd class="stat__value display"><span data-count="100">100</span><span class="stat__unit stat__unit--after">%</span></dd>
+            <dd class="stat__note u-mono">DOMAIN, FILES, EVERYTHING.</dd>
           </div>
         </dl>
       </div>
     </section>
 
-    <!-- 02 · MONO ONE — PRODUCT REVEAL -->
-    <section class="s-reveal" id="mono-one" data-section="reveal">
-      <div class="reveal-inner">
-        <header class="reveal-head">
-          <p class="eyebrow u-mono">02 · YOUR SITE</p>
-          <h2 class="reveal-title">Every piece,<br />built for&nbsp;you.</h2>
-          <p class="reveal-sub">Click-to-call. Your reviews. Your services. Hand-assembled into one fast page that works as hard as you do.</p>
+    <!-- 02 · YOUR SITE — 3D PHONE -->
+    <section class="site" id="site" data-theme="dark">
+      <div class="site__pin" data-site-pin>
+        <canvas class="site__gl" data-phone-gl aria-hidden="true"></canvas>
+        <div class="site__intro" data-site-intro>
+          <p class="eyebrow u-mono"><span>02</span>Your site</p>
+          <h2 class="site__title display">Every piece, <em class="serif">built</em> for&nbsp;you.</h2>
+          <p class="site__sub">Click-to-call. Your reviews. Your services. Hand-assembled into one fast page that works as hard as you do.</p>
+        </div>
+        <ol class="features" data-features>
+          <li class="feature" data-feature>
+            <p class="feature__num u-mono">01 / 04</p>
+            <h3 class="feature__title display">Click-to-call</h3>
+            <p class="feature__lede">One tap, and their phone is ringing yours.</p>
+            <ul class="feature__specs u-mono"><li>Tap to call</li><li>Tap to text</li><li>Zero hunting</li></ul>
+            <p class="feature__quote">“If they have to hunt for your number, they call the next guy.”</p>
+          </li>
+          <li class="feature" data-feature>
+            <p class="feature__num u-mono">02 / 04</p>
+            <h3 class="feature__title display">Reviews that sell</h3>
+            <p class="feature__lede">Your five stars, front and center.</p>
+            <ul class="feature__specs u-mono"><li>Real Google reviews</li><li>Stars they can verify</li><li>Proof over promises</li></ul>
+            <p class="feature__quote">“You already earned the reviews. Let them do the talking.”</p>
+          </li>
+          <li class="feature" data-feature>
+            <p class="feature__num u-mono">03 / 04</p>
+            <h3 class="feature__title display">Found on Google</h3>
+            <p class="feature__lede">Show up when your town searches.</p>
+            <ul class="feature__specs u-mono"><li>Google Maps pin</li><li>Your trade + your town</li><li>Local SEO built in</li></ul>
+            <p class="feature__quote">“The best contractor in town is invisible without this.”</p>
+          </li>
+          <li class="feature" data-feature>
+            <p class="feature__num u-mono">04 / 04</p>
+            <h3 class="feature__title display">Fast on every phone</h3>
+            <p class="feature__lede">Because that’s where your customers are.</p>
+            <ul class="feature__specs u-mono"><li>Loads in a blink</li><li>Thumb-sized buttons</li><li>No pinching, no squinting</li></ul>
+            <p class="feature__quote">“Most people will only ever see your site on a phone.”</p>
+          </li>
+        </ol>
+        <div class="site__rail u-mono" aria-hidden="true">
+          <span class="site__rail-track"><span data-site-progress></span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · HOW IT WORKS -->
+    <section class="process" id="process" data-theme="light">
+      <div class="wrap">
+        <header class="process__head">
+          <p class="eyebrow u-mono"><span>03</span>How it works</p>
+          <h2 class="process__title display">Built before you even&nbsp;<em class="serif">call.</em></h2>
         </header>
-        <figure class="speaker-stage" aria-label="Technical drawing of a website assembling itself from its parts">
-          <span class="speaker-aura" aria-hidden="true"></span>
-          <!-- Winning speaker SVG lands here -->
-          <svg class="speaker-svg" viewBox="0 0 600 1100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <!-- frame ring: horizontal anodized sheen, bright band left-of-center (light upper-left) -->
-    <linearGradient id="d-mBody" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0"    stop-color="#202632"/>
-      <stop offset="0.08" stop-color="#303746"/>
-      <stop offset="0.22" stop-color="#3A4150"/>
-      <stop offset="0.36" stop-color="#353D4B"/>
-      <stop offset="0.55" stop-color="#272D39"/>
-      <stop offset="0.78" stop-color="#1A1F2B"/>
-      <stop offset="1"    stop-color="#141824"/>
-    </linearGradient>
-    <linearGradient id="d-mBodyIce" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0"    stop-color="#A8B0BF"/>
-      <stop offset="0.08" stop-color="#C7CEDB"/>
-      <stop offset="0.22" stop-color="#D9DEE8"/>
-      <stop offset="0.36" stop-color="#D5DBE5"/>
-      <stop offset="0.55" stop-color="#C0C7D3"/>
-      <stop offset="0.78" stop-color="#B3BBC9"/>
-      <stop offset="1"    stop-color="#A8B0BF"/>
-    </linearGradient>
-    <!-- screen face: cold glass, dark toward the foot -->
-    <linearGradient id="d-screen" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0"   stop-color="#131826"/>
-      <stop offset="0.4" stop-color="#0D1119"/>
-      <stop offset="1"   stop-color="#080B12"/>
-    </linearGradient>
-    <!-- UI panels: one grade up from the glass -->
-    <linearGradient id="d-panel" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0"    stop-color="#1C2230"/>
-      <stop offset="0.55" stop-color="#161B26"/>
-      <stop offset="1"    stop-color="#10141D"/>
-    </linearGradient>
-    <!-- footer bar: sits in screen shadow, one grade darker -->
-    <linearGradient id="d-plinth" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0"    stop-color="#121620"/>
-      <stop offset="0.15" stop-color="#222936"/>
-      <stop offset="0.5"  stop-color="#1A1F2B"/>
-      <stop offset="1"    stop-color="#0A0D15"/>
-    </linearGradient>
-    <!-- top edge catching the key light -->
-    <linearGradient id="d-edge" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0"    stop-color="#E9EEF6" stop-opacity="0.12"/>
-      <stop offset="0.12" stop-color="#E9EEF6" stop-opacity="0.55"/>
-      <stop offset="0.30" stop-color="#E9EEF6" stop-opacity="0.32"/>
-      <stop offset="0.65" stop-color="#E9EEF6" stop-opacity="0.10"/>
-      <stop offset="1"    stop-color="#E9EEF6" stop-opacity="0.03"/>
-    </linearGradient>
-    <radialGradient id="d-floor" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0"    stop-color="#000000" stop-opacity="0.5"/>
-      <stop offset="0.55" stop-color="#000000" stop-opacity="0.26"/>
-      <stop offset="1"    stop-color="#000000" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-
-  <!-- =========================== SHELL ==========================
-       Phone frame + screen bezel. The ring is the casting; the
-       glass is the page everything else assembles onto. -->
-  <g id="g-shell" data-part="shell" transform="translate(0,0)">
-    <!-- solid -->
-    <ellipse class="solid" cx="300" cy="938" rx="128" ry="9" fill="url(#d-floor)"/>
-    <ellipse class="solid" cx="300" cy="936.5" rx="84" ry="4.5" fill="#000000" opacity="0.3"/>
-    <path class="solid shell-fill" fill-rule="evenodd" fill="url(#d-mBody)"
-          d="M 195 862 L 195 358 A 38 38 0 0 1 233 320 L 367 320 A 38 38 0 0 1 405 358 L 405 862 A 38 38 0 0 1 367 900 L 233 900 A 38 38 0 0 1 195 862 Z
-             M 207 861 L 207 359 A 27 27 0 0 1 234 332 L 366 332 A 27 27 0 0 1 393 359 L 393 861 A 27 27 0 0 1 366 888 L 234 888 A 27 27 0 0 1 207 861 Z"/>
-    <path class="solid" fill="url(#d-screen)"
-          d="M 207 861 L 207 359 A 27 27 0 0 1 234 332 L 366 332 A 27 27 0 0 1 393 359 L 393 861 A 27 27 0 0 1 366 888 L 234 888 A 27 27 0 0 1 207 861 Z"/>
-    <path class="solid" fill="none" stroke="#000000" stroke-opacity="0.45" stroke-width="1.4"
-          d="M 207 861 L 207 359 A 27 27 0 0 1 234 332 L 366 332 A 27 27 0 0 1 393 359 L 393 861 A 27 27 0 0 1 366 888 L 234 888 A 27 27 0 0 1 207 861 Z"/>
-    <!-- antenna seams in the casting -->
-    <line class="solid" x1="195" y1="508" x2="207" y2="508" stroke="#05070C" stroke-opacity="0.55" stroke-width="1"/>
-    <line class="solid" x1="393" y1="508" x2="405" y2="508" stroke="#05070C" stroke-opacity="0.55" stroke-width="1"/>
-    <line class="solid" x1="195" y1="760" x2="207" y2="760" stroke="#05070C" stroke-opacity="0.55" stroke-width="1"/>
-    <line class="solid" x1="393" y1="760" x2="405" y2="760" stroke="#05070C" stroke-opacity="0.55" stroke-width="1"/>
-    <line class="solid" x1="278" y1="326" x2="322" y2="326" stroke="#05070C" stroke-opacity="0.6" stroke-width="2.5"/>
-    <circle class="solid" cx="336" cy="326" r="2.2" fill="#05070C"/>
-    <circle class="solid" cx="335.3" cy="325.3" r="0.6" fill="#E9EEF6" opacity="0.35"/>
-    <line class="solid" x1="272" y1="894" x2="328" y2="894" stroke="#E9EEF6" stroke-opacity="0.28" stroke-width="2"/>
-    <path class="solid" d="M 195 386 L 195 358 A 38 38 0 0 1 233 320 L 367 320 A 38 38 0 0 1 405 358 L 405 378" fill="none"
-          stroke="url(#d-edge)" stroke-width="1.1" opacity="0.9"/>
-    <!-- wire -->
-    <path class="wire" vector-effect="non-scaling-stroke" d="M 195 862 L 195 358 A 38 38 0 0 1 233 320 L 367 320 A 38 38 0 0 1 405 358 L 405 862 A 38 38 0 0 1 367 900 L 233 900 A 38 38 0 0 1 195 862 Z"/>
-    <path class="wire w2" vector-effect="non-scaling-stroke" d="M 207 861 L 207 359 A 27 27 0 0 1 234 332 L 366 332 A 27 27 0 0 1 393 359 L 393 861 A 27 27 0 0 1 366 888 L 234 888 A 27 27 0 0 1 207 861 Z"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="278" y1="326" x2="322" y2="326"/>
-    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="336" cy="326" r="2"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="192.7" y1="424" x2="192.7" y2="452"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="192.7" y1="464" x2="192.7" y2="500"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="407.3" y1="440" x2="407.3" y2="488"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="272" y1="894" x2="328" y2="894"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="187" y1="610" x2="195" y2="610"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="405" y1="610" x2="413" y2="610"/>
-  </g>
-
-  <!-- ========================== DRIVER ==========================
-       Header bar: mark on the left, click-to-call pill on the
-       right. The pill is the one live surface on the page. -->
-  <g id="g-driver" data-part="driver" transform="translate(0,0)">
-    <!-- solid -->
-    <rect class="solid" x="213" y="338" width="174" height="54" rx="7" fill="url(#d-panel)"/>
-    <line class="solid" x1="218" y1="338.5" x2="382" y2="338.5" stroke="#E9EEF6" stroke-opacity="0.07" stroke-width="0.8"/>
-    <line class="solid" x1="213" y1="392.4" x2="387" y2="392.4" stroke="#000000" stroke-opacity="0.5" stroke-width="1"/>
-    <rect class="solid" x="227" y="356" width="18" height="18" rx="3" fill="#2A3242"/>
-    <line class="solid" x1="231" y1="370" x2="241" y2="360" stroke="#E9EEF6" stroke-opacity="0.55" stroke-width="1.4"/>
-    <rect class="solid" x="250" y="347" width="133" height="36" rx="18" style="fill:var(--signal)"/>
-    <path class="solid" transform="translate(264 363.5)" fill="none" style="stroke:var(--void)" stroke-width="1.2"
-          d="M -5.4 -2.2 L -3.4 -4.2 A 1.1 1.1 0 0 1 -1.9 -4.2 L -0.6 -2.9 A 1.1 1.1 0 0 1 -0.6 -1.4 L -1.5 -0.5 A 8.2 8.2 0 0 0 2.1 3.1 L 3 2.2 A 1.1 1.1 0 0 1 4.5 2.2 L 5.8 3.5 A 1.1 1.1 0 0 1 5.8 5 L 3.8 7 A 2 2 0 0 1 1.6 7.4 A 13.6 13.6 0 0 1 -5.8 0 A 2 2 0 0 1 -5.4 -2.2 Z"/>
-    <text class="lbl solid" x="276" y="368.5" style="fill:var(--void);letter-spacing:0.02em">%VITE_PHONE_AREA% %VITE_PHONE_LINE%</text>
-    <!-- wire -->
-    <rect class="wire" vector-effect="non-scaling-stroke" x="213" y="338" width="174" height="54" rx="7"/>
-    <rect class="wire w2" vector-effect="non-scaling-stroke" x="227" y="356" width="18" height="18" rx="3"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="231" y1="370" x2="241" y2="360"/>
-    <rect class="wire" vector-effect="non-scaling-stroke" x="250" y="347" width="133" height="36" rx="18"/>
-    <path class="wire w2" vector-effect="non-scaling-stroke" transform="translate(264 363.5)"
-          d="M -5.4 -2.2 L -3.4 -4.2 A 1.1 1.1 0 0 1 -1.9 -4.2 L -0.6 -2.9 A 1.1 1.1 0 0 1 -0.6 -1.4 L -1.5 -0.5 A 8.2 8.2 0 0 0 2.1 3.1 L 3 2.2 A 1.1 1.1 0 0 1 4.5 2.2 L 5.8 3.5 A 1.1 1.1 0 0 1 5.8 5 L 3.8 7 A 2 2 0 0 1 1.6 7.4 A 13.6 13.6 0 0 1 -5.8 0 A 2 2 0 0 1 -5.4 -2.2 Z"/>
-  </g>
-
-  <!-- ========================= INTERNALS ========================
-       The page itself: review row, two service cards, running
-       copy. Skeleton in wire; surfaces arrive with assembly. -->
-  <g id="g-internals" data-part="internals" transform="translate(0,0)">
-    <!-- solid -->
-    <path class="solid" transform="translate(244 442)" fill="#CBD2DF" fill-opacity="0.92"
-          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
-    <path class="solid" transform="translate(272 442)" fill="#CBD2DF" fill-opacity="0.92"
-          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
-    <path class="solid" transform="translate(300 442)" fill="#CBD2DF" fill-opacity="0.92"
-          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
-    <path class="solid" transform="translate(328 442)" fill="#CBD2DF" fill-opacity="0.92"
-          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
-    <path class="solid" transform="translate(356 442)" style="fill:var(--signal)"
-          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
-    <line class="solid" x1="233" y1="468" x2="367" y2="468" stroke="#E9EEF6" stroke-opacity="0.42" stroke-width="2"/>
-    <line class="solid" x1="233" y1="480" x2="322" y2="480" stroke="#E9EEF6" stroke-opacity="0.24" stroke-width="2"/>
-    <rect class="solid" x="221" y="500" width="72" height="110" rx="6" fill="url(#d-panel)"/>
-    <rect class="solid" x="307" y="500" width="72" height="110" rx="6" fill="url(#d-panel)"/>
-    <circle class="solid" cx="240" cy="527" r="9" fill="none" stroke="#E9EEF6" stroke-opacity="0.5" stroke-width="1.1"/>
-    <circle class="solid" cx="326" cy="527" r="9" fill="none" stroke="#E9EEF6" stroke-opacity="0.5" stroke-width="1.1"/>
-    <circle class="solid" cx="240" cy="527" r="1.8" fill="#E9EEF6" fill-opacity="0.5"/>
-    <circle class="solid" cx="326" cy="527" r="1.8" fill="#E9EEF6" fill-opacity="0.5"/>
-    <line class="solid" x1="231" y1="556" x2="283" y2="556" stroke="#E9EEF6" stroke-opacity="0.45" stroke-width="2"/>
-    <line class="solid" x1="231" y1="570" x2="269" y2="570" stroke="#E9EEF6" stroke-opacity="0.26" stroke-width="2"/>
-    <line class="solid" x1="231" y1="590" x2="255" y2="590" stroke="#E9EEF6" stroke-opacity="0.38" stroke-width="2"/>
-    <line class="solid" x1="317" y1="556" x2="369" y2="556" stroke="#E9EEF6" stroke-opacity="0.45" stroke-width="2"/>
-    <line class="solid" x1="317" y1="570" x2="355" y2="570" stroke="#E9EEF6" stroke-opacity="0.26" stroke-width="2"/>
-    <line class="solid" x1="317" y1="590" x2="341" y2="590" stroke="#E9EEF6" stroke-opacity="0.38" stroke-width="2"/>
-    <line class="solid" x1="221" y1="654" x2="379" y2="654" stroke="#E9EEF6" stroke-opacity="0.34" stroke-width="2"/>
-    <line class="solid" x1="221" y1="672" x2="356" y2="672" stroke="#E9EEF6" stroke-opacity="0.3" stroke-width="2"/>
-    <line class="solid" x1="221" y1="690" x2="379" y2="690" stroke="#E9EEF6" stroke-opacity="0.32" stroke-width="2"/>
-    <line class="solid" x1="221" y1="708" x2="332" y2="708" stroke="#E9EEF6" stroke-opacity="0.28" stroke-width="2"/>
-    <line class="solid" x1="221" y1="736" x2="300" y2="736" stroke="#E9EEF6" stroke-opacity="0.2" stroke-width="2"/>
-    <line class="solid" x1="221" y1="754" x2="281" y2="754" stroke="#E9EEF6" stroke-opacity="0.18" stroke-width="2"/>
-    <line class="solid" x1="221" y1="772" x2="259" y2="772" stroke="#E9EEF6" stroke-opacity="0.16" stroke-width="2"/>
-    <!-- wire -->
-    <line class="wire w3" vector-effect="non-scaling-stroke" x1="221" y1="424" x2="221" y2="776" stroke-dasharray="5 4"/>
-    <line class="wire w3" vector-effect="non-scaling-stroke" x1="379" y1="424" x2="379" y2="776" stroke-dasharray="5 4"/>
-    <path class="wire" vector-effect="non-scaling-stroke" transform="translate(244 442)"
-          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
-    <path class="wire" vector-effect="non-scaling-stroke" transform="translate(272 442)"
-          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
-    <path class="wire" vector-effect="non-scaling-stroke" transform="translate(300 442)"
-          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
-    <path class="wire" vector-effect="non-scaling-stroke" transform="translate(328 442)"
-          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
-    <path class="wire" vector-effect="non-scaling-stroke" transform="translate(356 442)"
-          d="M 0 -11 L 2.7 -3.72 L 10.46 -3.4 L 4.37 1.42 L 6.47 8.9 L 0 4.6 L -6.47 8.9 L -4.37 1.42 L -10.46 -3.4 L -2.7 -3.72 Z"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="233" y1="468" x2="367" y2="468"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="233" y1="480" x2="322" y2="480"/>
-    <rect class="wire" vector-effect="non-scaling-stroke" x="221" y="500" width="72" height="110" rx="6"/>
-    <rect class="wire" vector-effect="non-scaling-stroke" x="307" y="500" width="72" height="110" rx="6"/>
-    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="240" cy="527" r="9"/>
-    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="326" cy="527" r="9"/>
-    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="240" cy="527" r="1.8"/>
-    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="326" cy="527" r="1.8"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="231" y1="556" x2="283" y2="556"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="231" y1="570" x2="269" y2="570"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="231" y1="590" x2="255" y2="590"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="317" y1="556" x2="369" y2="556"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="317" y1="570" x2="355" y2="570"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="317" y1="590" x2="341" y2="590"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="221" y1="654" x2="379" y2="654"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="221" y1="672" x2="356" y2="672"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="221" y1="690" x2="379" y2="690"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="221" y1="708" x2="332" y2="708"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="221" y1="736" x2="300" y2="736"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="221" y1="754" x2="281" y2="754"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="221" y1="772" x2="259" y2="772"/>
-  </g>
-
-  <!-- ========================== PLINTH ==========================
-       Footer bar: map pin, address skeleton, directions tick.
-       The part Google reads first. -->
-  <g id="g-plinth" data-part="plinth" transform="translate(0,0)">
-    <!-- solid -->
-    <path class="solid" fill="url(#d-plinth)"
-          d="M 207 830 L 393 830 L 393 861 A 27 27 0 0 1 366 888 L 234 888 A 27 27 0 0 1 207 861 Z"/>
-    <line class="solid" x1="207" y1="830.5" x2="393" y2="830.5" stroke="#000000" stroke-opacity="0.5" stroke-width="1"/>
-    <line class="solid" x1="212" y1="831.6" x2="388" y2="831.6" stroke="#E9EEF6" stroke-opacity="0.08" stroke-width="0.7"/>
-    <path class="solid" transform="translate(238 857)" fill="none" stroke="#E9EEF6" stroke-opacity="0.8" stroke-width="1.1"
-          d="M 0 -9 A 6.6 6.6 0 0 1 6.6 -2.4 C 6.6 1.6 0 9 0 9 C 0 9 -6.6 1.6 -6.6 -2.4 A 6.6 6.6 0 0 1 0 -9 Z"/>
-    <circle class="solid" cx="238" cy="854.6" r="1.6" fill="#E9EEF6" fill-opacity="0.6"/>
-    <line class="solid" x1="254" y1="852" x2="345" y2="852" stroke="#E9EEF6" stroke-opacity="0.5" stroke-width="2"/>
-    <line class="solid" x1="254" y1="864" x2="316" y2="864" stroke="#E9EEF6" stroke-opacity="0.28" stroke-width="2"/>
-    <path class="solid" fill="none" stroke="#E9EEF6" stroke-opacity="0.5" stroke-width="1.1"
-          d="M 364 863 L 373 854 M 366.5 854 H 373 V 860.5"/>
-    <!-- wire -->
-    <path class="wire" vector-effect="non-scaling-stroke" d="M 207 830 L 393 830 L 393 861 A 27 27 0 0 1 366 888 L 234 888 A 27 27 0 0 1 207 861 Z"/>
-    <path class="wire w2" vector-effect="non-scaling-stroke" transform="translate(238 857)"
-          d="M 0 -9 A 6.6 6.6 0 0 1 6.6 -2.4 C 6.6 1.6 0 9 0 9 C 0 9 -6.6 1.6 -6.6 -2.4 A 6.6 6.6 0 0 1 0 -9 Z"/>
-    <circle class="wire w2" vector-effect="non-scaling-stroke" cx="238" cy="854.6" r="2.4"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="254" y1="852" x2="345" y2="852"/>
-    <line class="wire w2" vector-effect="non-scaling-stroke" x1="254" y1="864" x2="316" y2="864"/>
-    <path class="wire w2" vector-effect="non-scaling-stroke" d="M 364 863 L 373 854 M 366.5 854 H 373 V 860.5"/>
-  </g>
-
-  <!-- ========================== LABELS ==========================
-       Drawn in exploded-space coordinates; the timeline retires
-       the whole annotation layer before assembly completes. -->
-  <g id="g-labels" data-part="labels">
-    <line class="wire w3" vector-effect="non-scaling-stroke" x1="300" y1="64" x2="300" y2="1072"
-          stroke-dasharray="12 5 3 5"/>
-
-    <circle class="marker lbl" cx="407" cy="113" r="2.2"/>
-    <line class="wire signal" vector-effect="non-scaling-stroke" x1="409" y1="113" x2="444" y2="113"/>
-    <text class="lbl"      x="452" y="109.5">CLICK-TO-CALL</text>
-    <text class="lbl dim"  x="452" y="123">ONE TAP TO RING</text>
-    <text class="lbl dim2" x="452" y="136.5">HEADER &#183; FIXED</text>
-
-    <circle class="marker lbl" cx="211" cy="561" r="2.2" style="animation-delay:.7s"/>
-    <line class="wire signal" vector-effect="non-scaling-stroke" x1="209" y1="561" x2="160" y2="561"/>
-    <text class="lbl"     x="152" y="557.5" text-anchor="end">YOUR REVIEWS</text>
-    <text class="lbl dim" x="152" y="571"   text-anchor="end">FIVE-STAR PROOF</text>
-
-    <circle class="marker lbl" cx="373" cy="677" r="2.2" style="animation-delay:1.4s"/>
-    <line class="wire signal" vector-effect="non-scaling-stroke" x1="375" y1="677" x2="420" y2="677"/>
-    <text class="lbl"      x="428" y="673.5">YOUR SERVICES</text>
-    <text class="lbl dim"  x="428" y="687">PRICED AND LISTED</text>
-    <text class="lbl dim2" x="428" y="700.5">CARDS &#215; 2</text>
-
-    <circle class="marker lbl" cx="214" cy="1025" r="2.2" style="animation-delay:2.1s"/>
-    <line class="wire signal" vector-effect="non-scaling-stroke" x1="212" y1="1025" x2="160" y2="1025"/>
-    <text class="lbl"     x="152" y="1021.5" text-anchor="end">FOUND ON GOOGLE</text>
-    <text class="lbl dim" x="152" y="1035"   text-anchor="end">MAP PIN + ADDRESS</text>
-  </g>
-          </svg>
-        </figure>
-      </div>
-    </section>
-
-    <!-- 03 · ANATOMY — FILMSTRIP -->
-    <section class="s-anatomy" id="anatomy" data-section="anatomy">
-      <p class="eyebrow u-mono anatomy-eyebrow">03 · WHAT YOU GET</p>
-      <p class="film-status u-mono" aria-hidden="true"><span data-film-current>01</span> / 04</p>
-      <div class="film-viewport" data-cursor="drag">
-        <div class="film-track">
-          <article class="film-panel">
-            <p class="panel-index u-mono" aria-hidden="true">01</p>
-            <h3 class="panel-title">Click-to-call</h3>
-            <p class="panel-lede">One tap, and their phone is ringing yours.</p>
-            <div class="panel-art" data-art="driver" aria-hidden="true">
-              <svg viewBox="0 0 400 220" fill="none" stroke="currentColor" stroke-width="1">
-                <rect class="wire" x="120" y="58" width="32" height="32" rx="10" />
-                <rect class="wire" x="228" y="58" width="32" height="32" rx="10" />
-                <path class="wire" d="M136 58C150 30 230 30 244 58" />
-                <path class="wire" d="M152 74C165 52 215 52 228 74" opacity="0.5" />
-                <path class="wire" d="M270 54a28 28 0 0 1 12 22" opacity="0.6" />
-                <path class="wire" d="M282 44a42 42 0 0 1 18 32" opacity="0.4" />
-                <path class="wire" d="M190 98v34" stroke-dasharray="2 4" opacity="0.5" />
-                <rect class="wire" x="130" y="140" width="120" height="32" rx="16" />
-                <path class="wire" d="M148 156h48" opacity="0.5" />
-                <circle class="wire" cx="224" cy="150" r="12" />
-                <circle class="wire" cx="224" cy="150" r="24" stroke-dasharray="2 4" opacity="0.5" />
-                <circle class="wire" cx="224" cy="150" r="34" stroke-dasharray="2 6" opacity="0.4" />
-              </svg>
+        <div class="cards">
+          <article class="card card--black" data-card>
+            <p class="card__num display" aria-hidden="true">01</p>
+            <div class="card__body">
+              <p class="card__kicker u-mono">Step 01</p>
+              <h3 class="card__title display">I find you.</h3>
+              <p class="card__text">Every build starts the same way: a business with great reviews and no website. That’s you.</p>
             </div>
-            <ul class="panel-specs u-mono">
-              <li>TAP TO CALL</li>
-              <li>TAP TO TEXT</li>
-              <li>ZERO HUNTING</li>
-            </ul>
-            <p class="panel-quote">“If they have to hunt for your number, they call the next guy.”</p>
+            <svg class="card__art" viewBox="0 0 200 200" aria-hidden="true"><circle cx="86" cy="86" r="52"/><path d="M124 124l48 48"/><path d="M62 88l14 14 30-32"/></svg>
           </article>
-          <article class="film-panel">
-            <p class="panel-index u-mono" aria-hidden="true">02</p>
-            <h3 class="panel-title">Reviews that sell</h3>
-            <p class="panel-lede">Your five stars, front and center.</p>
-            <div class="panel-art" data-art="crossover" aria-hidden="true">
-              <svg viewBox="0 0 400 220" fill="none" stroke="currentColor" stroke-width="1">
-                <path class="wire" d="M96 44l3.4 9.4 10 .2-8 6.2 2.8 9.6-8.2-5.8-8.2 5.8 2.8-9.6-8-6.2 10-.2z" />
-                <path class="wire" d="M148 44l3.4 9.4 10 .2-8 6.2 2.8 9.6-8.2-5.8-8.2 5.8 2.8-9.6-8-6.2 10-.2z" />
-                <path class="wire" d="M200 44l3.4 9.4 10 .2-8 6.2 2.8 9.6-8.2-5.8-8.2 5.8 2.8-9.6-8-6.2 10-.2z" />
-                <path class="wire" d="M200 46v17M196.5 54v12M203.5 54v12" />
-                <path class="wire" d="M252 44l3.4 9.4 10 .2-8 6.2 2.8 9.6-8.2-5.8-8.2 5.8 2.8-9.6-8-6.2 10-.2z" />
-                <path class="wire" d="M304 44l3.4 9.4 10 .2-8 6.2 2.8 9.6-8.2-5.8-8.2 5.8 2.8-9.6-8-6.2 10-.2z" />
-                <path class="wire" d="M200 76v18" stroke-dasharray="2 4" opacity="0.5" />
-                <rect class="wire" x="124" y="100" width="152" height="76" rx="6" />
-                <path class="wire" d="M140 120h72M140 134h104M140 148h88" opacity="0.5" />
-                <circle class="wire" cx="252" cy="158" r="10" />
-                <path class="wire" d="M247 158l4 4 7-8" opacity="0.6" />
-              </svg>
+          <article class="card card--orange" data-card>
+            <p class="card__num display" aria-hidden="true">02</p>
+            <div class="card__body">
+              <p class="card__kicker u-mono">Step 02</p>
+              <h3 class="card__title display">I build your demo first.</h3>
+              <p class="card__text">Before we ever talk. You judge the real thing, on your own phone, instead of a promise.</p>
             </div>
-            <ul class="panel-specs u-mono">
-              <li>REAL GOOGLE REVIEWS</li>
-              <li>STARS THEY CAN VERIFY</li>
-              <li>PROOF OVER PROMISES</li>
-            </ul>
-            <p class="panel-quote">“You already earned the reviews. Let them do the talking.”</p>
+            <svg class="card__art" viewBox="0 0 200 200" aria-hidden="true"><rect x="58" y="20" width="84" height="160" rx="16"/><path d="M84 34h32"/><path d="M74 62h52M74 80h36"/><rect x="74" y="104" width="52" height="22" rx="11"/><path d="M74 146h52M74 160h28"/></svg>
           </article>
-          <article class="film-panel">
-            <p class="panel-index u-mono" aria-hidden="true">03</p>
-            <h3 class="panel-title">Found on Google</h3>
-            <p class="panel-lede">Show up when your town searches.</p>
-            <div class="panel-art" data-art="shell" aria-hidden="true">
-              <svg viewBox="0 0 400 220" fill="none" stroke="currentColor" stroke-width="1">
-                <rect class="wire" x="100" y="32" width="200" height="28" rx="14" />
-                <circle class="wire" cx="121" cy="46" r="7" />
-                <path class="wire" d="M126 51l8 8" />
-                <path class="wire" d="M144 46h88" opacity="0.5" />
-                <path class="wire" d="M200 68v26" stroke-dasharray="2 4" opacity="0.6" />
-                <path class="wire" d="M200 162c-14-14-22-26-22-38a22 22 0 0 1 44 0c0 12-8 24-22 38z" />
-                <circle class="wire" cx="200" cy="124" r="8" />
-                <circle class="wire" cx="200" cy="170" r="13" stroke-dasharray="2 4" opacity="0.5" />
-                <path class="wire" d="M60 170h280" opacity="0.5" />
-                <path class="wire" d="M108 204l56-70" opacity="0.45" />
-                <path class="wire" d="M258 140l46 64" opacity="0.45" />
-                <path class="wire" d="M60 184h280" stroke-dasharray="1 5" opacity="0.4" />
-              </svg>
+          <article class="card card--black" data-card>
+            <p class="card__num display" aria-hidden="true">03</p>
+            <div class="card__body">
+              <p class="card__kicker u-mono">Step 03</p>
+              <h3 class="card__title display">You decide.</h3>
+              <p class="card__text">Love it? It goes live on your domain within 7 days. Don’t? You owe me nothing.</p>
             </div>
-            <ul class="panel-specs u-mono">
-              <li>GOOGLE MAPS PIN</li>
-              <li>YOUR TRADE + YOUR TOWN</li>
-              <li>LOCAL SEO BUILT IN</li>
-            </ul>
-            <p class="panel-quote">“The best contractor in town is invisible without this.”</p>
+            <svg class="card__art" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="74"/><path d="M62 102l26 26 52-56"/></svg>
           </article>
-          <article class="film-panel">
-            <p class="panel-index u-mono" aria-hidden="true">04</p>
-            <h3 class="panel-title">Fast on every phone</h3>
-            <p class="panel-lede">Because that’s where your customers are.</p>
-            <div class="panel-art" data-art="plinth" aria-hidden="true">
-              <svg viewBox="0 0 400 220" fill="none" stroke="currentColor" stroke-width="1">
-                <rect class="wire" x="76" y="96" width="44" height="80" rx="6" />
-                <path class="wire" d="M86 108h24" />
-                <rect class="wire" x="86" y="116" width="24" height="16" />
-                <path class="wire" d="M86 142h24M86 150h17" opacity="0.5" />
-                <rect class="wire" x="150" y="76" width="76" height="100" rx="8" />
-                <path class="wire" d="M162 92h52" />
-                <rect class="wire" x="162" y="100" width="52" height="28" />
-                <path class="wire" d="M162 140h52M162 148h38" opacity="0.5" />
-                <rect class="wire" x="248" y="84" width="100" height="76" rx="4" />
-                <path class="wire" d="M260 100h64" />
-                <rect class="wire" x="260" y="108" width="64" height="24" />
-                <path class="wire" d="M260 142h64M260 150h48" opacity="0.5" />
-                <path class="wire" d="M244 160l-14 16h136l-14-16" />
-                <path class="wire" d="M36 112h24M28 132h32M36 152h24" opacity="0.5" />
-                <path class="wire" d="M130 90h12M126 106h16M234 94h10M230 110h14" opacity="0.45" />
-                <path class="wire" d="M60 190h296" stroke-dasharray="1 5" opacity="0.4" />
-              </svg>
+          <article class="card card--orange" data-card>
+            <p class="card__num display" aria-hidden="true">04</p>
+            <div class="card__body">
+              <p class="card__kicker u-mono">Step 04</p>
+              <h3 class="card__title display">You own it.</h3>
+              <p class="card__text">Domain, files, everything. Hosting is $25 a month, cancel anytime. No contracts, ever.</p>
             </div>
-            <ul class="panel-specs u-mono">
-              <li>LOADS IN A BLINK</li>
-              <li>THUMB-SIZED BUTTONS</li>
-              <li>NO PINCHING, NO SQUINTING</li>
-            </ul>
-            <p class="panel-quote">“Most people will only ever see your site on a phone.”</p>
+            <svg class="card__art" viewBox="0 0 200 200" aria-hidden="true"><rect x="40" y="92" width="120" height="86" rx="10"/><path d="M68 92V64a32 32 0 0 1 64 0v28"/><circle cx="100" cy="130" r="10"/><path d="M100 140v16"/></svg>
           </article>
         </div>
-      </div>
-    </section>
-
-    <!-- 04 · THE SWEEP -->
-    <section class="s-sweep" id="sweep" data-section="sweep">
-      <div class="sweep-inner">
-        <p class="eyebrow u-mono">04 · CRAFT</p>
-        <h2 class="sweep-title">Feel the difference.</h2>
-        <p class="sweep-sub">Drag it. Fling it. Turn the sound on. This is the level of detail I put into every site, including yours.</p>
-        <figure class="sweep-chart" role="group" aria-label="Interactive frequency response chart, 20 hertz to 20 kilohertz, flat within plus or minus 0.5 decibels">
-          <div class="sweep-plot" data-sweep-plot>
-            <button class="sweep-handle" type="button" role="slider" data-cursor="drag" aria-label="Frequency" aria-orientation="horizontal" aria-valuemin="20" aria-valuemax="20000" aria-valuenow="440" aria-valuetext="440 hertz, minus 0.2 decibels">
-              <span class="sweep-handle-ring" aria-hidden="true"></span>
-              <span class="sweep-handle-dot"></span>
-              <span class="sweep-handle-value u-mono" aria-hidden="true">440 HZ</span>
-            </button>
-          </div>
-          <figcaption class="sweep-meta">
-            <output class="sweep-readout u-mono" aria-live="off">440 Hz · −0.2 dB</output>
-            <button class="sound-toggle u-mono" type="button" aria-pressed="false">
-              <span class="sound-toggle-mark" aria-hidden="true"></span>
-              <span class="sound-toggle-label" data-label>ENABLE SOUND</span>
-            </button>
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <!-- 05 · MATERIAL -->
-    <section class="s-material daylight" id="material" data-section="material">
-      <div class="material-inner">
-        <p class="eyebrow u-mono">05 · RECENT BUILDS</p>
-        <h2 class="material-title">Built before they even&nbsp;called.</h2>
-        <div class="material-body">
-          <p>Every build starts the same way: a business with great reviews and no website. I build the demo first, before we ever talk, so you judge the real thing instead of a promise.</p>
-          <p>If you love it, it goes live on your domain within days. If you don’t, you owe me nothing.</p>
-        </div>
-        <div class="swatches">
-          <figure class="swatch build-card build-card--amber">
-            <div class="swatch-face" aria-hidden="true">
-              <span class="build-mini-nav"><span class="build-mini-logo"></span><span class="build-mini-link"></span><span class="build-mini-link"></span><span class="build-mini-link"></span></span>
-              <span class="build-mini-headline"><span></span><span></span></span>
-              <span class="build-mini-stars"><span></span><span></span><span></span><span></span><span></span></span>
-              <span class="build-mini-call"></span>
-            </div>
-            <figcaption class="u-mono">HANDYMAN · CHANDLER, AZ</figcaption>
-          </figure>
-          <figure class="swatch build-card build-card--teal">
-            <div class="swatch-face" aria-hidden="true">
-              <span class="build-mini-nav"><span class="build-mini-logo"></span><span class="build-mini-link"></span><span class="build-mini-link"></span><span class="build-mini-link"></span></span>
-              <span class="build-mini-headline"><span></span><span></span></span>
-              <span class="build-mini-stars"><span></span><span></span><span></span><span></span><span></span></span>
-              <span class="build-mini-call"></span>
-            </div>
-            <figcaption class="u-mono">ELECTRICIAN · DANVILLE, CA</figcaption>
-          </figure>
-          <figure class="swatch build-card build-card--red">
-            <div class="swatch-face" aria-hidden="true">
-              <span class="build-mini-nav"><span class="build-mini-logo"></span><span class="build-mini-link"></span><span class="build-mini-link"></span><span class="build-mini-link"></span></span>
-              <span class="build-mini-headline"><span></span><span></span></span>
-              <span class="build-mini-stars"><span></span><span></span><span></span><span></span><span></span></span>
-              <span class="build-mini-call"></span>
-            </div>
-            <figcaption class="u-mono">LOCKSMITH · BIRMINGHAM, AL</figcaption>
-          </figure>
-        </div>
-        <blockquote class="material-quote">
+        <blockquote class="process__quote">
           <p>“I build your demo before we ever talk. If you don’t love it, you owe me nothing.”</p>
-          <cite class="u-mono">— GEORGE, STILLE</cite>
+          <cite class="u-mono">— George, STILLE</cite>
         </blockquote>
-        <p class="material-numeral u-mono" aria-hidden="true">$500</p>
       </div>
     </section>
 
-    <!-- 06 · THE LEDGER -->
-    <section class="s-ledger" id="ledger" data-section="ledger">
-      <div class="ledger-inner">
-        <p class="eyebrow u-mono">06 · THE DEAL</p>
-        <h2 class="ledger-title">The ledger.</h2>
-        <table class="ledger-table">
-          <tbody>
-            <tr data-part="column"><th scope="row">What you get</th><td>A one-page site, built by hand</td></tr>
-            <tr data-part="curve"><th scope="row">Feels like</th><td>The page you are on right now</td></tr>
-            <tr data-part="driver"><th scope="row">Click-to-call</th><td>Everywhere it should be</td></tr>
-            <tr data-part="sens"><th scope="row">Your reviews</th><td>Pulled from Google, verifiable</td></tr>
-            <tr data-part="dims"><th scope="row">Works on</th><td>Every phone, tablet, and laptop</td></tr>
-            <tr data-part="power"><th scope="row">Turnaround</th><td>Live in 7 days</td></tr>
-            <tr data-part="price"><th scope="row">Price</th><td>$500, one-time</td></tr>
-            <tr data-part="ohm"><th scope="row">Hosting</th><td>$25 a month, cancel anytime</td></tr>
-            <tr data-part="crossover"><th scope="row">Contracts</th><td>None</td></tr>
-            <tr data-part="mass"><th scope="row">You own it</th><td>Domain, files, everything</td></tr>
-          </tbody>
-        </table>
-        <div class="ledger-diagram" aria-hidden="true" data-ledger-diagram></div>
+    <!-- 04 · RECENT BUILDS -->
+    <section class="builds" id="builds" data-theme="dark">
+      <div class="builds__pin" data-builds-pin>
+        <div class="builds__track" data-builds-track>
+          <div class="builds__intro">
+            <p class="eyebrow u-mono"><span>04</span>Recent builds</p>
+            <h2 class="builds__title display">Demo first. <em class="serif">Always.</em></h2>
+            <p class="builds__text">Real trades, real towns. Each one got a finished site before the first phone call.</p>
+            <p class="builds__hint u-mono" aria-hidden="true">KEEP SCROLLING →</p>
+          </div>
+
+          <figure class="build build--amber">
+            <div class="build__screen" aria-hidden="true">
+              <div class="mock">
+                <div class="mock__bar"><i></i><i></i><i></i><span></span></div>
+                <div class="mock__page">
+                  <div class="mock__nav"><span class="mock__logo"></span><span class="mock__links"><i></i><i></i><i></i></span><span class="mock__call">CALL NOW</span></div>
+                  <p class="mock__hero">Handyman</p>
+                  <p class="mock__city">Chandler, AZ</p>
+                  <p class="mock__stars">★★★★★</p>
+                  <div class="mock__tiles"><i></i><i></i><i></i></div>
+                </div>
+              </div>
+            </div>
+            <figcaption class="build__cap"><span class="build__num display">01</span><span class="u-mono">Handyman · Chandler, AZ</span></figcaption>
+          </figure>
+
+          <figure class="build build--teal">
+            <div class="build__screen" aria-hidden="true">
+              <div class="mock mock--split">
+                <div class="mock__bar"><i></i><i></i><i></i><span></span></div>
+                <div class="mock__page">
+                  <div class="mock__nav"><span class="mock__logo"></span><span class="mock__links"><i></i><i></i><i></i></span><span class="mock__call">CALL NOW</span></div>
+                  <p class="mock__hero">Electrician</p>
+                  <p class="mock__city">Danville, CA</p>
+                  <p class="mock__stars">★★★★★</p>
+                  <div class="mock__tiles"><i></i><i></i><i></i></div>
+                </div>
+              </div>
+            </div>
+            <figcaption class="build__cap"><span class="build__num display">02</span><span class="u-mono">Electrician · Danville, CA</span></figcaption>
+          </figure>
+
+          <figure class="build build--red">
+            <div class="build__screen" aria-hidden="true">
+              <div class="mock mock--center">
+                <div class="mock__bar"><i></i><i></i><i></i><span></span></div>
+                <div class="mock__page">
+                  <div class="mock__nav"><span class="mock__logo"></span><span class="mock__links"><i></i><i></i><i></i></span><span class="mock__call">CALL NOW</span></div>
+                  <p class="mock__hero">Locksmith</p>
+                  <p class="mock__city">Birmingham, AL</p>
+                  <p class="mock__stars">★★★★★</p>
+                  <div class="mock__tiles"><i></i><i></i><i></i></div>
+                </div>
+              </div>
+            </div>
+            <figcaption class="build__cap"><span class="build__num display">03</span><span class="u-mono">Locksmith · Birmingham, AL</span></figcaption>
+          </figure>
+
+          <div class="builds__outro">
+            <p class="builds__outro-text display">Yours <em class="serif">next.</em></p>
+            <a class="builds__outro-link u-mono" href="#reserve" data-cursor="Go">GET YOUR DEMO →</a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- 07 · RETURN TO SILENCE -->
-    <section class="s-finale" id="reserve" data-section="finale">
-      <div class="finale-inner">
-        <h2 class="finale-title">Let’s build yours.</h2>
-        <a class="finale-cta" href="tel:%VITE_PHONE_TEL%" data-phone data-magnetic>
-          Call or text %VITE_PHONE_AREA%&nbsp;%VITE_PHONE_LINE%
-        </a>
-        <p class="finale-note u-mono">YOUR DEMO FIRST · FREE TO LOOK · NO CONTRACTS</p>
+    <!-- 05 · THE DEAL -->
+    <section class="deal" id="deal" data-theme="light">
+      <div class="wrap deal__grid">
+        <div class="deal__price">
+          <p class="eyebrow u-mono"><span>05</span>The deal</p>
+          <p class="deal__big display" aria-label="$500"><span class="deal__dollar">$</span><span data-count="500">500</span></p>
+          <p class="deal__note u-mono">ONE TIME. THEN $25/MO HOSTING, CANCEL ANYTIME.</p>
+        </div>
+        <div class="deal__ledger">
+          <h2 class="deal__title display">The ledger.</h2>
+          <table class="ledger">
+            <tbody>
+              <tr data-row><th scope="row" class="u-mono">What you get</th><td>A one-page site, built by hand</td></tr>
+              <tr data-row><th scope="row" class="u-mono">Feels like</th><td>The page you are on right now</td></tr>
+              <tr data-row><th scope="row" class="u-mono">Click-to-call</th><td>Everywhere it should be</td></tr>
+              <tr data-row><th scope="row" class="u-mono">Your reviews</th><td>Pulled from Google, verifiable</td></tr>
+              <tr data-row><th scope="row" class="u-mono">Works on</th><td>Every phone, tablet, and laptop</td></tr>
+              <tr data-row><th scope="row" class="u-mono">Turnaround</th><td>Live in 7 days</td></tr>
+              <tr data-row><th scope="row" class="u-mono">Price</th><td>$500, one-time</td></tr>
+              <tr data-row><th scope="row" class="u-mono">Hosting</th><td>$25 a month, cancel anytime</td></tr>
+              <tr data-row><th scope="row" class="u-mono">Contracts</th><td>None</td></tr>
+              <tr data-row><th scope="row" class="u-mono">You own it</th><td>Domain, files, everything</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · LET'S BUILD YOURS -->
+    <section class="finale" id="reserve" data-theme="orange">
+      <div class="wrap finale__inner">
+        <p class="eyebrow u-mono"><span>06</span>Let’s build yours</p>
+        <h2 class="finale__title display" data-finale-title>
+          <span class="finale__row" data-fit-row>Let’s build</span>
+          <span class="finale__row" data-fit-row>yours.</span>
+        </h2>
+        <div class="finale__actions">
+          <a class="finale__cta" href="tel:%VITE_PHONE_TEL%" data-phone data-magnetic data-cursor="Call">
+            <span class="finale__cta-text">
+              <span class="finale__cta-label u-mono">Call or text</span>
+              <span class="finale__cta-number">%VITE_PHONE_AREA%&nbsp;%VITE_PHONE_LINE%</span>
+            </span>
+            <span class="finale__cta-arrow" aria-hidden="true">→</span>
+          </a>
+          <svg class="badge" viewBox="0 0 200 200" aria-hidden="true">
+            <defs><path id="badge-circle" d="M100 100m-74 0a74 74 0 1 1 148 0a74 74 0 1 1-148 0"/></defs>
+            <text><textPath href="#badge-circle" textLength="462" lengthAdjust="spacing">DEMO FIRST ✶ FREE TO LOOK ✶ NO CONTRACTS ✶</textPath></text>
+            <path class="badge__arrow" d="M82 118 118 82M92 82h26v26"/>
+          </svg>
+        </div>
+        <p class="finale__note u-mono">YOUR DEMO FIRST · FREE TO LOOK · NO CONTRACTS</p>
       </div>
     </section>
 
   </main>
 
-  <footer class="site-foot">
-    <p class="foot-wordmark">STILLE<sup>®</sup></p>
-    <nav class="foot-links u-mono" aria-label="Footer">
-      <a href="tel:%VITE_PHONE_TEL%" data-phone>CALL</a>
-      <a href="sms:%VITE_PHONE_TEL%" data-phone>TEXT</a>
-      <a href="mailto:Stille.Builds@gmail.com">EMAIL</a>
-    </nav>
-    <p class="colophon u-mono">THIS PAGE IS THE PORTFOLIO. EVERY PIXEL BUILT BY HAND IN CODE. NO TEMPLATES, NO STOCK ASSETS.</p>
+  <footer class="foot" data-theme="dark">
+    <div class="wrap foot__top">
+      <nav class="foot__links" aria-label="Contact">
+        <a href="tel:%VITE_PHONE_TEL%" data-phone data-cursor="Call">Call</a>
+        <a href="sms:%VITE_PHONE_TEL%" data-phone data-cursor="Text">Text</a>
+        <a href="mailto:Stille.Builds@gmail.com" data-cursor="Email">Email</a>
+      </nav>
+      <p class="foot__colophon u-mono">This page is the portfolio. Every pixel built by hand in code. No templates, no stock assets.</p>
+      <a class="foot__top-link u-mono" href="#top">BACK TO TOP ↑</a>
+    </div>
+    <p class="foot__mark" data-foot-mark aria-hidden="true"><span data-fit-row>STILLE</span></p>
   </footer>
 </body>
 </html>
